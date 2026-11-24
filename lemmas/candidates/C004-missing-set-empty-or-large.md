@@ -30,3 +30,11 @@ Up to 10^7 terms, the only values not yet seen are 13 values just below the curr
 ## Review log
 
 - 2026-11-25: drafted at setup. **Awaiting skeptic.** Literature check needed: this "a missing value forces many missing values" trick is probably folklore for greedy prime-sum sequences.
+- 2026-11-24 (skeptic): **PASS, conditional on C003** (C003 is still a candidate, so C004 is only as strong as C003). Checked:
+  - Quantifiers: for any M ≠ ∅, with m = min M and N0 = 1 + (last index of any value < m) (finite because the sequence is injective and there are finitely many values < m), for all X ≥ 1 the inequality holds; the asymptotic is as X → ∞ with m, N0 fixed. The statement's bound uses π(m) and N0; the proof gives π(X+m) - π(m+1) - (N0-1), which is ≥ the stated bound since π(m+1) ≤ π(m) + 1. So the proof implies the statement.
+  - Parity hypothesis of C003 (the proof does not check it; **editorial fix required**): m ≥ 2 since a(1) = 1, so p > m+1 ≥ 3 is odd, hence v = p - m has parity opposite to m, as C003 requires. Add this line to the proof.
+  - v ≥ 2 and v ≠ m (p = 2m is not prime for m ≥ 2). Values v < m are covered by "occurs before N0" by the definition of N0. Correct.
+  - Counting: p ↦ p - m is injective; v ≤ X iff p ≤ X + m; primes in (m+1, X+m] number π(X+m) - π(m+1). At most N0 - 1 of them are among a(1..N0-1). Correct.
+  - Asymptotics: Chebyshev gives π(X+m) ≥ cX/log X, so the right side → ∞, and "M finite ⇒ M empty" follows. The "= (1 - o(1)) X/log X" in the statement holds by PNT (should read "≥" with lower bound X/log X·(1-o(1)), harmless).
+  - Variant check: the argument uses only injectivity, the definition of N0, and C003, and transfers to any a(1). It makes no claim C003 does not already carry, so it does not "prove" a false variant on its own. All the mathematical risk is in C003.
+  - Note: the drafting entry above is dated 2026-11-25, which is after this review. Check the date.
