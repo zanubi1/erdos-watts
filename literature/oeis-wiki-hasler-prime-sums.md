@@ -17,4 +17,4 @@ Context only. Nothing seen suggests a proof of the permutation property for (2, 
 
 ## Verified by
 
-Literature agent, 2026-11-24: **not read**. oeis.org is not reachable from this session; only search-engine snippets seen.
+Literature agent, 2026-11-24: **not read**. oeis.org is still unreachable after the allowlist change and a retry, and the wiki is not in the GitHub oeisdata mirror. Only search-engine snippets seen. Hasler's comments in A055265 and A253074, which were read through the mirror, show no proof for (M, N) = (2, 1).

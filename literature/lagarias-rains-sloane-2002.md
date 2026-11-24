@@ -16,4 +16,4 @@ Model for C003/C004: the "smallest missing value is an admissible candidate at e
 
 ## Verified by
 
-Literature agent, 2026-11-24: **not read**. arxiv.org fetches were not attempted because the session's network policy blocked erdosproblems.com and oeis.org and the policy says to stop trying further hosts. Only search-engine summaries seen. TODO: read Section 2 of arXiv:math/0204011.
+Literature agent, 2026-11-24: **not read**. In the second pass, arxiv.org (abs and pdf) still failed DNS, including on retry. Only search-engine summaries seen. TODO: read Section 2 of arXiv:math/0204011.
