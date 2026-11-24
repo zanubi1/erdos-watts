@@ -32,7 +32,9 @@ If M were nonempty, C004 would give |M ∩ [1, X]| >= (1 - o(1)) X / log X, a co
 
 ## Numerical check
 
-Upper displacement max(a(n) - n) for n <= 10^7: see `experiments/results/run_1e7/summary.md` (max |a(n) - n| = 200).
+Upper displacement max(a(n) - n) for n <= 10^7: **188, at n = 8,525,842** (a(n) = 8,526,030), about 0.72 (ln n)^2. Running max of a(n) - n: 28 / 74 / 94 / 156 / 188 at n = 10^3 / 10^4 / 10^5 / 10^6 / 10^7; a(n)/n <= 1.0316 for n >= 1000. (2026-11-24, `experiments/src/overshoot.py --terms 10000000`.)
+
+The earlier figure "max |a(n) - n| = 200 at n = 8,526,046" (`run_1e7/summary.md`) is a *lower* displacement (a(n) = n - 200, a value arriving late) and is not what this lemma needs. Both events come from the record prime gap (17,051,707, 17,051,887) of length 180 at about 2n. Six of the nine upper-displacement records after n = 10^5 sit exactly at maximal prime gaps near 2n.
 
 ## Review log
 
