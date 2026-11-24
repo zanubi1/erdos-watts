@@ -46,4 +46,5 @@ The data suggests the truth is far stronger (about (log n)^2), so there is a lot
 
 - [ ] Skeptic pass on C003, C004, C005.
 - [ ] Literature agent: is C005 (or the "missing set is empty or large" trick) known? Check OEIS wiki (Hasler, "Prime sums from neighboring terms"), MathOverflow, the erdosproblems.com forum thread for #473, Google DeepMind formal-conjectures (is #473 formalized?).
+- [x] Literature pass 2026-11-24 (partial, network-limited): nothing found showing the greedy question resolved; no proved displacement bound seen. The C003/C004 trick looks like a known technique (cf. Devlin-Artamonov outline in OEIS A253074, EKG Lemma 2.3) - cite it, do not claim novelty. C005 not seen, but it is a routine counting step. **Still TODO:** allow www.erdosproblems.com, oeis.org, github.com, arxiv.org and re-read the originals (see literature/README.md).
 - [ ] Experimenter: track the overshoot (number of used values above the smallest unused value) over time; correlate the worst displacement spots (e.g. n ≈ 8,526,046) with large prime gaps.
