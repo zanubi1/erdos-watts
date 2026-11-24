@@ -10,4 +10,5 @@ Last pass: 2026-11-24 (two passes). **Network note:** even after the allowlist c
 | [Google DeepMind formal-conjectures](formal-conjectures.md) | 473.lean formalizes only the main question (solved) and the finite variant (open); **greedy variant not formalized** | raw file read |
 | [Hasler OEIS wiki, Prime sums from neighboring terms](oeis-wiki-hasler-prime-sums.md) | context; conjectures only | snippets only (oeis.org unreachable) |
 | [Lagarias-Rains-Sloane, EKG (2002)](lagarias-rains-sloane-2002.md) | model "smallest missing" proof; also Yellowstone (arXiv:1501.01669) | summaries only (arxiv.org unreachable) |
+| [Search log for C006 step formula](search-C006-step-formula.md) | C006: **not found** in the OEIS entries or by web search; elementary/folklore; EKG and Yellowstone proofs still unread | OEIS raw files read; rest snippets; EKG/Yellowstone hosts (arxiv, emis, cs.uwaterloo.ca) unreachable |
 | MathOverflow 241569 | Segal's finite version | not yet read |
