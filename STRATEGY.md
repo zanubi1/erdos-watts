@@ -22,6 +22,14 @@ Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. 
   - Corollary: if H <= h up to time n, then every hole v at time n has n - v < ℓ_{2h+1}(2v).
 - **L011** (unconditional criterion): if some v is missing, then H(n) >= (1 - o(1)) n / log n. So **liminf H(n) log n / n < 1 implies the permutation property**. Needs only L009 and the PNT.
 
+**Formalized in Lean 4 + Mathlib** (`lean/`, 2026-11-25):
+- L001, L002, L003, L004, L005, L009 (with Sub-lemma S, L009' and the corollary), L011 and L012 (a and b).
+- No `sorry` and no extra axioms (`#print axioms`: propext, Classical.choice, Quot.sound only).
+- The PNT comes from Mathlib (`Nat.isEquivalent_primeCounting`), so there are no explicit hypotheses.
+- Watts' question is stated in `lean/ErdosWatts/Conjecture.lean` (`watts_greedy_bijective`, `sorry`).
+- No GAPs were found in the informal proofs. The informal-vs-formal discrepancies are cosmetic (indexing from n >= 1, truncated subtraction, liminf over EReal) and are listed in each lemma's Review log.
+- Not yet formalized: L006, L007, L008.
+
 **Open** (`lemmas/candidates/`):
 - **C010** (conjecture): a uniform bound on the number of primes a hole survives, K(v) := π(fi(v)-1+v) - π(2v) <= K0, or <= C log v. Either implies the permutation property.
   - Data: max K is 8 up to 10^7 and **11 up to 10^8**. The per-decade maxima 6, 7, 8, 8, 11 fit about 2 + 1.1 log10 v, so **C log v is the realistic target**.

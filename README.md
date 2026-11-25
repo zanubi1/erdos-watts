@@ -34,10 +34,20 @@ Literature checking is not finished: see `literature/`.
 | `lemmas/refuted/` | dead statements with the counterexample or the gap |
 | `attempts/` | dated proof attempts, including failures |
 | `experiments/` | code and result write-ups |
-| `lean/` | formalization (optional, for key lemmas) |
+| `lean/` | Lean 4 + Mathlib formalization: the sequence, L001-L005, L009, L011, L012 (no `sorry`), and the Watts conjecture stated with `sorry` |
 | `.claude/agents/` | prover, skeptic, literature, experimenter |
 
 ## Quick start
 
     pip install numpy
     python experiments/src/greedy.py --terms 10000000 --out experiments/results/run_1e7
+
+## Lean formalization
+
+    export PATH="$HOME/.elan/bin:$PATH"
+    cd lean && lake exe cache get && lake build
+
+- **Toolchain:** Lean 4.36.0 with Mathlib v4.36.0, pinned in `lean/lakefile.toml`.
+- **What is formalized:** L001, L002, L003, L004, L005, L009 (with L009' and its corollary), L011 and L012. All of them depend only on the axioms `propext`, `Classical.choice` and `Quot.sound`. The prime number theorem comes from Mathlib (`Nat.isEquivalent_primeCounting`).
+- **The conjecture:** `lean/ErdosWatts/Conjecture.lean` states Watts' question as `Function.Bijective aPNat` and is the only `sorry`.
+- **More:** conventions are in `lean/README.md`. The agent that does this work is `.claude/agents/formalizer.md`.
