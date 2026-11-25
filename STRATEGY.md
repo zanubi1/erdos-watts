@@ -121,11 +121,21 @@ _Update 2026-11-25: route 1 is now made precise by L009-L011. A uniform bound on
 - [x] Hole-dynamics experiment (2026-11-25): `experiments/results/holes_dynamics_1e7/`. There is no restoring drift. Lifetimes are governed by a prime count (L009). Pair and prime-sum-free ideas are dead.
 - [x] L009 (with L009') and L011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
 - [x] 10^8 run (2026-11-25): `experiments/results/k_survival_1e8/`. Max K = 11, so K0 = 8 fails. Max H = 75. All eight OEIS displacement records match.
-- [ ] **Next target:** a uniform bound on the prime partners of a hole. For every hole v at time n, show #Late(v,n) + #Ahead(v) <= C log v, where:
-  - Late(v,n) is the partners w = q - v still unused at time n;
-  - Ahead(v) is the partners used before time v.
+- [x] Partners experiment (10^8, 2026-11-25): `experiments/results/partners_1e8/`. Measured against the primes actually in the window, W1 + W4 looks like a random (hypergeometric) placement, so there is no special arithmetic avoidance. Ahead partners are suppressed (0.4× random), explained by the pre-steal injection. Nothing contracts.
+- [x] C012 (crossing bound): W1 + W2 <= number of down-crossings of level v. Part (a) has a skeptic PASS. Part (b), the parity refinement X^ε <= H(v) - 1, awaits its skeptic, then Matteo's OK for promotion.
+- [x] Crossings experiment (10^8, 2026-11-25): `experiments/results/crossings_1e8/`. Crossings are **not** O(log v); their max tracks H(v). So the crossing route does not escape the circularity either.
+- **Diagnosis (2026-11-25): a barrier.** Every bound found from the sequence's own bookkeeping reduces "primes survived by a hole" (K) to the hole count H:
+  - L009', with the bound H(v) + H(n);
+  - C012, with X^ε <= H(v) - 1;
+  - the partner counts, with the same shape.
 
-  With L009 this gives C010 in its C log v form, and hence the permutation property. It needs arithmetic input: the hole set (a dense set of about 50 values in [n-86, n], reflection-locked around a prime) must meet the shifted primes {q - v} in O(log v) elements. Counting payers alone is tight (L009' equality) and cannot do it. The data shows that worst cases are prime-dense windows, not large gaps. See `attempts/2026-11-25-c010-bounded-prime-survival.md` for what died: iterating L009 on partners, window counting (coefficient 2 > 1), and bootstrapping H against K.
+  Going back from H to K via lifetimes loses a factor of about log n. Up to 10^8, K, H and the crossings all grow like log v, so no counting identity contracts. **Breaking the loop needs distributional input**: how the primes in windows of length about log² n near 2n interact with the dynamics.
+- [ ] **Candidate directions, for Matteo to choose:**
+  1. **Conditional theorem.** Assume a hypothesis on primes in short intervals, e.g. "every interval (x, x + y] with y >= (log x)^{2+δ} contains between (1-η) y/log x and (1+η) y/log x primes" (a Cramér/Selberg-type uniformity). Under it, try to prove H(n) = O(polylog n), via L011.
+     - The loss of log n might be absorbed, because H counts holes in a window of length about log² n, while K counts primes, about log n of them.
+     - This is the most promising route to a rigorous (conditional) result.
+  2. **Probabilistic model.** Prove the analogous statement for the greedy sequence with "prime" replaced by a random set of density 1/log n (a Cramér model). That would give a rigorous heuristic and identify which properties of the primes are needed.
+  3. **A weaker unconditional statement.** For example, infinitely many n with H(n) = 0 (equivalently, A070942 infinite), or that every even number appears. Both look as hard as the main problem.
 - [ ] Secondary: since L011 needs only H(n) < (1-δ) n/log n infinitely often, look for *any* sublinear bound on H. Even H(n) = O(n / log n) with a small constant would be enough.
 - [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
 - [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.
