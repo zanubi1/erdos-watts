@@ -1,6 +1,6 @@
 # Strategy
 
-_Last updated: 2026-11-24 (session 2: skeptic pass on C003-C005, literature pass, overshoot experiment). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
+_Last updated: 2026-11-25 (session 2: skeptic pass on C003-C005, literature pass, overshoot experiment, C006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
 
 ## Goal
 
@@ -21,6 +21,17 @@ Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. 
   - Skeptic: **PASS, conditional on C004**.
   - Optional simplifications: "f nondecreasing" can be dropped (replace f by its running max), and "for all n" can be relaxed to "for n >= n0".
   - Awaiting Matteo.
+
+- **C006** (step formula): a(n+1) = q_{b+1} - a(n), where the q_i are the primes >= t_n = a(n) + u*(n) and b <= O*(n). Also u*(n) <= n+1. Exact identities:
+  - O*(n) = (n+1-u*(n))/2;
+  - a(n+1) - (n+1) = (q_{b+1} - t_n) - 2O*(n).
+  - Skeptic: **PASS** (2026-11-25); depends only on L001/L002. Checked exactly for every n < 10^7.
+  - Literature: not found; elementary/folklore.
+  - Awaiting Matteo.
+  - The prover's Remarks section (not reviewed) adds:
+    - **R1:** combined with Huxley's theorem, a(n+1) - (n+1) <= n^0.61 + 3(O*+1) log n.
+    - **R2:** this route is circular with respect to C005. Averaging does not help: a missing value forces Σ_{n<=X} O*(n) >= ~X²/8.
+    - **R3a/R3b:** a "holes" version. If the number of unused values <= X at time X is o(X/log X) for infinitely many X, then the sequence is a permutation (via C004). The data has at most 50 holes.
 
 Proof status of the chain: if Matteo accepts C003 -> C004 -> C005, then **an upper displacement bound a(n) <= n + o(n/log n) proves the conjecture.**
 
@@ -107,4 +118,7 @@ To break it:
 - [ ] Still unread: erdosproblems.com/473 page and forum, Hasler's wiki page, the EKG paper (arXiv:math/0204011). The hosts are blocked by DNS; read them manually or from a different environment.
 - [x] Overshoot experiment (2026-11-24): `experiments/results/overshoot_1e7/`.
 - [ ] Fix `experiments/results/run_1e7/summary.md` (and `run_1e6`): relabel "max |a(n)-n|" as the lower displacement and add the upper one.
-- [ ] Write candidate C006 (step formula) and state a precise density-version target for route 2.
+- [x] C006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [ ] Promote R3a/R3b from C006's Remarks to candidates C007/C008 (holes-based density criterion), then run them through skeptic review. R3b is the precise density target for route 2.
+- [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
+- [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.
