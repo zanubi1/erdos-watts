@@ -82,6 +82,6 @@ Observed partner counts are compared with two placements:
 ## Conclusions
 
 1. **Measured:** W1 + W4 is about hypergeometric relative to the primes actually in the window. "Few payers land on shifted primes" is mostly "few primes times the slot fraction". There is no special arithmetic avoidance, so a bound on W1 + W4 pushes the burden back onto K itself (circular).
-2. **Measured:** the one genuine suppression is on Ahead partners, explained by the pre-steal injection. With the steal injection of L009, this gives the crossing bound of C012.
+2. **Measured:** the one genuine suppression is on Ahead partners, explained by the pre-steal injection. With the steal injection of L009, this gives the crossing bound of L012.
 3. **Interpretation:** the hardest class is W4 (Late): it is over-dispersed and favoured. Bounding it needs the spread n - (smallest Late hole), which is overshoot-type data.
 4. **Interpretation:** no partner-counting statement found here contracts. Proving C010 needs input on how K itself grows, i.e. on primes in short windows near 2v weighted by the dynamics. It does not reduce to a count of holes.

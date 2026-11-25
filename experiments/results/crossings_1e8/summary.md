@@ -14,15 +14,15 @@ Hole v, at time n = fi(v) - 1, with ε = v mod 2.
 - X = X_v(n) = #{ j <= n : a(j-1) > v > a(j) } is the number of down-crossings of level v.
 - X^ε counts only the crossings that land on a(j) ≡ ε.
 
-## C012 checks (all 47.5M holes): 0 violations
+## L012 checks (all 47.5M holes): 0 violations
 
 | inequality | equality fraction |
 |---|---|
 | K <= X + 1 + H_{1-ε}(n) | 0.006% |
 | W1+W2 <= X | 0.47% |
 | W1+W2 <= X^ε | 4.72% |
-| X^ε <= H(v) - 1 (C012 b) | 2.65% |
-| X <= H(v-1) + H(v) - 1 (C012 b) | 0.57% |
+| X^ε <= H(v) - 1 (L012 b) | 2.65% |
+| X <= H(v-1) + H(v) - 1 (L012 b) | 0.57% |
 
 ## Size of X at holes
 
@@ -58,7 +58,7 @@ The largest residual, 6, is at v = 73,818,656: K = 7, X = 0, W4 = 6.
 
 ## Conclusions
 
-1. **Measured.** C012 (a) and (b) hold on all 47.5M holes.
-2. **Measured.** X is not O(log v): its maximum grows with H(v). So the crossing bound does **not** escape the circularity. Its proven ceiling (C012 b) is itself H(v) - 1.
+1. **Measured.** L012 (a) and (b) hold on all 47.5M holes.
+2. **Measured.** X is not O(log v): its maximum grows with H(v). So the crossing bound does **not** escape the circularity. Its proven ceiling (L012 b) is itself H(v) - 1.
 3. **Measured.** The residual for W4 is small (max 6, at most 0.33 ln v) and occurs where X is tiny.
-4. **Interpretation.** Every bound found so far (L009', C012, the partner counts) reduces the primes survived by a hole to H. Bounding H through lifetimes loses a factor of log n. No counting identity in the sequence's own data breaks this loop. The missing input is distributional: how the primes in short windows near 2v interact with the dynamics.
+4. **Interpretation.** Every bound found so far (L009', L012, the partner counts) reduces the primes survived by a hole to H. Bounding H through lifetimes loses a factor of log n. No counting identity in the sequence's own data breaks this loop. The missing input is distributional: how the primes in short windows near 2v interact with the dynamics.

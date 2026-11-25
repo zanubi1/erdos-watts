@@ -1,4 +1,4 @@
-# C012 - Primes survived by a hole are paid by down-crossings of its level
+# L012 - Primes survived by a hole are paid by down-crossings of its level
 
 ## Statement
 
@@ -48,7 +48,7 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
 
 ## Remarks
 
-- **Relation to L009.** L009 bounds |W1| by H_{1-ε}(v-1) (Sub-lemma S) and |W2| by B(v), whose sum is H(v) - 1. C012 replaces that sum by a single dynamical quantity, the number of times the sequence jumps from above v to below v.
+- **Relation to L009.** L009 bounds |W1| by H_{1-ε}(v-1) (Sub-lemma S) and |W2| by B(v), whose sum is H(v) - 1. L012 replaces that sum by a single dynamical quantity, the number of times the sequence jumps from above v to below v.
   - Neither bound dominates the other in general.
   - X_v(n) counts *all* down-crossings, including those not caused by a prime partner of v.
 - **Prior art.** The W2 half is the steal injection, i.e. EKG Lemma 7's charging argument. The W1 half ("pre-steal") was found in the partners experiment: it held in 100% of 5.83M cases.
@@ -67,7 +67,7 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
     - K <= X^ε + 1 + H_{1-ε}(n): 0 violations, equality 0.08%.
     - Per class: W1 <= E^ε (crossings with j <= v) and W2 <= L^ε (crossings with v < j <= n), both with 0 violations.
   - **X against H(v) - 1** on [1e7, 1e8]: X is smaller in 57.0% of holes, equal in 12.9% and larger in 30.1%. The largest excess X - (H(v) - 1) is 47. The max of X is 113, at v = 95,956,519.
-  - **X^ε against H(v) - 1.** X^ε_v(n) <= H(v) - 1 held in every case, and an elementary injection proves it (experimenter's reply, 2026-11-25). So the parity-refined C012 is never weaker than L009' for W1 + W2. Above 10^7 it is strictly sharper in 97.5% of holes.
+  - **X^ε against H(v) - 1.** X^ε_v(n) <= H(v) - 1 held in every case, and an elementary injection proves it (experimenter's reply, 2026-11-25). So the parity-refined L012 is never weaker than L009' for W1 + W2. Above 10^7 it is strictly sharper in 97.5% of holes.
   - **Growth.** X_v(n) does not look O(log v). By decade, max X / ln v is 0.95, 1.53, 2.28, 2.79, 4.33, 4.54, 6.25, which tracks the growth of H(v).
 
 ## Review log
@@ -79,7 +79,7 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
   - *a(k+1) ≠ v.* k + 1 <= n puts a(k+1) in U_n, and v ∉ U_n. Correct for both W1 and W2. The W1 parenthetical is also right: k <= v - 1 gives k + 1 <= v, and fi(v) > n >= v.
   - *Range and strictness.* k >= 1 gives j = k + 1 >= 2; k <= n - 1 gives j <= n. a(j-1) = w > v holds because W ⊆ (v, n] (L009 Step 0, which needs q > 2v), and a(j) < v follows from <= v and ≠ v. Both inequalities are strict, as X_v requires.
   - *Injectivity.* w = a(fi(w)), so w ↦ fi(w) is injective and so is k ↦ k + 1. Correct. The partition W1-W4 and the bounds for W3 and W4 are reused from L009 Steps 0-1, 4-5, which are in proven/.
-  - *Scope (stronger than stated).* No step uses F1 (parity of a(k)) or Sub-lemma S. Step 0 gets w ≡ 1 - ε from q being odd, not from F1. So C012 holds for **every** start a(1), unlike L009'. The proof is in fact generic: it works for any rule of the form a(k+1) = min of an admissible set that contains v whenever a(k) + v is prime and v is unused. So it does not "prove" any false variant that I could find.
+  - *Scope (stronger than stated).* No step uses F1 (parity of a(k)) or Sub-lemma S. Step 0 gets w ≡ 1 - ε from q being odd, not from F1. So L012 holds for **every** start a(1), unlike L009'. The proof is in fact generic: it works for any rule of the form a(k+1) = min of an admissible set that contains v whenever a(k) + v is prime and v is unused. So it does not "prove" any false variant that I could find.
   - *Numerics (own C script, scratchpad c012_check.c; Fenwick range-add for X_v, exact W1-W4 classification by fi).* a(1) = 1, N = 3·10^6, **every** n <= N and every hole v in [2, n]: 24,089,445 (n, v) pairs. Violations: 0 for |W1|+|W2| <= X_v(n), 0 for |W3| <= 1, 0 for |W4| <= H_{1-ε}(n), 0 for the total. Equality |W1|+|W2| = X_v(n) at 528,316 pairs. The generated sequence matches overshoot_1e7/sequence.npy (a(3·10^5) = 299990, same partial sum), and its first 20 terms match OEIS. Variants a(1) ∈ {2,3,4,5,6,7,10,13,20,101}, N = 2·10^5, all pairs (about 1.25M each): 0 violations in every class.
   - *Remark "neither bound dominates".* Confirmed numerically: over all pairs, X_v(n) > H(v) - 1 in 4.49M cases and X_v(n) < H(v) - 1 in 16.5M cases (a(1) = 1, N = 3·10^6).
   - *Dependencies.* L009 is in proven/, and so is L002. L001 is listed but not used: only F2, F3 and the definition of A_k are needed. Note also that L002 is not really needed here, because v ∈ A_k already shows A_k ≠ ∅.
@@ -99,3 +99,4 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
   - *Numerics (own C script, scratchpad c012b.c).* Fenwick range-add per parity for X^ε and X. |W1| + |W2| is maintained incrementally as #{ w ∈ (v, n] : w + v prime, fi(w) <= n - 1 }. A Python brute force (brute.py) agrees exactly at N = 600 for a(1) ∈ {1, 2, 6}. With a(1) = 1, **every** n <= 10^7 and every hole v in [2, n]: 88,212,972 pairs (this matches L009's skeptic count). Violations: 0 for (i), 0 for (ii), 0 for (iii), 0 for the per-class bounds E^ε <= H_{1-ε}(v-1) and L^ε <= B(v) and their unrestricted analogues, 0 for the identity. Equality: (i) at 8,422,904 pairs, (ii) at 2,383,444 pairs, (iii) at 594,114 pairs. So all three bounds are attained.
   - *Variants.* For odd a(1) ∈ {3, 5, 7, 13, 101} (N = 2·10^5, all pairs): 0 violations of anything. For even a(1) ∈ {2, 4, 6, 10, 20}: (i) and (iii) hold (0 violations), but (ii) **fails** at about 13.1k pairs each, together with the identity. Smallest case: a(1) = 6, so a = 6, 1, 2, ... At n = v = 3, X^1 = 1 (j = 2) but H(3) - 1 = 0. This matches the proof, which uses F1 only in S and in the identity. So the proof does not "prove" a false variant, and the a(1) = 1 scope is necessary for (ii).
 - 2026-11-25 (editor): applied the skeptic's edits to (b): restated the hypotheses, gave a parity-free count for the X bound, and narrowed the scope note to the middle bound. (a) and (b) now both have a skeptic PASS. **Ready for promotion to L012 on Matteo's OK.**
+- 2026-11-25: Matteo's OK. **Moved to lemmas/proven/ as L012 (formerly L012).**

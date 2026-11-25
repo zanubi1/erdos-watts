@@ -122,11 +122,11 @@ _Update 2026-11-25: route 1 is now made precise by L009-L011. A uniform bound on
 - [x] L009 (with L009') and L011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
 - [x] 10^8 run (2026-11-25): `experiments/results/k_survival_1e8/`. Max K = 11, so K0 = 8 fails. Max H = 75. All eight OEIS displacement records match.
 - [x] Partners experiment (10^8, 2026-11-25): `experiments/results/partners_1e8/`. Measured against the primes actually in the window, W1 + W4 looks like a random (hypergeometric) placement, so there is no special arithmetic avoidance. Ahead partners are suppressed (0.4× random), explained by the pre-steal injection. Nothing contracts.
-- [x] C012 (crossing bound): W1 + W2 <= number of down-crossings of level v. Part (a) has a skeptic PASS. Part (b), the parity refinement X^ε <= H(v) - 1, awaits its skeptic, then Matteo's OK for promotion.
+- [x] L012 (crossing bound, proven 2026-11-25): W1 + W2 <= number of down-crossings of level v; the parity refinement gives X^ε <= H(v) - 1.
 - [x] Crossings experiment (10^8, 2026-11-25): `experiments/results/crossings_1e8/`. Crossings are **not** O(log v); their max tracks H(v). So the crossing route does not escape the circularity either.
 - **Diagnosis (2026-11-25): a barrier.** Every bound found from the sequence's own bookkeeping reduces "primes survived by a hole" (K) to the hole count H:
   - L009', with the bound H(v) + H(n);
-  - C012, with X^ε <= H(v) - 1;
+  - L012, with X^ε <= H(v) - 1;
   - the partner counts, with the same shape.
 
   Going back from H to K via lifetimes loses a factor of about log n. Up to 10^8, K, H and the crossings all grow like log v, so no counting identity contracts. **Breaking the loop needs distributional input**: how the primes in windows of length about log² n near 2n interact with the dynamics.
