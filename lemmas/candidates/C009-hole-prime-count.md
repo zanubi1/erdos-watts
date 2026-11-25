@@ -49,3 +49,4 @@ _Draft by the experimenter (2026-11-25), checked by the main session. Awaiting t
 ## Review log
 
 - 2026-11-25: candidate created from the hole-dynamics experiment (E5). The main session checked the four-case split. **Awaiting prover (write-up), literature and skeptic.**
+- 2026-11-25 (literature): Case 2 ("steals") is the charging argument of Lagarias-Rains-Sloane 2002, EKG Lemma 7 (each admissible partner of a missing value forces a smaller next term, and distinct times give distinct values). Cite it. The special case B(v) = 0 is the classical smallest-missing step (EKG Lemmas 3-4, Yellowstone Theorem 1(vi), A253074). I did **not find** the four-case partition or the inequality itself in the sources read. No delay bound for A055265 was found anywhere. See literature/search-C009-C010-hole-payers.md.

@@ -35,3 +35,4 @@ See `experiments/results/holes_dynamics_1e7/summary.md`, the table of K(v) by ra
 ## Review log
 
 - 2026-11-25: conjecture recorded from the hole-dynamics experiment. Not a lemma until proved.
+- 2026-11-25 (literature): **not found** in the sources read. These were the OEIS A055265, A117922, A117925, A086527, A282695-7, A282700, A128280 and A051237 entries, the EKG and Yellowstone papers, and Sloane 2018. The last of these calls A055265 possibly "beyond reach" because of prime gaps. None of them states a proved bound on A117922(n) - n; only the empirical A282696/7 records exist. The EKG/Yellowstone bounds are linear sieve bounds for gcd sequences and do not transfer directly. Not yet searched: the Hasler wiki, the erdosproblems forum, UPINT, MO 241569. See literature/search-C009-C010-hole-payers.md.
