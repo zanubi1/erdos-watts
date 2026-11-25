@@ -246,4 +246,25 @@ def H (m : ℕ) : ℕ := holes 0 m + holes 1 m
 def B (v : ℕ) : ℕ :=
   ((Finset.Ico 1 v).filter (fun x => x % 2 = v % 2 ∧ x ∉ U v)).card
 
+/-! ### Primes after a point and down-crossings (used by L009's Corollary and L012) -/
+
+/-- `primeAfter K x` is P_K(x), the `K`-th prime `> x`, for `K ≥ 1` (L009 Corollary).
+`Nat.nth Nat.Prime` is 0-indexed and exactly `π x` primes are `≤ x`, so the `K`-th prime `> x`
+is `nth Prime (π x + K - 1)`. (Junk for `K = 0`.) Its characterization (prime, `> x`, and
+exactly `K` primes in `(x, P_K(x)]`) is proved in `L009.lean` (`primeAfter_spec`). -/
+noncomputable def primeAfter (K x : ℕ) : ℕ := Nat.nth Nat.Prime (Nat.primeCounting x + K - 1)
+
+/-- ℓ_K(x) = P_K(x) - x, the distance from `x` to the `K`-th prime `> x` (L009 Corollary). -/
+noncomputable def ell (K x : ℕ) : ℕ := primeAfter K x - x
+
+/-- X_v(n) = #{ j ∈ [2, n] : a(j-1) > v > a(j) }: the number of down-crossings of level `v`
+up to time `n` (L012). -/
+def downCrossings (v n : ℕ) : ℕ :=
+  ((Finset.Icc 2 n).filter (fun j => v < a (j - 1) ∧ a j < v)).card
+
+/-- X^ε_v(n) = #{ j ∈ [2, n] : a(j-1) > v > a(j), a(j) ≡ v (mod 2) }: the down-crossings of
+level `v` up to time `n` that land on the parity of `v` (L012 (b), ε = v mod 2). -/
+def downCrossingsPar (v n : ℕ) : ℕ :=
+  ((Finset.Icc 2 n).filter (fun j => v < a (j - 1) ∧ a j < v ∧ a j % 2 = v % 2)).card
+
 end ErdosWatts
