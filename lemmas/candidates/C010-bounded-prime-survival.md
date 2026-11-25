@@ -6,7 +6,7 @@
 
     π(n + v) - π(2v)  <=  K0.
 
-The numerical evidence is K0 = 8: the maximum is 8 up to n = 10^7, and the maximum per decade is flat from 10^4 to 10^7.
+Numerical evidence: K reaches 8 up to 10^7 but **11 up to 10^8** (at v = 76,132,619). The per-decade maxima are 6, 7, 8, 8, 11, and fit K ≈ 2 + 1.1 log10 v better than a constant. So an absolute K0 is doubtful, and the **C log v variant below is the realistic target**. See `experiments/results/k_survival_1e8/summary.md`.
 
 **Uniform variants that also suffice.**
 - K0 replaced by C log v, which the data supports equally well (the tail of K looks geometric, ratio about 0.15, and is creeping upward slowly).
@@ -35,6 +35,8 @@ None yet.
 ## Numerical check
 
 See `experiments/results/holes_dynamics_1e7/summary.md`, the table of K(v) by range of v.
+
+2026-11-25 (experimenter, N = 10^8, `experiments/src/k_survival_1e8.py`): **K0 = 8 does not hold beyond 10^7.** Max K per decade (completed holes): 6, 7, 8, 8, 11 for [10^3,10^4), ..., [10^7,10^8). The maximum K = 11 occurs at v = 76,132,619 (lifetime 96, H(v) = 25); K = 10 occurs 10 times. Per 10^7 block (each about 4.76M holes, the same sample size as [10^6, 10^7)): 9, 9, 9, 10, 10, 9, 11, 10, 10. The tail is creeping: P(K >= 7) is 3.5e-5 for v < 10^7 and 5.1e-5 on [10^7, 10^8); P(K >= 8) is 3.2e-6 and 8.5e-6. The geometric ratio is about 0.16 on [10^7, 10^8), versus about 0.15 below. A fit of the decade maxima, maxK ≈ 1.95 + 1.10 log10 v, fits far better than a constant (residual SS 1.9 vs 14.0). With a geometric tail, the extreme-value prediction (M·P(K >= j) ≈ 1) fits the growth of the maxima. **The data now favour max K growing like log v, not K = O(1).** The uniform C log v variant is still consistent with the data.
 
 ## Review log
 
