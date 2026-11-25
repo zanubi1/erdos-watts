@@ -1,6 +1,6 @@
 # Strategy
 
-_Last updated: 2026-11-25 (session 2: skeptic pass on C003-C005, literature pass, overshoot experiment, C006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
+_Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass, overshoot experiment, L006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
 
 ## Goal
 
@@ -8,56 +8,32 @@ Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. 
 
 ## What we know so far
 
-- **L001**: consecutive terms alternate in parity. Trivial, proven.
-- **L002**: the sequence is well defined. Trivial, proven.
-- **C003**: if m is the smallest value that never appears, then a(n) + m is composite for all n >= N0.
-  - Skeptic: **PASS** (2026-11-24). It depends only on L002.
-  - Awaiting Matteo.
-- **C004**: if the missing set M is nonempty, then |M ∩ [1, X]| >= π(X+m) - π(m+1) - (N0-1) >> X / log X. In particular, M finite implies M empty.
-  - Skeptic: **PASS, conditional on C003**.
-  - Editorial fix needed: add the line showing the parity hypothesis holds (m >= 2, so p is odd and v = p - m has the opposite parity to m). Also state the "(1 - o(1)) X/log X" as a lower bound.
-  - Awaiting Matteo.
-- **C005** (reduction): if a(n) <= n + f(n) with f(x) = o(x / log x), then M is empty.
-  - Skeptic: **PASS, conditional on C004**.
-  - Optional simplifications: "f nondecreasing" can be dropped (replace f by its running max), and "for all n" can be relaxed to "for n >= n0".
-  - Awaiting Matteo.
+**Proven** (`lemmas/proven/`). L003-L009 and L011 were promoted on 2026-11-25, after skeptic passes plus a main-session review with Matteo's delegated OK. They were formerly C003-C009 and C011.
 
-- **C006** (step formula): a(n+1) = q_{b+1} - a(n), where the q_i are the primes >= t_n = a(n) + u*(n) and b <= O*(n). Also u*(n) <= n+1. Exact identities:
-  - O*(n) = (n+1-u*(n))/2;
-  - a(n+1) - (n+1) = (q_{b+1} - t_n) - 2O*(n).
-  - Skeptic: **PASS** (2026-11-25); depends only on L001/L002. Checked exactly for every n < 10^7.
-  - Literature: not found; elementary/folklore.
-  - Awaiting Matteo.
-  - The prover's Remarks section (not reviewed) adds:
-    - **R1:** combined with Huxley's theorem, a(n+1) - (n+1) <= n^0.61 + 3(O*+1) log n.
-    - **R2:** this route is circular with respect to C005. Averaging does not help: a missing value forces Σ_{n<=X} O*(n) >= ~X²/8.
-    - **R3a/R3b:** a "holes" version. If the number of unused values <= X at time X is o(X/log X) for infinitely many X, then the sequence is a permutation (via C004). The data has at most 50 holes.
+- **L001**: consecutive terms alternate in parity, so a(k) ≡ k (mod 2). Trivial.
+- **L002**: the sequence is well defined. Trivial.
+- **L003**: if m is the smallest missing value, then a(n) + m is composite for all n >= N0.
+- **L004**: if the missing set M is nonempty, then |M ∩ [1, X]| >> X / log X. In particular, M finite implies M empty.
+- **L005**: if a(n) <= n + o(n / log n), then M = ∅.
+- **L006** (step formula): a(n+1) = q_{b+1} - a(n), with q_i the primes >= a(n) + u*(n) and b <= O*(n). Also O*(n) = (n+1-u*(n))/2. Its prover Remarks are unreviewed and live in `attempts/2026-11-24-c006-remarks.md`.
+- **L007** (hole step bound): a(n+1) - (n+1) <= (the length from a(n)+n+1 needed to see H_π(n)+1 primes).
+- **L008**: H(X) = #{ k <= X : a(k) > X }, and H(X) <= D + S(X)/D. Criterion (ii) is superseded by L011.
+- **L009** (payers): for a hole v at time n, π(n+v) - π(2v) <= H(v) + H_{1-ε}(n). This is the sharp form L009', and it is attained. Needs a(1) odd.
+  - Corollary: if H <= h up to time n, then every hole v at time n has n - v < ℓ_{2h+1}(2v).
+- **L011** (unconditional criterion): if some v is missing, then H(n) >= (1 - o(1)) n / log n. So **liminf H(n) log n / n < 1 implies the permutation property**. Needs only L009 and the PNT.
 
-- **C007** (hole-count step bound): a(n+1) - (n+1) <= q'_{H_π(n)+1} - (a(n)+n+1), where q'_i are the primes >= a(n)+n+1 and H_π(n) is the number of holes <= n of the next term's parity.
-  - Skeptic: **PASS** (2026-11-25). The comparison H_π <= O* is conditional on C006 (b).
-  - Tight at some steps. Up to 10^7 the bound has max 554.
-- **C008** (hole-density criterion): H(X) = #{k <= X : a(k) > X}. If liminf H(X) log X / X = 0, then M = ∅. The same holds if S(X) = Σ_{k<=X} (a(k)-k)^+ = o(X²/log²X) along a subsequence.
-  - Skeptic: **PASS**, with the criterion conditional on C003/C004.
-  - Checked to 10^7: max H = 50, and the running max grows about 10 per decade. S(X) ≈ Σ_{Y<=X} H(Y); the difference is 68 at 10^7.
-  - **This is the weakest sufficient target found so far.**
+**Open** (`lemmas/candidates/`):
+- **C010** (conjecture): a uniform bound on the number of primes a hole survives, K(v) := π(fi(v)-1+v) - π(2v) <= K0, or <= C log v. Either implies the permutation property.
+  - Data: max K is 8 up to 10^7 and **11 up to 10^8**. The per-decade maxima 6, 7, 8, 8, 11 fit about 2 + 1.1 log10 v, so **C log v is the realistic target**.
 
-- **C009** (hole prime-count lemma). For a hole v at time n, every prime in (2v, n+v] is paid for by one of four things: a smaller same-parity hole filled instead, an opposite-parity value used early, the term a(n), or an opposite-parity hole at time n.
-  - Sharp form (C009'): π(n+v) - π(2v) <= H(v) + H_{1-ε}(n). Equality is attained 1,887 times up to 10^7.
-  - Skeptic: **PASS** (2026-11-25). Depends only on L001/L002, and needs a(1) odd.
-  - Checked at all (n, v) to 10^7, and at n = fi(v) - 1 for all 47.5M holes to 10^8.
-  - Case 2 is EKG Lemma 7's charging argument; cite it.
-- **C010** (conjecture, no proof). Uniform bound K(v) := π(fi(v)-1+v) - π(2v) <= K0, or <= C log v. Either implies the permutation property directly.
-  - Data: max K is 8 up to 10^7 but **11 up to 10^8**. The per-decade maxima 6, 7, 8, 8, 11 fit about 2 + 1.1 log10 v, so **C log v is the realistic target**.
-  - The per-v version is equivalent to the conjecture itself; the content is uniformity.
-- **C011** (unconditional hole criterion). If v is missing, then H_{1-ε}(n) >= π(n+v) - π(2v) - H(v) for all n >= v. Hence **liminf H(n) log n / n < 1 implies the permutation property**.
-  - Uses C009' and the PNT, and **does not need C003/C004**. It supersedes C008 (ii).
-  - Skeptic: **PASS**, conditional on C009 (now PASS).
-
-Proof status of the chain: if Matteo accepts C003 -> C004 -> C005, then **an upper displacement bound a(n) <= n + o(n/log n) proves the conjecture.**
+**Reductions now available** (all proven). Any one of these proves the conjecture:
+1. a(n) <= n + o(n / log n) (L005);
+2. H(n) <= (1 - δ) n / log n for infinitely many n (L011);
+3. C010 in any uniform form.
 
 Literature status:
-- **C003/C004 are a known technique.** The same "smallest missing value forces p - m to be missing" mechanism is in the Devlin-Artamonov proof outline in OEIS A253074 (the variant where adjacent sums must be non-prime). Cite it, together with the EKG "smallest missing" argument, and do not claim novelty.
-- **C005 was not found in any source.** It is a routine counting step: call it "not found", not "new".
+- **L003/L004 are a known technique.** The same "smallest missing value forces p - m to be missing" mechanism is in the Devlin-Artamonov proof outline in OEIS A253074 (the variant where adjacent sums must be non-prime). Cite it, together with the EKG "smallest missing" argument, and do not claim novelty.
+- **L005 was not found in any source.** It is a routine counting step: call it "not found", not "new".
 
 ## Literature (2026-11-24, see `literature/`)
 
@@ -73,7 +49,7 @@ Literature status:
 
 ## Data (experiments/results)
 
-| N | max a(n) - n (upper, what C005 needs) | max n - a(n) (lower) = max overshoot | smallest value not yet seen |
+| N | max a(n) - n (upper, what L005 needs) | max n - a(n) (lower) = max overshoot | smallest value not yet seen |
 |---|---|---|---|
 | 10^6 | 156 | 150 | 999,949 |
 | 10^7 | **188** (n = 8,525,842) | 200 (n = 8,526,046) | 9,999,963 |
@@ -85,7 +61,7 @@ The earlier "max |a(n)-n| = 200" was the *lower* displacement. Both quantities a
 1. **Overshoot is lower displacement.**
    - Exact identity: O(n) = n + 1 - u(n), where u(n) is the smallest unused value.
    - Exact relation: max O = max (n - a(n)).
-   - **Warning:** O(n) = o(n) already *is* the permutation property. "Bound the overshoot" is not a weaker subgoal. The upper bound in C005 is the genuinely weaker target.
+   - **Warning:** O(n) = o(n) already *is* the permutation property. "Bound the overshoot" is not a weaker subgoal. The upper bound in L005 is the genuinely weaker target.
 2. **Worst spots sit at large prime gaps near 2n, not near n.**
    - Six of the nine upper-displacement records after 10^5 sit exactly on a maximal prime gap at 2n. Example: the 188 sits at the record gap 180 after 17,051,707.
    - Top events are at the 99th percentile of local gap size against a random control.
@@ -103,7 +79,7 @@ The earlier "max |a(n)-n| = 200" was the *lower* displacement. Both quantities a
 
 ## Main line of attack
 
-By C005, it is enough to prove a(n) <= n + o(n / log n). The data says the truth is about (log n)^2.
+By L005, it is enough to prove a(n) <= n + o(n / log n). The data says the truth is about (log n)^2.
 
 The bottleneck is the circularity between the two displacements:
 - upper displacement <= (prime-counting length) + overshoot, by the step formula;
@@ -111,17 +87,17 @@ The bottleneck is the circularity between the two displacements:
 
 To break it:
 
-_Update 2026-11-25: route 1 is now made precise by C009-C011. A uniform bound on the number of primes a hole survives (C010) suffices, and so does H(n) < (1-δ) n/log n infinitely often (C011). See "Open questions" for the current target. Routes 1-3 below are kept for history; item 3 is done (C006)._
+_Update 2026-11-25: route 1 is now made precise by L009-L011. A uniform bound on the number of primes a hole survives (C010) suffices, and so does H(n) < (1-δ) n/log n infinitely often (L011). See "Open questions" for the current target. Routes 1-3 below are kept for history; item 3 is done (L006)._
 
 1. **Wait-time lemma.** If m is overtaken at step n (the running max passes m), then m is used within W(n) steps, for some W(n) = o(n / log n).
    - **Plausible route:** the reflection lock. While the sums sit on a prime q, the partner q - m of each left-behind m is reached in order.
    - **Data:** the maximum wait is 309 for m < 10^7.
-   - **Consequence:** a wait bound gives O(n) = o(n / log n), which directly gives M = ∅ and bypasses C005. It is therefore the whole problem; look for a version that needs only an *averaged* or *density* bound, and combine it with C004.
-2. **Density route (combine C004 with averages).**
-   - C004 needs |M ∩ [1, X]| >> X / log X if M is nonempty.
+   - **Consequence:** a wait bound gives O(n) = o(n / log n), which directly gives M = ∅ and bypasses L005. It is therefore the whole problem; look for a version that needs only an *averaged* or *density* bound, and combine it with L004.
+2. **Density route (combine L004 with averages).**
+   - L004 needs |M ∩ [1, X]| >> X / log X if M is nonempty.
    - So it suffices to show that, for infinitely many X, all but o(X / log X) values <= X appear before step X + o(X).
    - This needs averaged control only, not a pointwise bound. It may be reachable with Brun-Titchmarsh or Selberg sieve upper bounds on primes in short intervals, plus a counting argument on blocked primes (mean 0.79 per step in the data).
-3. **Step-formula lemma.** Write up item 4 above as candidate C006 and send it through the experimenter -> skeptic loop. It is elementary and is needed by both routes.
+3. **Step-formula lemma.** Write up item 4 above as candidate L006 and send it through the experimenter -> skeptic loop. It is elementary and is needed by both routes.
 
 ## Secondary lines
 
@@ -130,26 +106,26 @@ _Update 2026-11-25: route 1 is now made precise by C009-C011. A uniform bound on
   - Are there infinitely many fixed points?
   - Are there infinitely many n in A070942 (the first n terms are exactly 1..n)? That would imply the permutation property.
 - **Conditional results:** under Cramér-type gap bounds, or Hardy-Littlewood, does the displacement bound follow?
-- **Formalization:** a Lean statement of the greedy variant, plus L001/L002/C003-C005, as a contribution to formal-conjectures.
+- **Formalization:** a Lean statement of the greedy variant, plus L001/L002/L003-L005, as a contribution to formal-conjectures.
 
 ## Open questions for the next session
 
-- [x] Skeptic pass on C003, C004, C005 (2026-11-24): all PASS, with C004 and C005 conditional on their predecessors.
-- [ ] Matteo: review C003-C005; on OK, apply the editorial fixes from the review logs and move them to `lemmas/proven/`.
+- [x] Skeptic pass on L003, L004, L005 (2026-11-24): all PASS, with L004 and L005 conditional on their predecessors.
+- [x] L003-L009 and L011 promoted to proven (2026-11-25).
 - [x] Literature pass (2026-11-24): see "Literature" above.
 - [ ] Still unread: erdosproblems.com/473 page and forum, Hasler's wiki page, the EKG paper (arXiv:math/0204011). The hosts are blocked by DNS; read them manually or from a different environment.
 - [x] Overshoot experiment (2026-11-24): `experiments/results/overshoot_1e7/`.
 - [ ] Fix `experiments/results/run_1e7/summary.md` (and `run_1e6`): relabel "max |a(n)-n|" as the lower displacement and add the upper one.
-- [x] C006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
-- [x] C007/C008 created from C006 Remarks R3a/R3b; skeptic PASS (2026-11-25), C008 (ii) conditional on C003/C004. Awaiting Matteo.
-- [x] Hole-dynamics experiment (2026-11-25): `experiments/results/holes_dynamics_1e7/`. There is no restoring drift. Lifetimes are governed by a prime count (C009). Pair and prime-sum-free ideas are dead.
-- [x] C009 (with C009') and C011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [x] L006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [x] L007/L008 created from L006 Remarks R3a/R3b; skeptic PASS (2026-11-25), L008 (ii) conditional on L003/L004. Awaiting Matteo.
+- [x] Hole-dynamics experiment (2026-11-25): `experiments/results/holes_dynamics_1e7/`. There is no restoring drift. Lifetimes are governed by a prime count (L009). Pair and prime-sum-free ideas are dead.
+- [x] L009 (with L009') and L011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
 - [x] 10^8 run (2026-11-25): `experiments/results/k_survival_1e8/`. Max K = 11, so K0 = 8 fails. Max H = 75. All eight OEIS displacement records match.
 - [ ] **Next target:** a uniform bound on the prime partners of a hole. For every hole v at time n, show #Late(v,n) + #Ahead(v) <= C log v, where:
   - Late(v,n) is the partners w = q - v still unused at time n;
   - Ahead(v) is the partners used before time v.
 
-  With C009 this gives C010 in its C log v form, and hence the permutation property. It needs arithmetic input: the hole set (a dense set of about 50 values in [n-86, n], reflection-locked around a prime) must meet the shifted primes {q - v} in O(log v) elements. Counting payers alone is tight (C009' equality) and cannot do it. The data shows that worst cases are prime-dense windows, not large gaps. See `attempts/2026-11-25-c010-bounded-prime-survival.md` for what died: iterating C009 on partners, window counting (coefficient 2 > 1), and bootstrapping H against K.
-- [ ] Secondary: since C011 needs only H(n) < (1-δ) n/log n infinitely often, look for *any* sublinear bound on H. Even H(n) = O(n / log n) with a small constant would be enough.
+  With L009 this gives C010 in its C log v form, and hence the permutation property. It needs arithmetic input: the hole set (a dense set of about 50 values in [n-86, n], reflection-locked around a prime) must meet the shifted primes {q - v} in O(log v) elements. Counting payers alone is tight (L009' equality) and cannot do it. The data shows that worst cases are prime-dense windows, not large gaps. See `attempts/2026-11-25-c010-bounded-prime-survival.md` for what died: iterating L009 on partners, window counting (coefficient 2 > 1), and bootstrapping H against K.
+- [ ] Secondary: since L011 needs only H(n) < (1-δ) n/log n infinitely often, look for *any* sublinear bound on H. Even H(n) = O(n / log n) with a small constant would be enough.
 - [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
 - [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.

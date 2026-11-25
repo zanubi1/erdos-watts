@@ -11,8 +11,8 @@ N. J. A. Sloane, "The On-Line Encyclopedia of Integer Sequences", arXiv:1805.103
 
 ## Relevance
 
-- Confirms that, as of 2018, the leading OEIS editor regarded the permutation property of A055265 as open and probably hard. He named prime gaps as the obstacle, which is consistent with our C006 / C010 reductions to prime counts in short intervals.
-- It contains no lemma of the C009 type and no delay bound.
+- Confirms that, as of 2018, the leading OEIS editor regarded the permutation property of A055265 as open and probably hard. He named prime gaps as the obstacle, which is consistent with our L006 / C010 reductions to prime counts in short intervals.
+- It contains no lemma of the L009 type and no delay bound.
 
 ## Verified by
 

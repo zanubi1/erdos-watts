@@ -1,4 +1,4 @@
-# C003 - The smallest missing value blocks a translate of the primes
+# L003 - The smallest missing value blocks a translate of the primes
 
 ## Statement
 
@@ -8,7 +8,7 @@ Suppose some positive integer never occurs in the sequence, and let m be the sma
 
 L001, L002.
 
-## Draft proof
+## Proof
 
 Every x < m occurs, so there are finitely many indices at which the values 1, ..., m-1 occur; let N0 exceed all of them. Fix n >= N0 with a(n) of parity opposite to m. Suppose for contradiction a(n) + m is prime.
 
@@ -30,3 +30,4 @@ Not applicable directly (concerns a hypothetical missing value).
   - Dependencies: L001 is not actually used (only cited for the parity remark, which is elementary); L002 is in lemmas/proven/. Result is unconditional.
   - Variant test: the argument uses only "a(n+1) = least unused x satisfying a predicate P(a(n), x)", so it also proves the analogue for composite sums and for any a(1). The analogous statements are true there too (same argument), so no false variant is "proved". No counterexample possible beyond the hypothesis being vacuous.
   - Housekeeping: the prior log entry is dated 2026-11-25, which is after this review date; likely a typo - Matteo should check. Section is titled "Draft proof" rather than "Proof" per conventions; consider renaming. Suggest updating "Depends on" to "L002 (L001 only for the parity remark)".
+- 2026-11-25 (main-session review, with Matteo's delegated OK): PASS. N0 exceeds every index of a value < m, so U_n ⊇ [1, m-1] for n >= N0, while m ∉ U_n. If a(n)+m were prime, then m = min A_n, contradicting that m never occurs. The proof in fact shows compositeness for every n >= N0, whatever the parity. **Moved to lemmas/proven/ as L003 (formerly C003).**

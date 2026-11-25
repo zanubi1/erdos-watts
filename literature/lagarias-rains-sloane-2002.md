@@ -20,9 +20,9 @@ J. C. Lagarias, E. M. Rains, N. J. A. Sloane, "The EKG sequence", Experimental M
 
 ## Relevance
 
-- **C003/C004**: Lemmas 3-4 are the "smallest missing value is always an admissible candidate" mechanism. Cite them, together with A253074.
-- **C009 case 2 ("steals")**: EKG Lemma 7 is the same **charging argument**. Each time a term is an admissible partner of a missing value, the next term is forced to be no larger than that value. Distinct times give distinct small values, so the number of partner occurrences is bounded by the number of available smaller values.
-  - C009 refines this in two ways. It charges to the *smaller holes* B(v) rather than to all values <= v. It also adds cases 1, 3 and 4, which count partners never used while v is missing.
+- **L003/L004**: Lemmas 3-4 are the "smallest missing value is always an admissible candidate" mechanism. Cite them, together with A253074.
+- **L009 case 2 ("steals")**: EKG Lemma 7 is the same **charging argument**. Each time a term is an admissible partner of a missing value, the next term is forced to be no larger than that value. Distinct times give distinct small values, so the number of partner occurrences is bounded by the number of available smaller values.
+  - L009 refines this in two ways. It charges to the *smaller holes* B(v) rather than to all values <= v. It also adds cases 1, 3 and 4, which count partners never used while v is missing.
   - The charging step itself is prior art (LRS 2002, Lemma 7) and should be cited. I did not see the full four-way partition, or any bound of the form "number of admissible partners while missing <= number of payers", stated as such.
 - **Lifetime bounds**: Theorems 2-3 are linear bounds proved by sieving. They are not bounds on (first occurrence of n) - n. The density of the admissible relation is positive in EKG and 1/log in our case, so the sieve does not transfer directly.
 

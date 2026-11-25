@@ -10,7 +10,7 @@ Numerical evidence: K reaches 8 up to 10^7 but **11 up to 10^8** (at v = 76,132,
 
 **Uniform variants that also suffice.**
 - K0 replaced by C log v, which the data supports equally well (the tail of K looks geometric, ratio about 0.15, and is creeping upward slowly).
-- More generally, any bound F(n) = o(n / log n), by the argument of C011.
+- More generally, any bound F(n) = o(n / log n), by the argument of L011.
 
 **Warning (prover, 2026-11-25): the per-v version is the conjecture itself.** "π(n + v) - π(2v) <= F(v) for every hole v at time n", for an arbitrary finite F, is *equivalent* to the permutation property: if v occurs, the left side is only defined for n < fi(v). The content of C010 is the **uniformity** of the bound.
 
@@ -18,11 +18,11 @@ Numerical evidence: K reaches 8 up to 10^7 but **11 up to 10^8** (at v = 76,132,
 
 Suppose v never occurs. Then v is a hole at every time n >= v, so π(n + v) - π(2v) <= K0 for all n. This is impossible, because π(n + v) → ∞ as n → ∞. Hence v occurs, and moreover fi(v) <= v + ℓ_{K0+1}(2v).
 
-A uniform bound also gives a quantitative delay bound fi(v) <= v + ℓ_{F+1}(2v). Turning that into a power of v needs short-interval prime counts (Huxley, or a quantitative Baker-Harman-Pintz; see C006 Remark R0).
+A uniform bound also gives a quantitative delay bound fi(v) <= v + ℓ_{F+1}(2v). Turning that into a power of v needs short-interval prime counts (Huxley, or a quantitative Baker-Harman-Pintz; see L006 Remark R0).
 
 ## Depends on
 
-C009. By C009, it would suffice to bound
+L009. By L009, it would suffice to bound
 
     B(v) + H_{1-ε}(v - 1) + H_{1-ε}(n)
 

@@ -1,4 +1,4 @@
-# Search log for C009 (hole prime count / payers) and C010 (bounded prime survival)
+# Search log for L009 (hole prime count / payers) and C010 (bounded prime survival)
 
 ## Citation/link
 
@@ -6,10 +6,10 @@ This is a search log, not a single source. Sources are linked in the notes liste
 
 ## What it says (search on 2026-11-25)
 
-**Question 1.** Is the C009 argument known? The argument: a value v that is still unused at time n has at most "payers" many prime partners q = v + w in (2v, n+v]. The payers are opposite-parity values that were used early, steals forced onto smaller holes, a(n) itself, and opposite-parity holes.
+**Question 1.** Is the L009 argument known? The argument: a value v that is still unused at time n has at most "payers" many prime partners q = v + w in (2v, n+v]. The payers are opposite-parity values that were used early, steals forced onto smaller holes, a(n) itself, and opposite-parity holes.
 
 - **Partly known.** The "steal" case (case 2) is the charging argument of **EKG Lemma 7** (Lagarias-Rains-Sloane 2002). There, each admissible partner of the missing value forces the next term to be <= that value. Distinct times then give distinct small values. The special case B(v) = 0 (v is the smallest hole) is the classical "smallest missing value is forced" step: EKG Lemmas 3-4, Yellowstone Theorem 1(vi), and A253074 (Devlin-Artamonov).
-- **Not found:** the four-way partition of prime partners (ahead / steal / a(n) / late), its use of the C007 parity count for "ahead" values, and the resulting inequality π(n+v) - π(2v) <= 1 + B(v) + H(v-1) + H(n). I did not find these in any source read.
+- **Not found:** the four-way partition of prime partners (ahead / steal / a(n) / late), its use of the L007 parity count for "ahead" values, and the resulting inequality π(n+v) - π(2v) <= 1 + B(v) + H(v-1) + H(n). I did not find these in any source read.
 
 **Question 2.** Is the C010 conjecture (a hole survives only boundedly many primes), or any lifetime bound on A117922(n) - n, known?
 
@@ -23,7 +23,7 @@ This is a search log, not a single source. Sources are linked in the notes liste
 
 ## Relevance
 
-- C009: cite LRS 2002 Lemma 7 for the charging step. The full bound appears to be ours, as far as this search reached.
+- L009: cite LRS 2002 Lemma 7 for the charging step. The full bound appears to be ours, as far as this search reached.
 - C010: no prior result found, either for or against.
 
 "I found no prior work" here does **not** mean "there is no prior work". The following were not searched or read this pass:

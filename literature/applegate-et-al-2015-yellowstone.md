@@ -19,7 +19,7 @@ D. L. Applegate, H. Havermann, B. Selcoe, V. Shevelev, N. J. A. Sloane, R. Zumke
 
 ## Relevance
 
-- Step (vi) is the same "smallest missing value is forced at the first admissible moment" mechanism as EKG Lemmas 3-4 and A253074. It is relevant to C003, and to C009 case 2 only in the special case B(v) = 0.
+- Step (vi) is the same "smallest missing value is forced at the first admissible moment" mechanism as EKG Lemmas 3-4 and A253074. It is relevant to L003, and to L009 case 2 only in the special case B(v) = 0.
 - It contains no counting of payers and no bound on how long a value can stay missing.
 
 ## Verified by

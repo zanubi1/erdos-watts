@@ -1,9 +1,9 @@
-# C007 - Hole-count step bound
+# L007 - Hole-count step bound
 
 ## Statement
 
 Notation, for n >= 1:
-- U_n = {a(1), ..., a(n)} and π_n = parity of a(n+1), as in C006.
+- U_n = {a(1), ..., a(n)} and π_n = parity of a(n+1), as in L006.
 - H_π(n) = #{ v ∈ [1, n] : v ≡ π_n (mod 2), v ∉ U_n } is the number of holes below n in the parity of the next term.
 - q'_1 < q'_2 < ... are the primes >= a(n) + n + 1.
 
@@ -13,15 +13,15 @@ Then for every n >= 1:
 
 That is, the upper displacement at step n+1 is at most the length of the shortest interval starting at a(n) + n + 1 that contains H_π(n) + 1 primes.
 
-Also H_π(n) <= O*(n), where O*(n) is as in C006. So this bound counts no more primes than C006 (c), and it starts from a base point a(n) + n + 1 >= t_n.
+Also H_π(n) <= O*(n), where O*(n) is as in L006. So this bound counts no more primes than L006 (c), and it starts from a base point a(n) + n + 1 >= t_n.
 
 ## Depends on
 
-L001, L002. The count (Cnt) from the proof of C006 (b) is reproved below, so C006 is not needed except for the comparison remark H_π(n) <= O*(n).
+L001, L002. The count (Cnt) from the proof of L006 (b) is reproved below, so L006 is not needed except for the comparison remark H_π(n) <= O*(n).
 
 ## Proof
 
-_Transcribed 2026-11-25 from the prover's Remark R3a in C006, with the steps written out._
+_Transcribed 2026-11-25 from the prover's Remark R3a in L006, with the steps written out._
 
 Fix n >= 1.
 
@@ -50,27 +50,28 @@ Fix n >= 1.
 - Then y_j ∈ A_n, so a(n+1) <= y_j <= y_{H_π(n)+1} = q'_{H_π(n)+1} - a(n).
 - Subtracting n + 1 from both sides gives the claim. ∎
 
-**Comparison with C006: H_π(n) <= O*(n).**
+**Comparison with L006: H_π(n) <= O*(n).**
 - Every hole v counted by H_π(n) satisfies v ≥ u*(n), by the minimality of u*(n).
 - So the holes counted by H_π(n) lie in [u*(n), n] and have parity π_n. If u*(n) = n + 1, there are none.
-- The number of parity-π_n integers in [u*(n), n] is (n + 1 - u*(n))/2, since u*(n) ≡ π_n ≡ n + 1 and u*(n) <= n + 1 (C006 (b)).
+- The number of parity-π_n integers in [u*(n), n] is (n + 1 - u*(n))/2, since u*(n) ≡ π_n ≡ n + 1 and u*(n) <= n + 1 (L006 (b)).
 - This equals O*(n). All parity-π_n integers below u*(n) are used: there are (u*(n) - 1)/2 of them if n is even and (u*(n) - 2)/2 if n is odd. Exactly floor(n/2) used values have parity π_n (Step 2), and u*(n) itself is unused. So O*(n) = floor(n/2) minus that count, which is (n + 1 - u*(n))/2 in both cases. Hence H_π(n) <= O*(n).
-- The base point satisfies a(n) + n + 1 >= a(n) + u*(n) = t_n, by C006 (b).
+- The base point satisfies a(n) + n + 1 >= a(n) + u*(n) = t_n, by L006 (b).
 
 ## Numerical check
 
 `experiments/src/c006_holes_check.py` asserts the inequality for every n <= 10^7 (prover, 2026-11-24). Measured up to 10^7:
-- max of the bound: 554, against 1542 for C006 (c') and an actual max upper displacement of 188;
+- max of the bound: 554, against 1542 for L006 (c') and an actual max upper displacement of 188;
 - max H_π = 30, max H = 50, mean H = 8.8.
 
 ## Review log
 
-- 2026-11-25: candidate created from C006 Remark R3a. **Awaiting skeptic.**
-- 2026-11-25 (skeptic): **PASS** for the main inequality (depends only on L001, L002 and a(1) = 1). **PASS, conditional on C006 (b)** for the comparison H_π(n) <= O*(n) and the base-point remark a(n)+n+1 >= t_n; C006 is still a candidate, so those two remarks inherit its status. Checked:
+- 2026-11-25: candidate created from L006 Remark R3a. **Awaiting skeptic.**
+- 2026-11-25 (skeptic): **PASS** for the main inequality (depends only on L001, L002 and a(1) = 1). **PASS, conditional on L006 (b)** for the comparison H_π(n) <= O*(n) and the base-point remark a(n)+n+1 >= t_n; L006 is still a candidate, so those two remarks inherit its status. Checked:
   - Step 1: a(n)+n+1 odd and >= 3, so every q'_i is an odd prime, y_i >= n+1, y_i ≡ π_n; distinct and increasing. OK.
   - Step 2: #{k <= n : k ≡ n+1} = floor(n/2) in both parities of n; same count for parity-π_n integers in [1, n]; hence #{x ∈ U_n : x ≡ π_n, x > n} = H_π(n) exactly. OK (uses a(k) ≡ k, i.e. a(1) odd).
   - Step 3: pigeonhole over H_π+1 candidates, a(n+1) = min A_n <= y_j <= y_{H_π+1}. OK, no off-by-one.
-  - Comparison: "(b')" is not in C006's Statement section (cited from its proof). Re-derived independently: all parity-π integers < u* are used, u* ≡ n+1, and floor(n/2) used values of parity π give O* = (n+1-u*)/2; parity-π integers in [u*, n] also number (n+1-u*)/2 when u* <= n+1. This needs C006 (b) (u* <= n+1). Suggest inlining this 3-line derivation instead of citing (b').
+  - Comparison: "(b')" is not in L006's Statement section (cited from its proof). Re-derived independently: all parity-π integers < u* are used, u* ≡ n+1, and floor(n/2) used values of parity π give O* = (n+1-u*)/2; parity-π integers in [u*, n] also number (n+1-u*)/2 when u* <= n+1. This needs L006 (b) (u* <= n+1). Suggest inlining this 3-line derivation instead of citing (b').
   - Numerics (own script, independent incremental hole count, cross-checked by brute recount for n < 3000 and sampled n < 2·10^5): 0 violations of the main inequality and 0 of H_π <= O* for n < 10^7 on sequence.npy; max bound 554, max H_π 30 (matches the file). Equality (disp = bound) is attained, so the bound is tight at some steps.
   - Variants a(1) = c ∈ {2,3,4,5,6,9,10}, 2·10^4 terms: main inequality holds for all c (the proof adapts: for even c the used-above-n count is H_π - (n mod 2) <= H_π). The comparison H_π <= O* FAILS for even c (~1565 steps each, e.g. u* = n, H_π = 1, O* = 0). The written comparison proof uses the a(1) = 1 parity via (b'), so it does not "prove" the false variant; but this shows the comparison is genuinely parity-dependent, not a general fact.
-- 2026-11-25 (editor): inlined the derivation of O*(n) = (n+1-u*(n))/2 in the comparison, as the skeptic suggested, instead of citing C006 (b'). The argument is unchanged.
+- 2026-11-25 (editor): inlined the derivation of O*(n) = (n+1-u*(n))/2 in the comparison, as the skeptic suggested, instead of citing L006 (b'). The argument is unchanged.
+- 2026-11-25 (main-session review, with Matteo's delegated OK): PASS. Step 2's count floor(n/2) - (floor(n/2) - H_π) = H_π is right in both parities; pigeonhole over H_π + 1 distinct candidates of parity π_n, all > n. The comparison with O* is right, given L006 (b), (b'). **Moved to lemmas/proven/ as L007 (formerly C007).**

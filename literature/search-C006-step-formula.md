@@ -1,8 +1,8 @@
-# Search log: C006 (step formula, frontier + overshoot bound)
+# Search log: L006 (step formula, frontier + overshoot bound)
 
 ## Citation/link
 
-No source found that states C006. Sources checked (2026-11-24):
+No source found that states L006. Sources checked (2026-11-24):
 
 - OEIS A055265, A282695, A282696, A086527, A128280: raw files read via https://raw.githubusercontent.com/oeis/oeisdata/main/seq/ .
 - Web searches (several phrasings) for greedy "least unused x with a(n)+x prime" sequences with displacement bounds via primes in short intervals; for the EKG paper's Section 2; for MathOverflow / Math StackExchange threads on A055265.
@@ -17,7 +17,7 @@ No source found that states C006. Sources checked (2026-11-24):
 
 ## Relevance
 
-For C006 the result is **not found**, which is not the same as new. Part (a) follows directly from the greedy rule: the candidates of the right parity below a(n+1) are exactly the values q_i - a(n) for primes q_i < a(n)+a(n+1), and each of them must be used. Parts (b) and (c) are elementary consequences. Anyone who has worked on this sequence probably knows this, so treat it as folklore or elementary. Do not claim novelty. If the EKG/Yellowstone proofs become readable, check whether their upper bounds use the same "frontier + blocked candidates" counting. In EKG the analogue is "a(n+1) <= the k-th admissible candidate after the frontier".
+For L006 the result is **not found**, which is not the same as new. Part (a) follows directly from the greedy rule: the candidates of the right parity below a(n+1) are exactly the values q_i - a(n) for primes q_i < a(n)+a(n+1), and each of them must be used. Parts (b) and (c) are elementary consequences. Anyone who has worked on this sequence probably knows this, so treat it as folklore or elementary. Do not claim novelty. If the EKG/Yellowstone proofs become readable, check whether their upper bounds use the same "frontier + blocked candidates" counting. In EKG the analogue is "a(n+1) <= the k-th admissible candidate after the frontier".
 
 ## Verified by
 

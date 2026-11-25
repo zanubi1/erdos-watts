@@ -13,7 +13,7 @@ https://oeis.org/wiki/User:M._F._Hasler/Prime_sums_from_neighboring_terms (creat
 
 ## Relevance
 
-Context only. Nothing seen suggests a proof of the permutation property for (2, 1), nor a displacement bound, nor C004/C005.
+Context only. Nothing seen suggests a proof of the permutation property for (2, 1), nor a displacement bound, nor L004/L005.
 
 ## Verified by
 

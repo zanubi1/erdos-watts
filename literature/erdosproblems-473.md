@@ -16,7 +16,7 @@ On 2026-11-24 a web-search summary of the forum thread claimed "no integer ≡ 1
 
 ## Relevance
 
-Defines our target (Watts' greedy question). The page status "solved" refers to the main question, not to the greedy sub-question. Nothing found here bears on C003-C005.
+Defines our target (Watts' greedy question). The page status "solved" refers to the main question, not to the greedy sub-question. Nothing found here bears on L003-L005.
 
 ## Verified by
 
