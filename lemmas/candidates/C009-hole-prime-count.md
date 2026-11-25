@@ -206,6 +206,7 @@ No step is marked GAP?. The proof uses only L001, L002, a(1) = 1, and the defini
 `experiments/src/holes_dynamics.py`, section `bounds`. Checked for all 4.71M holes v at n = fi(v) - 1, and for the smallest hole at every n <= 10^7: 0 violations.
 - The left side is at most 8; the right side reaches 52.
 - See `experiments/results/holes_dynamics_1e7/summary.md`.
+- 2026-11-25 (experimenter, N = 10^8): (C009') checked at n = fi(v) - 1 for all 47,519,524 completed holes v <= 10^8 (42,806,899 with v in [10^7, 10^8)), and at n = N for the 14 holes still open: **0 violations**. Equalities: 6,483 in total (4,596 in [10^7, 10^8)), max K at equality 5, equality with K >= 2 up to v = 99,990,736. Left side max 11, right side max 112; max K/rhs is 0.70 for rhs in [10, 20), 0.50 for [20, 40), 0.24 for >= 40. Script `experiments/src/k_survival_1e8.py`.
 
 ## Review log
 
