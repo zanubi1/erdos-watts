@@ -229,3 +229,85 @@ Let Φ_K(n) := #{ v <= n : π(n+v) - π(2v) <= K }.
   - By P5, when one hole of a coexisting prime-sum pair (v, w) is filled, the next step fills either the other one or a smaller same-parity hole.
   - The data says the pair is filled at consecutive steps 81.5% of the time.
   - The aim is to charge each late partner of v to a distinct "lock prime" visited by the sums a(k) + a(k+1) during v's life, and to bound the number of such lock primes by O(log v).
+
+---
+
+## Review (skeptic, 2026-11-25)
+
+Scope: P2 (with the frontier corollary), P5 and P6. I did not review P1/P3, which are now L009'/L011, nor P4, which is marked GAP? by the author. Sections 4, 5 and 7-9 are heuristic or "dead" and are not reviewed.
+
+Numerical checks come from an independent C checker with its own generator and sieve (scratch file `chk.c`, not committed). It maintains the exact hole set at every time m.
+- At N = 10^7, every pair (v, n) with v a hole at time n (88,212,972 pairs) was checked.
+- At N = 10^8, the pairs with n = fi(v) - 1 (47,519,524) were checked.
+- Variants: a(1) ∈ {2..8, 10, 15, 20}, N = 2·10^5, all pairs.
+
+### P2 (shifted start) and its frontier corollary: **PASS**
+
+**Restatement.** Assume a(1) = 1. Let n >= 2 and 2 <= v <= t <= n with v ∉ U_n, and put ε = v mod 2 and B_t(v) = #{x < v : x ≡ ε, x ∉ U_t}. Then
+
+    π(n+v) - π(t+v) <= H_{1-ε}(t-1) + B_t(v) + 1 + H_{1-ε}(n).
+
+If v is the smallest parity-ε hole at time t, then B_t(v) = 0.
+
+**Checked.**
+- q ∈ (t + v, n + v] gives q > 2v >= 4, so q is odd, and w = q - v ∈ (t, n] has parity 1 - ε. The map q -> w is injective.
+- Case fi(w) <= t - 1: w ∈ U_{t-1} and w > t - 1, with parity 1 - ε. Sub-lemma S of L009 applies with m = t - 1 >= 1 (t >= v >= 2). Correct.
+- Case t <= k = fi(w) <= n - 1:
+  - v ∉ U_k ⊆ U_n and a(k) + v is prime, so a(k+1) <= v. Also a(k+1) ≠ v, since k + 1 <= n.
+  - Parity: k ≡ w ≡ 1 - ε (F1), so a(k+1) ≡ ε.
+  - a(k+1) ∉ U_k ⊇ U_t, because k >= t.
+  - Injective via F2. Correct.
+- Case fi(w) = n: at most 1. Case fi(w) > n: w <= n, so w is a parity-(1-ε) hole at time n. Correct.
+- t = v gives exactly the four-term L009. t = n gives an empty left side.
+- Frontier corollary: B_t(v) = 0 by minimality. Correct.
+
+**Dependencies.** L001, L002, and Sub-lemma S of L009 (all proven).
+
+**Data.**
+- 10^7, all pairs: 0 failures for t ∈ {v, (v+n)/2, n - 1, τ(v), pseudo-random t ∈ [v, n]}. Here τ(v) is the first time v is the parity frontier, i.e. B_τ(v) = 0.
+- 10^8, n = fi(v) - 1: 0 failures.
+- Equality occurs for every choice of t (for example 12,533 times at t = τ at 10^8), so the bound is tight.
+
+**Variant.** For even a(1) (2, 4, 6, 8, 10, 20), P2 fails by exactly 1 at t = τ (3 cases) and at t = mid (1 case). For odd a(1), it holds. This is expected, since the proof uses S, which needs a(1) odd (the same scope as L009'). So **the statement must say a(1) = 1**.
+
+**Cosmetic.** The data note uses "T0(v) = max(v, s(v))", but s(v) is not defined in this file. Define it, or say "first time v is the smallest parity-ε hole".
+
+### P5 (late partners leave only by steals): main statement **PASS**; the monotonicity sentence is **FALSE as stated** (easy fix)
+
+**Restatement of the main claim.** Let v be a hole, and let w be a parity-(1-ε) value with v + w prime that is used at time j + 1 = fi(w), while v is still unused at time j + 1. If fi(v) >= j + 3, then a(j+2) < v, a(j+2) ≡ ε, and a(j+2) is a hole at time j + 1.
+- The proof is the greedy rule: v ∈ A_{j+1}, so a(j+2) <= v, and a(j+2) ≠ v.
+- Parity follows from L001.
+- When w ∈ Late(v, n), we have j + 1 > n >= v > a(j+2), so a(j+2) <= j + 1 and it is a hole.
+- The proof does not even need w > v.
+- "At most B_t(v) late partners (observed from time t on) leave without v filled next": the map w -> a(fi(w) + 1) is injective, and its image lies in {x < v : x ≡ ε, x ∉ U_t}, because fi(w) > t. Correct.
+- Data: 57,813,193 events (v hole, v + a(m) prime) for m <= 10^8, with 0 failures. P5 also holds for every a(1) variant tested, which is consistent with the proof using only L001 and not S.
+
+**The FALSE sentence.** "After all smaller same-parity holes are gone, Late(v,·) is monotone non-decreasing."
+- **Counterexample: v = 11.**
+  - At time 15, U_15 = {1, ..., 10, 13, 14, 15, 16, 17} \ {11, 12}, so 11 is the smallest odd hole.
+  - Late(11, 15) = {12}, since 23 is prime and 12 ∉ U_15.
+  - a(16) = 12 and a(17) = 11, so Late(11, 16) = ∅.
+  - Another example is v = 26 at m = 30 → 31.
+- **Correct form.** If v is the parity-ε frontier at time τ, then Late(v, m) ⊆ Late(v, m+1) for τ <= m <= fi(v) - 3. At the last step m = fi(v) - 2 → fi(v) - 1, exactly the element a(fi(v) - 1) can leave (when it lies in Late).
+- Data, 10^8: 0 losses strictly inside that range, and 6,565,730 losses at the last step.
+- This edge case is exactly the "pair filled at consecutive steps" mechanism mentioned under "Most promising next statement". Any lock-prime charging argument built on P5 must treat it explicitly.
+
+### P6 (middle-window primes are paid only by steals): **PASS**
+
+**Restatement.** Let n >= 2 and 2 <= v <= n with v ∉ U_n, and put M(v-1) = max U_{v-1}. Let u' be the least parity-(1-ε) hole at time n, or n + 1 if there is none. Then the number of primes q with max(2v, v + M(v-1)) < q < v + u' and q <= n + v is at most B(v) + 1 = H_ε(v).
+
+**Checked.**
+- w = q - v > M(v-1) means w ∉ U_{v-1}, so w ∉ W1.
+- w < u', w ≡ 1 - ε (q > 2v is odd) and w <= n, so w is not a time-n hole, so w ∉ W4.
+- So w ∈ W2 ∪ W3, and the L009 Steps 3-4 bounds apply.
+- B(v) + 1 = H_ε(v) is L009 Sharpening (i). It holds for every a(1), and I checked it numerically: 0 mismatches.
+
+**Dependencies.** L009 (proven).
+
+**Data.** 0 failures on all 88.2M pairs at 10^7, and on 47.5M pairs at 10^8. The maximum left side is 4.
+- Variant: holds for all a(1) tested, including even starts. This is consistent with the proof not using S.
+- The "why it does not help" Brun-Titchmarsh arithmetic (2·2·86/log 86 ≈ 77) is correct. The Cramér-conditional paragraph is heuristic and not reviewed.
+
+### Data cross-check
+
+My generator independently reproduces max K = 11 over holes with fi(v) <= 10^8, matching `experiments/results/k_survival_1e8/summary.md`. This already exceeds the section 5 prediction ("max K = 9 or 10 somewhere below 10^8 to 10^9") and supports the O(log v) target over an absolute K0.
