@@ -8,13 +8,17 @@
 
 The numerical evidence is K0 = 8: the maximum is 8 up to n = 10^7, and the maximum per decade is flat from 10^4 to 10^7.
 
-Weaker version, which suffices: π(n + v) - π(2v) <= F(v) for every hole v at time n, with F(v) = o(v^{0.525} / log v).
+**Uniform variants that also suffice.**
+- K0 replaced by C log v, which the data supports equally well (the tail of K looks geometric, ratio about 0.15, and is creeping upward slowly).
+- More generally, any bound F(n) = o(n / log n), by the argument of C011.
+
+**Warning (prover, 2026-11-25): the per-v version is the conjecture itself.** "π(n + v) - π(2v) <= F(v) for every hole v at time n", for an arbitrary finite F, is *equivalent* to the permutation property: if v occurs, the left side is only defined for n < fi(v). The content of C010 is the **uniformity** of the bound.
 
 ## Why it would suffice
 
 Suppose v never occurs. Then v is a hole at every time n >= v, so π(n + v) - π(2v) <= K0 for all n. This is impossible, because π(n + v) → ∞ as n → ∞. Hence v occurs, and moreover fi(v) <= v + ℓ_{K0+1}(2v).
 
-For the weaker version, the same argument works, provided some interval (2v, n + v] with n - v <= v^{0.525} contains more than F(v) primes. GAP?: this needs a quantitative Baker-Harman-Pintz lower bound for the count of primes, not just existence; see C006 Remark R0.
+A uniform bound also gives a quantitative delay bound fi(v) <= v + ℓ_{F+1}(2v). Turning that into a power of v needs short-interval prime counts (Huxley, or a quantitative Baker-Harman-Pintz; see C006 Remark R0).
 
 ## Depends on
 
@@ -36,3 +40,4 @@ See `experiments/results/holes_dynamics_1e7/summary.md`, the table of K(v) by ra
 
 - 2026-11-25: conjecture recorded from the hole-dynamics experiment. Not a lemma until proved.
 - 2026-11-25 (literature): **not found** in the sources read. These were the OEIS A055265, A117922, A117925, A086527, A282695-7, A282700, A128280 and A051237 entries, the EKG and Yellowstone papers, and Sloane 2018. The last of these calls A055265 possibly "beyond reach" because of prime gaps. None of them states a proved bound on A117922(n) - n; only the empirical A282696/7 records exist. The EKG/Yellowstone bounds are linear sieve bounds for gcd sequences and do not transfer directly. Not yet searched: the Hasler wiki, the erdosproblems forum, UPINT, MO 241569. See literature/search-C009-C010-hole-payers.md.
+- 2026-11-25 (editor): replaced the 'weaker version' with the uniform variants (C log v, F(n) = o(n/log n)) and the prover's warning that the per-v form is equivalent to the conjecture.
