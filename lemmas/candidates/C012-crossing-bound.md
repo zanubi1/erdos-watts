@@ -12,11 +12,11 @@ Let n >= 2 and 2 <= v <= n with v ∉ U_n, and put ε = v mod 2. Then
 
 More precisely, with W1..W4 as in L009: |W1| + |W2| <= X_v(n), |W3| <= 1 and |W4| <= H_{1-ε}(n).
 
-**(b) Parity-refined form and its ceiling** (needs a(1) = 1; added 2026-11-25, **not yet skeptic-reviewed**). Let X^ε_v(n) count only the down-crossings j with a(j) ≡ ε (mod 2). Then
+**(b) Parity-refined form and its ceiling** (added 2026-11-25; skeptic PASS). Same hypotheses as (a). Let X^ε_v(n) count only the down-crossings j with a(j) ≡ ε (mod 2). Then
 
     |W1| + |W2|  <=  X^ε_v(n)  <=  H(v) - 1,     and     X_v(n)  <=  H(v - 1) + H(v) - 1.
 
-**Scope.** Part (a) holds for every starting value a(1). The proof uses no parity facts (neither F1 nor Sub-lemma S of L009); w ≡ 1 - ε comes from q being odd.
+**Scope.** Part (a) and the bound X <= H(v-1) + H(v) - 1 hold for every starting value a(1). The middle bound X^ε <= H(v) - 1 needs a(1) odd; it fails for even starts, as the skeptic checked. The proof uses no parity facts (neither F1 nor Sub-lemma S of L009); w ≡ 1 - ε comes from q being odd.
 
 ## Depends on
 
@@ -39,7 +39,7 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
 - **|W1| + |W2| <= X^ε.** For the crossings j = k + 1 built above, a(k) = w has parity 1 - ε, so by L001 a(j) has parity ε.
 - **Crossings with j <= v.** Map j to k = j - 1 <= v - 1. Then a(k) > v > v - 1, so a(k) is a used value > v - 1 at time v - 1.
   - If a(j) ≡ ε, then a(k) ≡ 1 - ε (L001). By Sub-lemma S of L009 at m = v - 1, there are exactly H_{1-ε}(v-1) such used values.
-  - Without the parity restriction, S summed over both parities gives H(v-1).
+  - Without the parity restriction: #{x ∈ U_m : x > m} = H(m), because |U_m| = m. This needs no parity argument, so the bound X <= H(v-1) + H(v) - 1 holds for every a(1).
   - j ↦ a(j-1) is injective (F2).
 - **Crossings with v < j <= n.** Map j to a(j) < v. Since j - 1 >= v, a(j) ∉ U_{j-1} ⊇ U_v, so a(j) is a hole < v at time v.
   - With parity ε it is counted by B(v). Without the restriction, it is one of the H(v) - 1 holes < v at time v (v itself is a hole at time v).
@@ -86,3 +86,16 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
   - *Editorial (non-blocking).* (1) Add a Scope line saying the lemma holds for every a(1). (2) Remove L001 from "Depends on", or say that it is not used. (3) Fill in the Numerical check section. The "to do" there asks for 10^8, and I ran 3·10^6 with all pairs. (4) The "Why it might help" remark is a heuristic, not a claim. Note that X_v(n) counts every down-crossing, so the bound can be much weaker than L009' at a level the sequence oscillates across; it is useful only if such levels are rare.
 - 2026-11-25 (editor): applied the skeptic's editorial points (1)-(4).
 - 2026-11-25 (main session): added part (b), the crossings experiment's P1, with a written proof. The 10^8 run found 0 violations of (b). **(b) awaits a skeptic.** (a) has a skeptic PASS.
+- 2026-11-25 (skeptic, part (b)): **PASS** for (b) as written, with scope a(1) = 1 (more generally a(1) odd). Checked:
+  - *Restatement.* Same hypotheses as (a): n >= 2, 2 <= v <= n, v ∉ U_n, ε = v mod 2. X^ε_v(n) = #{ j ∈ [2, n] : a(j-1) > v > a(j), a(j) ≡ ε }. Claims: (i) |W1| + |W2| <= X^ε_v(n); (ii) X^ε_v(n) <= H(v) - 1; (iii) X_v(n) <= H(v-1) + H(v) - 1. Editorial: (b) does not restate these hypotheses. It inherits them from (a); say so explicitly.
+  - *(i).* The crossings j = fi(w) + 1 from (a) have a(j-1) = w ≡ 1 - ε (Step 0, q odd), so a(j) ≡ ε by L001. L001's alternation holds for every a(1), so (i) holds for every start.
+  - *Split j <= v / j > v, boundary j = v.* The classes [2, v] ∩ [2, n] and [v+1, n] partition [2, n]. j = v goes to the first class: k = v - 1 >= 1, and a(v-1) ∈ U_{v-1}. The second class needs j - 1 >= v, which fails at j = v, so putting j = v in the first class is forced and correct. No off-by-one.
+  - *First injection (j <= v, j ↦ a(j-1)).* k = j - 1 ∈ [1, v-1], so a(k) ∈ U_{v-1} (F3). a(k) > v > v - 1. For a(j) ≡ ε, L001 gives a(k) ≡ 1 - ε. So a(k) lies in { x ∈ U_{v-1} : x ≡ 1 - ε, x > v - 1 }, which by Sub-lemma S at m = v - 1 >= 1 has H_{1-ε}(v-1) elements. S needs F1, hence a(1) odd. Injective because j ↦ j - 1 ↦ a(j-1) (F2).
+  - *Second injection (v < j <= n, j ↦ a(j)).* a(j) ∉ U_{j-1} (F2), and U_v ⊆ U_{j-1} since j - 1 >= v (F3), so a(j) is a hole at time v. a(j) < v (strict, by definition of a crossing). With a(j) ≡ ε it lies in the set counted by B(v). Injective by F2.
+  - *Sum.* H_{1-ε}(v-1) + B(v) = H(v) - 1 is the L009 Sharpening identity. It needs v ∉ U_v (true since v <= n) and F1 (a(1) odd).
+  - *"Holes < v at time v" = H(v) - 1.* H(v) counts the holes in [1, v] at time v. v is one of them, since v ∉ U_v. So exactly H(v) - 1 holes are < v. Correct.
+  - *(iii) holds for every a(1).* The proof cites "S summed over both parities". The summed statement #{ x ∈ U_m : x > m } = H(m) needs no parity: |U_m| = m, so this count is m - |U_m ∩ [1, m]| = H(m). The second class needs no parity either. So (iii) holds for every a(1), but S itself, as proved in L009, needs a(1) odd. Editorial: replace "S summed over both parities" by this one-line count, and narrow the a(1) = 1 scope note to (ii) only.
+  - *Dependencies.* L001, L009 (F2, F3, Sub-lemma S, Sharpening) are in proven/. Not conditional.
+  - *Numerics (own C script, scratchpad c012b.c).* Fenwick range-add per parity for X^ε and X. |W1| + |W2| is maintained incrementally as #{ w ∈ (v, n] : w + v prime, fi(w) <= n - 1 }. A Python brute force (brute.py) agrees exactly at N = 600 for a(1) ∈ {1, 2, 6}. With a(1) = 1, **every** n <= 10^7 and every hole v in [2, n]: 88,212,972 pairs (this matches L009's skeptic count). Violations: 0 for (i), 0 for (ii), 0 for (iii), 0 for the per-class bounds E^ε <= H_{1-ε}(v-1) and L^ε <= B(v) and their unrestricted analogues, 0 for the identity. Equality: (i) at 8,422,904 pairs, (ii) at 2,383,444 pairs, (iii) at 594,114 pairs. So all three bounds are attained.
+  - *Variants.* For odd a(1) ∈ {3, 5, 7, 13, 101} (N = 2·10^5, all pairs): 0 violations of anything. For even a(1) ∈ {2, 4, 6, 10, 20}: (i) and (iii) hold (0 violations), but (ii) **fails** at about 13.1k pairs each, together with the identity. Smallest case: a(1) = 6, so a = 6, 1, 2, ... At n = v = 3, X^1 = 1 (j = 2) but H(3) - 1 = 0. This matches the proof, which uses F1 only in S and in the identity. So the proof does not "prove" a false variant, and the a(1) = 1 scope is necessary for (ii).
+- 2026-11-25 (editor): applied the skeptic's edits to (b): restated the hypotheses, gave a parity-free count for the X bound, and narrowed the scope note to the middle bound. (a) and (b) now both have a skeptic PASS. **Ready for promotion to L012 on Matteo's OK.**
