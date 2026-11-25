@@ -58,7 +58,12 @@ For the consequence:
 
 ## Numerical check
 
-To be done by the experimenter: (i), and (iii) for several D, at every X <= 10^7.
+- 2026-11-25 (experimenter): `python experiments/src/c008_check.py` (reuses `experiments/results/overshoot_1e7/sequence.npy`, N = 10^7, checked against A055265's first 20 terms). Took about 10 s.
+  - (i): computed H(X) for every X <= 10^7 in two independent ways (#{k <= X : a(k) > X}, and the direct hole count #{v <= X : v not in a(1..X)}). The two agree everywhere, and brute-force spot checks at 36 X also agree.
+  - (iii): checked exactly in integers (D·H <= D^2 + S) for D in {1, 2, 5, 10, 20, 50, 100, ceil(sqrt S(X)) + 1} at every X <= 10^7. **0 violations.** The smallest slack is 1.0, at small X. With D = ceil(sqrt S) + 1 the largest ratio H / (D + S/D) is 1/3.
+  - Growth: max H = 50 (at X = 6,869,384), mean H = 8.82 over X <= 10^7. Running max of H: 10, 17, 29, 41, 50 at X = 10^3..10^7, roughly +10 per decade, so it looks like about log X. H(X) log X / X at X = 10^3..10^7: 6.9e-3, 2.8e-3, 6.9e-4, 1.5e-4, 1.8e-5. Its max over [X/10, X] at X = 10^7 is 5.8e-4.
+  - S(X) at X = 10^3..10^7: 2,870; 42,690; 575,492; 7,307,212; 88,213,040. S(X) / (X^2/log^2 X): 0.137, 0.036, 0.0076, 0.0014, 0.00023. S(X)/X is 2.9, 4.3, 5.8, 7.3, 8.8, so S grows like X times a slowly growing factor, far below X^2/log^2 X.
+  - Side identity (exact, easy to prove): S(X) = Σ_{Y <= X} H(Y) + Σ_{k <= X} max(a(k) - X - 1, 0). At X = 10^7 the second term is 68. So S(X)/X is essentially the mean of H, and (iii) is the elementary Markov/Chebyshev step between average and pointwise hole counts.
 
 ## Review log
 
