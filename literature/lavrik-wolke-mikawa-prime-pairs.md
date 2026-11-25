@@ -24,6 +24,32 @@
   - Zhou dates the result "1970" in the text, but cites Dokl. Akad. Nauk SSSR 132 (1960), 1258-1260. That page range differs from the one above.
 - This is still secondary. The original was not read (mathnet.ru fails DNS).
 
+## Update 2026-11-25 (fifth pass): primary access still failed
+
+The session allowlist was extended to mathnet.ru, projecteuclid.org, tsukuba.repo.nii.ac.jp, link.springer.com, en.wikipedia.org, terrytao.wordpress.com and export.arxiv.org. **Every one of these hosts still fails DNS** (getaddrinfo ENOTFOUND). Each was retried once after a delay, with the same result. So neither Lavrik nor Mikawa was read. Only arxiv.org works.
+
+**Lavrik: bibliographic data, and three mutually inconsistent paraphrases**
+- The 1961 paper is A. F. Lavrik, "The number of k-twin primes lying on an interval of a given length", Dokl. Akad. Nauk SSSR 136 (1961), 281-283; English translation in Soviet Math. Dokl. 2 (1961), 52-55.
+  - Source: the bibliography of arXiv:2605.21529v4 (via WebFetch) and an extended-search summary.
+  - The title, "on an interval of a given length", suggests counting p in an interval. I have not seen what interval.
+- **(a)** Zhou, arXiv:1704.01908: Σ_{m <= X} Λ(m)Λ(m+u) ~ S(u)X for all even u <= X, with O(X (log X)^{-A}) exceptions. This is the {m <= X} form.
+- **(b)** arXiv:2605.21529v4, Thm 6.16, attributed to "[Lavrik]" with no proof: π_d(y) = #{p <= y : p + d prime} = S(d) Li_2(y)(1 + O(log^{-B} y)) for all even d <= y outside O_A(y log^{-A} y). Read via WebFetch extraction. The paper itself flags the mismatch with Lavrik's title.
+- **(c)** S. Baier, "An elementary approach to the twin primes problem", Monatsh. Math. 143 (2004), 269-283 (search snippet of the abstract only): Lavrik showed, by the circle method, that the prime-pair formula "holds true for almost-all d <= y/2" (one snippet renders it "d = y/2").
+  - The bound d <= y/2 would fit pairs p, p + 2d <= y, i.e. the {n <= y - h} form. That is Route A of `search-C013-G-and-cascade.md`. **Speculative.**
+- **Exact statement and ranges: still UNKNOWN.**
+  - In every paraphrase the shift range is <= the prime range ({p <= y, d <= y}, or {p <= y - 2d}).
+  - None of them states shifts longer than the prime range.
+  - So, as paraphrased, Lavrik does **not** contain (G\*). It makes (G\*) immediate only if the original is the {n <= y - h} form, with a mean-square or exceptional-set bound uniform enough to be applied at O(L^2) values of y (Route A). That cannot be decided without the paper.
+
+**Mikawa 1991: statement as quoted by Suzuki** (arXiv:1610.09084, Theorem A, read as a page image; see `suzuki-2016-prime-vs-prime-power.md`)
+- Statement: for X^{1/3+ε} <= H <= X, Σ_{n <= X} Λ(n)Λ(n+h) = S(h)X + O(X L^{-A}) for all but ≪ H L^{-A} even h ∈ [1, H].
+- The shift range is at most the n-range, so it does **not** contain (G\*). With X = Y it covers only h <= Z/L^2.
+- MRT 2019 footnote 6 (read, p. 5) says the range X^{1-ε} <= H <= X is handled "by the same methods; see [57] or [70]". This is consistent.
+
+**New lead.** Perelli-Pintz, J. London Math. Soc. (2) 47 (1993), 41-49, **Theorem 3**: according to Suzuki, Remark 4, it handles Σ_{n <= Y} with shifts h ∈ [X, X+H], i.e. shifts larger than the n-range. This may be a published (G\*)-type statement. **Unread.**
+
 ## Verified by
+
+Fifth pass (2026-11-25): Suzuki pp. 1-5 and 15-17 were read as page images. arXiv:2605.21529 was read only via WebFetch extraction. Baier 2004 is known from a search snippet only. Lavrik, Mikawa and Perelli-Pintz remain **unread**.
 
 Literature agent, 2026-11-25. **Only search-engine snippets and secondary citations** (MRT 2019 pp. 5-8, which I did read). Lavrik's, Wolke's, Mikawa's and Perelli-Pintz's papers were **not read**: projecteuclid.org and tsukuba.repo.nii.ac.jp fail DNS, and mathnet.ru was not tried for the full text. Before citing anything specific to Lavrik, a human should read Lavrik 1961, or a textbook statement of it.

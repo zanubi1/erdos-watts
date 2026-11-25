@@ -44,7 +44,40 @@ Not accessible in this session (DNS failure): en.wikipedia.org, encyclopediaofma
   - Davenport Ch. 22 is not verified.
 - Since C014 needs only the qualitative forms (Remark R2), **none of the discrepancies found affect C014.**
 
+## Update 2026-11-25 (fifth pass): the books are still unread
+
+**Access.** The allowlist now includes link.springer.com, en.wikipedia.org, terrytao.wordpress.com, mathnet.ru, projecteuclid.org, tsukuba.repo.nii.ac.jp and export.arxiv.org. **All of them still fail DNS** (getaddrinfo ENOTFOUND), also on a retry after a delay. Only arxiv.org resolves. Google Books is not on the list. So **IK, Davenport and Vaughan were NOT read in this pass either.** No exact book statement can be quoted.
+
+**New secondary evidence**
+- arXiv:2505.07803v2 ("Log-free bounds on exponential sums over primes"), eq. (1.1), read via WebFetch extraction:
+  - S(α; x) ≪ (x/√q + x^{4/5} + √(qx)) (log x)^3 "when α = a/q + O*(1/q^2)". That is the **non-strict** |α - a/q| <= 1/q^2, with O* meaning implied constant 1.
+  - A footnote says "Vaughan proves this with a (log x)^4".
+  - So the log^3 form is in the literature under a non-strict hypothesis, and the log^4 form is attributed to Vaughan. This is consistent with C014.
+- Davenport: the search tool reports a Springer listing in which the chapter with DOI suffix _21 is "Siegel's Theorem". If the suffix equals the chapter number, Ch. 21 = Siegel's theorem, and Ch. 22 = "The Prime Number Theorem for Arithmetic Progressions (II)" is where SW should be. **Snippet only; unverified.**
+
+**Item-by-item comparison with C014 "Depends on"** (against the best available secondary quotes)
+
+| Item | C014's form | Best available quote | Verdict |
+|---|---|---|---|
+| (SW), the form used | for every M, K: \|ψ(x;q,r) - x/φ(q)\| <= C_{M,K} x (log x)^{-K} for q <= (log x)^M | IK Cor. 5.29 via [Ah]: q ≪ (log x)^C gives O_C(x (log x)^{-C}), x >= 2 | **Matches.** Take C = max(M, K). C014 uses M = B+1 < K = 3B+12, so C = K covers it. |
+| (SW), the form stated | O(x exp(-c_M √log x)) | only [BG]'s character form (c absolute) | Stated form unverified against a book. **Not used** by the proof, so no gap. |
+| (V) Vaughan | strict \|α - a/q\| < q^{-2}, (log X)^4, C_V absolute | [LZ] Lemma 3 = "Vaughan Thm 3.1"; [BG] Prop 4.1: strict, log^4 | **Matches** (secondary). |
+| (V) IK 13.6 | "(log X)^3 there, which is stronger" | Tao (1.3): log^3, hypothesis via \|β\| <= 1/(qQ); 2505.07803: log^3 under non-strict \|α-a/q\| <= q^{-2} (not attributed to IK) | Consistent. IK's exact hypothesis is unverified. **Not used.** |
+
+**No GAP found.** Nothing in C014 is stronger than any form quoted in the secondary literature.
+
+**Pages Matteo would need to upload (literature/private/)**
+1. Iwaniec-Kowalski, *Analytic Number Theory* (AMS Colloq. Publ. 53, 2004):
+   - §5.9: the pages from Siegel's theorem (Thm 5.28) through Cor. 5.29;
+   - §13.5: the page with Theorem 13.6 and its hypotheses.
+2. Davenport, *Multiplicative Number Theory*, 3rd ed. (GTM 74): the end of Ch. 22, where the SW statement for ψ(x; q, a) appears, and the chapter titles of Ch. 20-22.
+3. Vaughan, *The Hardy-Littlewood Method*, 2nd ed.: Ch. 3, Theorem 3.1 (the statement), and §3.2 (Goldbach exceptional set; the model for C014).
+
+Page numbers are not given because I could not see the books' tables of contents.
+
 ## Verified by
+
+Fifth pass (2026-11-25): arXiv:2505.07803 read only via WebFetch extraction. The Davenport chapter numbering comes from a search-result summary. **No book was read.**
 
 Literature agent, 2026-11-25.
 - **Read** (page images or HTML text): [LZ] pp. 1-10; [Tao5] pp. 2-3.
