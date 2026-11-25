@@ -19,9 +19,11 @@ anywhere, except the single intentional `sorry` in `ErdosWatts/Conjecture.lean`.
 | `ErdosWatts/L003.lean` | `missingSet` (M), L003 (`L003_smallestMissing`, all-parity `L003_smallestMissing_all`) |
 | `ErdosWatts/L004.lean` | L004 bound (`L004_bound`, `L004_exists`), `L004_finite_imp_empty`, PNT consequences (`L004_rhs_isEquivalent`, `L004_eventually_ge`) |
 | `ErdosWatts/L005.lean` | L005 displacement reduction (`L005_displacementReduction`, `L005_missingSet_empty`) |
+| `ErdosWatts/L006.lean` | L006, the parts used by C013 (b): `piPar` (π_n), `uStar` (u*), `tStar` (t_n), `Ostar` (O*), (Cnt) `card_U_filter_parity`, (b) `L006_b`, `Ostar_le_half` (O* ≤ n/2), (c) in interval form (`L006_c_interval`, `L006_c`). Not formalized: (a) exact formula, (b'), the q_K form of (c) |
 | `ErdosWatts/L009.lean` | L009 (`L009`, count form `L009_count`), Sub-lemma S (`subLemmaS`, `subLemmaS_index`), partner set `W`, `W1`..`W4`, identity `L009_identity`, sharp form `L009_sharp`, Corollary (`L009_corollary_count`, `L009_corollary`, `L009_lifetime`), `primeCounting_sub_eq_card`, `primeAfter_spec` |
 | `ErdosWatts/L011.lean` | L011 (i) (`L011_i`, `L011_i_int`, hole form `L011_i_hole`), (ii) (`L011_ii`, parity form `L011_ii_holes`, `L011_ii_ratio`, liminf `L011_ii_liminf_ereal` / `L011_ii_liminf` (ℝ, with coboundedness)), contrapositive (`L011_criterion` (∃ᶠ form), `L011_criterion_liminf_ereal`, `L011_criterion_liminf`); PNT from Mathlib, no hypotheses |
 | `ErdosWatts/L012.lean` | L012 (a) (`L012`, `L012_classes`), (b) (`L012_b`: `L012_W12_le_par`, `L012_par_le`, `L012_crossings_le`), `card_U_filter_gt` |
+| `ErdosWatts/C013.lean` | **Candidate** C013 (not in `proven/`; mechanical check on Matteo's request). Defs `rY` (r_Y(h)), `Bad` (Bad_c(Z, Y)), `G_hyp` (hypothesis (G), **explicit hypothesis, not proved**). (a) `C013_a`, `C013_a_single` (Finset cores `blocking_finset`, `blocking_single_finset`); PNT form `pnt_three_quarters`; (b) `growth_step`, `C013_b`; (c) `C013_c`, `C013_c_core`; (d) `C013_d : G_hyp → ∀ v, 1 ≤ v → Occurs v` |
 | `ErdosWatts/Conjecture.lean` | Watts' question (`watts_greedy_bijective`, `sorry`), sanity check of the first 12 terms |
 
 `lean/scratch/` (if present) is not built; put unfinished work there.

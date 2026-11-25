@@ -163,6 +163,10 @@ None. Every step uses only (D), L001, L002, and the fact that 2 is the only even
   - Variant test. With a(1) = 2 or 4, (a) still holds, but (b'), (E) and (c) fail from n = 1 or 2 on; for example, a(1) = 2 gives u*(2) = 4 > 3. The proof uses a(1) = 1 exactly at (Cnt), as its GAP? note 3 says, so it does not "prove" the false variant. The composite-sum variant is not covered, because Step 0.1 fails there.
   - Cosmetic, not a gap: q_i, b and O* depend on n, but the notation hides this. It is clear from context.
 
+- 2026-11-25 (formalizer): **formalized: partial** (only the parts used by C013 (b)). File: lean/ErdosWatts/L006.lean. Theorems: `L006_b` (u*(n) <= n+1), `L006_c_interval` / `L006_c` ((c) in interval form: if [t_n, t_n+d] contains >= O*(n)+1 primes, then a(n+1) <= u*(n)+d <= (n+1)+d), (Cnt) `card_U_filter_parity`, `Ostar_le_half` (O* <= floor(n/2), from (Cnt)), and `three_le_tStar` (Step 0.2). Definitions: `piPar`, `uStar`, `tStar`, `Ostar`.
+  Axioms: `'ErdosWatts.L006_b' depends on axioms: [propext, Classical.choice, Quot.sound]`; `'ErdosWatts.L006_c' depends on axioms: [propext, Classical.choice, Quot.sound]`. Explicit hypotheses: none.
+  Not formalized: (a) (the exact formula a(n+1) = q_{b+1} - a(n)), (b'), (E), (c'), and the q_K form of (c). Discrepancies: π_n is defined as (n+1) mod 2 (`a_succ_mod_two_eq_piPar` proves it is the parity of a(n+1)); (c) is stated in its interval form, which L006's "Interpretation" says is equivalent. GAPs found: none.
+
 ### literature
 
 - 2026-11-24 (literature agent): **Not found.** Checked the raw OEIS files for A055265, A282695, A282696, A086527 and A128280, plus web searches. No source states the step formula or the frontier/overshoot displacement bound. Part (a) is immediate from the greedy rule, so treat it as elementary or folklore, not new. The EKG and Yellowstone proofs could not be read because their hosts are unreachable, so a "frontier + blocked candidates" analogue there is unchecked. See `literature/search-C006-step-formula.md`.

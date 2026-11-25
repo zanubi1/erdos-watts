@@ -172,3 +172,24 @@ Multiply by log Z_j / Z_j. The right side becomes 1/(2C0) - Y_j log Z_j/Z_j - (m
   - **Real (G) spot check (own script).** Z = 10^6, Y = floor(Z/ln^2 Z) = 5,239: min over even h <= Z of r_Y(h) is 43, so Bad_28 = ∅. Y = 2,636 (ln^3): min r = 18. Y = 190 (ln^2): 145,340 even h have r <= 4.
   - **Flag for Matteo (not a gap in the logic).** (a)-(d) are elementary, and I found no hole. So the whole weight rests on (G). (G) has the shape of a classical "almost all h" binary circle-method statement, so a quick claim that "(G) is known" must be checked by an analytic number theorist and not taken on faith. Until then, C013 proves only the implication (G) ⇒ permutation.
 - 2026-11-25 (prover): a full circle-method proof of (G), in the canonical form Y = Z/(log Z)^2 (Route B), is written as candidate **C014** (`lemmas/candidates/C014-almost-all-differences.md`; attempt: `attempts/2026-11-25-proof-of-G.md`). It is unreviewed. Until C014 passes the skeptic and Matteo, (G) stays the open input here.
+- 2026-11-25 (formalizer): **formalized: yes** (as a conditional theorem: (G) is an explicit hypothesis, not an axiom). Files: lean/ErdosWatts/C013.lean (new) and lean/ErdosWatts/L006.lean (new, the L006 parts used by (b)). Both are imported from lean/ErdosWatts.lean. Main theorem `ErdosWatts.C013_d : G_hyp → ∀ v, 1 ≤ v → Occurs v`. Separate theorems: (a) `C013_a` and `C013_a_single` (Finset cores `blocking_finset` and `blocking_single_finset`); (b) `C013_b`, via `growth_step` and `pnt_three_quarters`; (c) `C013_c` (and `C013_c_core`, the sharper +2 form of Step 4).
+  Axioms: `'ErdosWatts.C013_d' depends on axioms: [propext, Classical.choice, Quot.sound]`. The same three hold for `C013_a`, `C013_a_single`, `C013_b`, `C013_c`, `L006_b` and `L006_c`. No `sorry`, no `axiom`, no `native_decide`.
+  **Explicit hypotheses: (G), as `G_hyp`, in `C013_d` only.** (a), (b) and (c) have no hypotheses beyond their informal ones. The PNT comes from Mathlib's `Nat.isEquivalent_primeCounting`.
+    `def G_hyp : Prop := ∀ c : ℕ, ∃ Z Y : ℕ → ℝ, Tendsto Z atTop atTop ∧ (∀ j, 1 ≤ Y j) ∧ Tendsto (fun j => Y j * Real.log (Z j) / Z j) atTop (𝓝 0) ∧ Tendsto (fun j => ((Bad c (Z j) (Y j)).card : ℝ) * Real.log (Z j) / Z j) atTop (𝓝 0)`
+    Here `rY Y h = #{p ∈ [0, ⌊Y⌋₊] : p prime, h + p prime}` and `Bad c Z Y = {h ∈ [1, ⌊Z⌋₊] : Even h, rY Y h ≤ c}`. Z and Y are real, as in the Notation. This matters because the canonical instance Y = Z/(log Z)^2 is not an integer. The floors are exact: for prime p, p <= Y iff p <= ⌊Y⌋₊, and for integer h >= 1, h <= Z iff h <= ⌊Z⌋₊.
+  Discrepancies informal vs formal (none weakens a statement):
+    1. (a) single and (c) take `1 ≤ m0` explicitly. The informal "m0 never occurs" implicitly means a positive integer; `Occurs 0` is false, and m0 = 0 is not intended. (a) takes `1 ≤ m` for every m ∈ S, as stated ("positive integers").
+    2. (a) also asserts that the index set is finite (implicit in "#"). The bound is on its `Set.ncard`.
+    3. (b) is stated with `20 ≤ C0` added (the informal C0 = max(20, ...)). This is stronger.
+    4. The PNT form is proved for integer x >= x2 only, with π(3x/4) read as π(⌊3x/4⌋). (b) uses it only at an integer x. This is sufficient, but it is not the real-x statement.
+    5. (b) proof route. L006 (c) is used in its interval form, "if [t_n, t_n + d] has >= O*(n)+1 primes then a(n+1) <= n+1+d" (L006's own Interpretation), not the q_K form. O*(n) <= n/2 is proved directly from (Cnt) (O*'s set is contained in the floor(n/2) used values of parity π_n), not from (b'). So L006 (b') and the exact formula (a) are not formalized. In the step, d = ⌊t/3⌋ + 1 + ⌈12 n log n⌉ (an integer) replaces ceil(t/3) + 12 n log n. The extra +1 is absorbed: (4/3)(n+1) + 2 <= n log n for n >= 10. The step and the induction are otherwise as written.
+    6. `piPar n` (π_n) is defined as (n+1) mod 2. `a_succ_mod_two_eq_piPar` proves that it is the parity of a(n+1).
+    7. (d') is not formalized.
+  GAPs found: **none** in (a)-(d). Checked specifically:
+    - Parity cases: |T| >= (N-1)/2 holds in both parities of m0.
+    - p = 2: not needed. It is covered by the p <= m0 case, since m0 >= 2.
+    - The p <= m0 count: <= #[2, m0] = m0 - 1.
+    - |T'| >= |T| - |K_S ∩ [1,N]| - #{k <= N : a(k) <= m0}, with the last term <= m0 - 1 because m0 does not occur.
+    - N_j: no N_j >= 2 is needed. (c) holds for N = 0 in core form. N_j <= Z_j needs C0 log Z_j >= 1, which holds for Z_j >= e because C0 >= 20.
+  Cosmetic: in (d) the informal "(N_j-1)/2 - Y_j - m0 + 1 >= Z_j/(2C0 log Z_j) - Y_j - m0 - 1" is true but loose. The formal proof gets "- Y_j - m0" (no -1). This does not affect the argument.
+  This formalization checks only the implication (G) ⇒ permutation. It says nothing about (G) or C014.

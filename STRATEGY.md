@@ -10,6 +10,11 @@ _Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass
 >   - Skeptic: **PASS** on Steps 0-7. Main-session check: no gap.
 >   - Literature: the cited forms of Siegel-Walfisz (log-power form) and Vinogradov-Vaughan ((log X)^4) are confirmed through secondary sources. No published statement of this unbalanced form was found; Lavrik uses equal ranges.
 > - **Together, C013 (d) + C014 would prove unconditionally that A055265 is a permutation of N.**
+> - **Lean (2026-11-25):** C013 (a)-(d) is formalized in `lean/ErdosWatts/C013.lean`.
+>   - The main theorem is `C013_d : G_hyp → ∀ v, 1 ≤ v → Occurs v`.
+>   - (G) is an explicit hypothesis `G_hyp`, faithful to C013 (d); it is not an axiom.
+>   - Axioms: propext, Classical.choice, Quot.sound only. The growth bound (b) is proved too, via a partial L006.
+>   - So the new, combinatorial half of the proof is machine-checked. C014, the circle method, is not, because Mathlib has no circle method.
 > - **Before anything moves to proven/ or is announced:**
 >   1. Matteo's review;
 >   2. an independent analytic number theorist's check of C014, and of C013 (c);
