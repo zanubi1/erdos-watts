@@ -36,7 +36,7 @@ External theorems. All statements below are **recalled from memory**. The proof 
   ψ(x; q, r) := Σ_{n <= x, n ≡ r (q)} Λ(n) = x/φ(q) + O_M( x exp(-c_M (log x)^{1/2}) ).
   References: Davenport, *Multiplicative Number Theory*, 3rd ed., Ch. 22; Iwaniec-Kowalski, *Analytic Number Theory*, Cor. 5.29. The constants are ineffective.
   - We use only the consequence: for every M, K > 0, |ψ(x;q,r) - x/φ(q)| <= C_{M,K} x (log x)^{-K} in the same range.
-- **(V) Vinogradov's estimate, in Vaughan's form.** If (a, q) = 1, q >= 1 and |α - a/q| <= q^{-2}, then for X >= 2
+- **(V) Vinogradov's estimate, in Vaughan's form.** If (a, q) = 1, q >= 1 and |α - a/q| < q^{-2} (strict, as in the sources; Step 2 produces a strict inequality), then for X >= 2
   |Σ_{n <= X} Λ(n) e(nα)| <= C_V ( X q^{-1/2} + X^{4/5} + X^{1/2} q^{1/2} ) (log X)^4,
   with C_V absolute.
   References: R. C. Vaughan, *The Hardy-Littlewood Method*, 2nd ed., Thm 3.1; Iwaniec-Kowalski Thm 13.6 (I recall (log X)^3 there, which is stronger).
@@ -50,7 +50,7 @@ External theorems. All statements below are **recalled from memory**. The proof 
   - Hence, for squarefree q, |c_q(h)| = φ((q, h)).
 - Nothing from the repo. C014 is pure analytic number theory. C013 (d) uses it.
 
-**Method / prior art.** This is the textbook circle-method proof of the *Goldbach exceptional set theorem* (Chudakov, van der Corput, Estermann 1937-38; written e.g. in Vaughan's book, Ch. 3), and its difference analogue for prime pairs (Lavrik 1961). It is adapted to unbalanced lengths: one sum of length Y = Z/L^2, the other of length N ≈ Z. **No step is new.** The only point to check is that the unbalanced lengths cost only powers of L. Every such cost is absorbed by the free parameter B below. I have not seen (G\*) stated in this exact unbalanced form; see `literature/search-C013-G-and-cascade.md`.
+**Method / prior art.** This is the textbook circle-method proof of the *Goldbach exceptional set theorem* (Chudakov, van der Corput, Estermann 1937-38; written e.g. in Vaughan's book, Ch. 3), and the same scheme as for prime pairs in Lavrik 1961. Note that Lavrik's theorem, as paraphrased in the literature, uses equal ranges (shifts u <= X for m <= X), so it does not directly give (G\*). It is adapted to unbalanced lengths: one sum of length Y = Z/L^2, the other of length N ≈ Z. **No step is new.** The only point to check is that the unbalanced lengths cost only powers of L. Every such cost is absorbed by the free parameter B below. I have not seen (G\*) stated in this exact unbalanced form; see `literature/search-C013-G-and-cascade.md`.
 
 ## Proof
 
@@ -318,6 +318,12 @@ Code: `experiments/src/c014_variance.c`. It computes R_Y(h) exactly for **every*
   2. (Resolved while drafting.) A first draft took K = 2B + 1, which gives only X L^{-1} in (3.1). That is too weak for Σ_2. Now K := 3B + 12. Σ_2 uses (3.1) as X L^{-B-12}.
 
   No other step is, to my knowledge, uncertain. Awaiting skeptic (give them Statement + Proof only), literature agent (is (G\*) stated somewhere?), and an analytic number theorist.
+- 2026-11-25 (literature): citation check; see `literature/sw-vinogradov-statements.md` and `literature/search-C014-G-star.md`. The books themselves were not accessible; everything below comes from secondary quotes.
+  - **(V)** confirmed with (log N)^4 by Bhowmik-Grimmelt arXiv:2607.27282, Prop. 4.1, and by Languasco-Zaccagnini arXiv:1206.0252, Lemma 3, which is labelled "Vaughan, The Hardy-Littlewood method, 2nd ed., Theorem 3.1". Both sources state a strict |α - a/q| < q^{-2}. Step 2 produces a strict inequality anyway, so this is harmless. IK Thm 13.6 is quoted with (log x)^3 (Tao, arXiv:1201.6656, (1.3)).
+  - **(SW)** confirmed in the log-power form (q ≪ (log x)^C gives error x (log x)^{-C}) as IK Cor. 5.29 (quoted in arXiv:2103.15648, Thm 4.3). That is all the proof uses. Davenport Ch. 22 is not verified.
+  - **Conclusion of C014 unaffected.** GAP? item 1 is reduced to "theorem numbers confirmed only secondarily".
+  - **(G\*)** not found stated. Unbalanced analogues exist: Zhou arXiv:1704.01908, Thm 1.1 (polynomial shifts, ℓ >= 2), and Akeno arXiv:2508.02769, Prop. 1.4 (sums with p <= X^c, proof omitted). So "standard by the same proof" is well supported.
+  - Lavrik, as paraphrased by Zhou, is the balanced {m <= X} form, so the Method paragraph should not suggest that Lavrik covers (G\*).
 - 2026-11-25 (skeptic): I read only Statement, Depends on, Proof, Remarks and Numerical check, plus the statement of C013 (to match the definitions of r_Y and Bad_c). I did not read attempts/. I checked every inequality and every exponent of L by hand, and reran the numerics with an independent implementation. **Verdict: PASS on every step.** No mathematical gap found. Two cosmetic points and one procedural caveat are listed at the end.
   - **Step 0: PASS.**
     - k(p) <= 6/p is equivalent to 4p^2-11p+6 >= 0, with roots 3/4 and 2, so it holds with equality at p = 2.
@@ -364,3 +370,4 @@ Code: `experiments/src/c014_variance.c`. It computes R_Y(h) exactly for **every*
     - (1) The "Moreover" sentence of the Statement (r_Y(h) >= Z/(4(log Z)^4)) should say "for Z >= Z_2(A=2)". It is proved only for Z large.
     - (2) (ii) is proved for all h, not only even h. Harmless.
   - **Procedural caveat (not a gap).** The forms of (SW) and (V) match my own recollection: Vaughan Thm 3.1 with (log X)^4, IK Cor 5.29, Davenport Ch. 22. But my recollection is not a re-reading of the source, and by R2 only their qualitative shape matters. Given the stakes, this PASS should be followed by an external analytic number theorist and Matteo before C014 moves to proven/. The novelty of the combined result rests on C013, not on C014. C014 is routine.
+- 2026-11-25 (editor): Method paragraph corrected (Lavrik uses equal ranges, so it does not cover (G\*) directly); (V) is now stated with strict inequality. No change to the argument.

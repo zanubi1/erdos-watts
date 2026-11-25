@@ -17,6 +17,13 @@
 - Wolke, Mikawa, Perelli-Pintz and MRT all have **shift range <= p-range**. (G) has shifts ≍ Z with p <= Z/(log Z)^2, so these do not apply directly.
 - **Lavrik is the relevant one.** It covers all shifts h <= x. If its counting function is the natural circle-method one, Σ_{n <= x-h} Λ(n)Λ(n+h) = ∫|F(α)|^2 e(-hα) dα with F = Σ_{n<=x} Λ(n)e(nα), then for h close to x the p-range x - h is short. Applying it at O((log Z)^2) values of x then gives (G). See `search-C013-G-and-cascade.md`. Whether Lavrik's paper states exactly this form is **not verified**.
 
+## Update 2026-11-25 (fourth pass, see `search-C014-G-star.md`)
+
+- N. H. Zhou (arXiv:1704.01908, introduction, read via WebFetch) paraphrases Lavrik as follows: for any A > 0, Σ_{m<=X} Λ(m)Λ(m+u) ~ S(u) X for all even u <= X with O(X (log X)^{-A}) exceptions.
+  - This is the **{m <= X}** form, not {m <= X - u}. If it is accurate, Route A in `search-C013-G-and-cascade.md` does not follow directly. C014 uses Route B instead.
+  - Zhou dates the result "1970" in the text, but cites Dokl. Akad. Nauk SSSR 132 (1960), 1258-1260. That page range differs from the one above.
+- This is still secondary. The original was not read (mathnet.ru fails DNS).
+
 ## Verified by
 
 Literature agent, 2026-11-25. **Only search-engine snippets and secondary citations** (MRT 2019 pp. 5-8, which I did read). Lavrik's, Wolke's, Mikawa's and Perelli-Pintz's papers were **not read**: projecteuclid.org and tsukuba.repo.nii.ac.jp fail DNS, and mathnet.ru was not tried for the full text. Before citing anything specific to Lavrik, a human should read Lavrik 1961, or a textbook statement of it.

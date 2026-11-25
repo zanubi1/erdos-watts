@@ -2,18 +2,20 @@
 
 _Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass, overshoot experiment, L006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
 
-> **LITERATURE NOTE (2026-11-25, C013).** No source states hypothesis (G). However, the literature agent assesses (G) as **very probably a routine consequence of Lavrik-type (1961) mean-value results** for prime pairs over all shifts h <= x, about 80% confidence. Two sketched reductions are in `literature/search-C013-G-and-cascade.md`. If this holds, **C013 (d) would be an unconditional proof of the permutation property**, and no source checked contains such a proof. Nothing is claimed yet. Required before any claim:
-> 1. Lavrik's exact statement (unread; projecteuclid and mathnet are unreachable), or Route B written out as its own candidate lemma;
-> 2. a skeptic pass on C013 (a)-(d) (a skeptic PASS on the implication "(G) ⇒ permutation" is now recorded in C013's Review log);
-> 3. an analytic number theorist's check.
+> **STATUS (2026-11-25): a candidate unconditional proof exists. NOTHING IS CLAIMED YET.**
 >
-> The blocking lemma (union form) and the cascade were **not found** in the literature (which is not the same as "new").
-
-> **C014 (2026-11-25, prover, UNREVIEWED).** There is now a written-out circle-method proof of hypothesis (G) of C013, canonical form Y = Z/(log Z)^2: `lemmas/candidates/C014-almost-all-differences.md`.
-> - Inputs: Siegel-Walfisz, Vinogradov (Vaughan Thm 3.1), Dirichlet, Parseval; all cited from memory.
-> - The singular-series mean square is proved inline.
-> - Numerics to Z = 10^8 agree.
-> - **Bottleneck now:** a skeptic pass on C014 and an expert check. If C014 holds, C013 (d) + C014 is an unconditional proof of the permutation property. Nothing is claimed until then.
+> - **C013** (blocking lemma + cascade): if some value m0 never occurs, then almost every later term a(k) of m0's parity makes h = a(k) - m0 an even number with at most 2m0 representations h = q - p (p <= Y, q prime). So "(G) ⇒ the sequence is a permutation".
+>   - Skeptic: **PASS** on (a)-(d). Main-session check: no gap.
+> - **C014** (circle method): proves (G) with Y = Z/(log Z)^2. Almost all even h <= Z have about S(h)·Y prime pairs (p, p+h) with p <= Y, with exceptions ≪ Z (log Z)^{-A}.
+>   - Skeptic: **PASS** on Steps 0-7. Main-session check: no gap.
+>   - Literature: the cited forms of Siegel-Walfisz (log-power form) and Vinogradov-Vaughan ((log X)^4) are confirmed through secondary sources. No published statement of this unbalanced form was found; Lavrik uses equal ranges.
+> - **Together, C013 (d) + C014 would prove unconditionally that A055265 is a permutation of N.**
+> - **Before anything moves to proven/ or is announced:**
+>   1. Matteo's review;
+>   2. an independent analytic number theorist's check of C014, and of C013 (c);
+>   3. the primary sources for (SW) and (V) (Vaughan's book, Iwaniec-Kowalski), read by a human;
+>   4. a further literature check that the cascade argument is not already known.
+> - **Why earlier routes failed, and why this one doesn't.** Every count based on the hole count H loses a factor of log n (the "barrier" below). C013 avoids H altogether: a value that never occurs is available at *every* later step, and the blocking lemma bounds all such values together. C013 R3 also shows that no hypothesis on counts of primes in intervals can suffice. A mod-6 pseudo-prime set satisfies all of them, and its greedy sequence misses 2/3 of N. So the input has to be binary (about prime pairs), which is exactly what (G) is.
 
 ## Goal
 
