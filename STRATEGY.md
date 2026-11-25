@@ -41,6 +41,18 @@ Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. 
   - Checked to 10^7: max H = 50, and the running max grows about 10 per decade. S(X) ≈ Σ_{Y<=X} H(Y); the difference is 68 at 10^7.
   - **This is the weakest sufficient target found so far.**
 
+- **C009** (hole prime-count lemma). For a hole v at time n, every prime in (2v, n+v] is paid for by one of four things: a smaller same-parity hole filled instead, an opposite-parity value used early, the term a(n), or an opposite-parity hole at time n.
+  - Sharp form (C009'): π(n+v) - π(2v) <= H(v) + H_{1-ε}(n). Equality is attained 1,887 times up to 10^7.
+  - Skeptic: **PASS** (2026-11-25). Depends only on L001/L002, and needs a(1) odd.
+  - Checked at all (n, v) to 10^7, and at n = fi(v) - 1 for all 47.5M holes to 10^8.
+  - Case 2 is EKG Lemma 7's charging argument; cite it.
+- **C010** (conjecture, no proof). Uniform bound K(v) := π(fi(v)-1+v) - π(2v) <= K0, or <= C log v. Either implies the permutation property directly.
+  - Data: max K is 8 up to 10^7 but **11 up to 10^8**. The per-decade maxima 6, 7, 8, 8, 11 fit about 2 + 1.1 log10 v, so **C log v is the realistic target**.
+  - The per-v version is equivalent to the conjecture itself; the content is uniformity.
+- **C011** (unconditional hole criterion). If v is missing, then H_{1-ε}(n) >= π(n+v) - π(2v) - H(v) for all n >= v. Hence **liminf H(n) log n / n < 1 implies the permutation property**.
+  - Uses C009' and the PNT, and **does not need C003/C004**. It supersedes C008 (ii).
+  - Skeptic: **PASS**, conditional on C009 (now PASS).
+
 Proof status of the chain: if Matteo accepts C003 -> C004 -> C005, then **an upper displacement bound a(n) <= n + o(n/log n) proves the conjecture.**
 
 Literature status:
@@ -99,7 +111,9 @@ The bottleneck is the circularity between the two displacements:
 
 To break it:
 
-1. **Wait-time lemma (next target).** If m is overtaken at step n (the running max passes m), then m is used within W(n) steps, for some W(n) = o(n / log n).
+_Update 2026-11-25: route 1 is now made precise by C009-C011. A uniform bound on the number of primes a hole survives (C010) suffices, and so does H(n) < (1-δ) n/log n infinitely often (C011). See "Open questions" for the current target. Routes 1-3 below are kept for history; item 3 is done (C006)._
+
+1. **Wait-time lemma.** If m is overtaken at step n (the running max passes m), then m is used within W(n) steps, for some W(n) = o(n / log n).
    - **Plausible route:** the reflection lock. While the sums sit on a prime q, the partner q - m of each left-behind m is reached in order.
    - **Data:** the maximum wait is 309 for m < 10^7.
    - **Consequence:** a wait bound gives O(n) = o(n / log n), which directly gives M = ∅ and bypasses C005. It is therefore the whole problem; look for a version that needs only an *averaged* or *density* bound, and combine it with C004.
@@ -128,6 +142,14 @@ To break it:
 - [ ] Fix `experiments/results/run_1e7/summary.md` (and `run_1e6`): relabel "max |a(n)-n|" as the lower displacement and add the upper one.
 - [x] C006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
 - [x] C007/C008 created from C006 Remarks R3a/R3b; skeptic PASS (2026-11-25), C008 (ii) conditional on C003/C004. Awaiting Matteo.
-- [ ] **Next target (route 2):** prove that the average hole count (1/X) Σ_{Y<=X} H(Y) is o(X / log X), even along a subsequence. Up to 10^7 it is 8.8. By C008 together with the identity S(X) = Σ_{Y<=X} H(Y) + (small term), this is enough. It needs a 'holes get filled' mechanism, which no prime-counting estimate supplies (C006 Remark R4).
+- [x] Hole-dynamics experiment (2026-11-25): `experiments/results/holes_dynamics_1e7/`. There is no restoring drift. Lifetimes are governed by a prime count (C009). Pair and prime-sum-free ideas are dead.
+- [x] C009 (with C009') and C011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [x] 10^8 run (2026-11-25): `experiments/results/k_survival_1e8/`. Max K = 11, so K0 = 8 fails. Max H = 75. All eight OEIS displacement records match.
+- [ ] **Next target:** a uniform bound on the prime partners of a hole. For every hole v at time n, show #Late(v,n) + #Ahead(v) <= C log v, where:
+  - Late(v,n) is the partners w = q - v still unused at time n;
+  - Ahead(v) is the partners used before time v.
+
+  With C009 this gives C010 in its C log v form, and hence the permutation property. It needs arithmetic input: the hole set (a dense set of about 50 values in [n-86, n], reflection-locked around a prime) must meet the shifted primes {q - v} in O(log v) elements. Counting payers alone is tight (C009' equality) and cannot do it. The data shows that worst cases are prime-dense windows, not large gaps. See `attempts/2026-11-25-c010-bounded-prime-survival.md` for what died: iterating C009 on partners, window counting (coefficient 2 > 1), and bootstrapping H against K.
+- [ ] Secondary: since C011 needs only H(n) < (1-δ) n/log n infinitely often, look for *any* sublinear bound on H. Even H(n) = O(n / log n) with a small constant would be enough.
 - [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
 - [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.
