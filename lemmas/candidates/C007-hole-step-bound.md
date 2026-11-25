@@ -53,7 +53,8 @@ Fix n >= 1.
 **Comparison with C006: H_π(n) <= O*(n).**
 - Every hole v counted by H_π(n) satisfies v ≥ u*(n), by the minimality of u*(n).
 - So the holes counted by H_π(n) lie in [u*(n), n] and have parity π_n. If u*(n) = n + 1, there are none.
-- The number of parity-π_n integers in [u*(n), n] is (n + 1 - u*(n))/2 = O*(n), using C006 (b'). Hence H_π(n) <= O*(n).
+- The number of parity-π_n integers in [u*(n), n] is (n + 1 - u*(n))/2, since u*(n) ≡ π_n ≡ n + 1 and u*(n) <= n + 1 (C006 (b)).
+- This equals O*(n). All parity-π_n integers below u*(n) are used: there are (u*(n) - 1)/2 of them if n is even and (u*(n) - 2)/2 if n is odd. Exactly floor(n/2) used values have parity π_n (Step 2), and u*(n) itself is unused. So O*(n) = floor(n/2) minus that count, which is (n + 1 - u*(n))/2 in both cases. Hence H_π(n) <= O*(n).
 - The base point satisfies a(n) + n + 1 >= a(n) + u*(n) = t_n, by C006 (b).
 
 ## Numerical check
@@ -65,3 +66,11 @@ Fix n >= 1.
 ## Review log
 
 - 2026-11-25: candidate created from C006 Remark R3a. **Awaiting skeptic.**
+- 2026-11-25 (skeptic): **PASS** for the main inequality (depends only on L001, L002 and a(1) = 1). **PASS, conditional on C006 (b)** for the comparison H_π(n) <= O*(n) and the base-point remark a(n)+n+1 >= t_n; C006 is still a candidate, so those two remarks inherit its status. Checked:
+  - Step 1: a(n)+n+1 odd and >= 3, so every q'_i is an odd prime, y_i >= n+1, y_i ≡ π_n; distinct and increasing. OK.
+  - Step 2: #{k <= n : k ≡ n+1} = floor(n/2) in both parities of n; same count for parity-π_n integers in [1, n]; hence #{x ∈ U_n : x ≡ π_n, x > n} = H_π(n) exactly. OK (uses a(k) ≡ k, i.e. a(1) odd).
+  - Step 3: pigeonhole over H_π+1 candidates, a(n+1) = min A_n <= y_j <= y_{H_π+1}. OK, no off-by-one.
+  - Comparison: "(b')" is not in C006's Statement section (cited from its proof). Re-derived independently: all parity-π integers < u* are used, u* ≡ n+1, and floor(n/2) used values of parity π give O* = (n+1-u*)/2; parity-π integers in [u*, n] also number (n+1-u*)/2 when u* <= n+1. This needs C006 (b) (u* <= n+1). Suggest inlining this 3-line derivation instead of citing (b').
+  - Numerics (own script, independent incremental hole count, cross-checked by brute recount for n < 3000 and sampled n < 2·10^5): 0 violations of the main inequality and 0 of H_π <= O* for n < 10^7 on sequence.npy; max bound 554, max H_π 30 (matches the file). Equality (disp = bound) is attained, so the bound is tight at some steps.
+  - Variants a(1) = c ∈ {2,3,4,5,6,9,10}, 2·10^4 terms: main inequality holds for all c (the proof adapts: for even c the used-above-n count is H_π - (n mod 2) <= H_π). The comparison H_π <= O* FAILS for even c (~1565 steps each, e.g. u* = n, H_π = 1, O* = 0). The written comparison proof uses the a(1) = 1 parity via (b'), so it does not "prove" the false variant; but this shows the comparison is genuinely parity-dependent, not a general fact.
+- 2026-11-25 (editor): inlined the derivation of O*(n) = (n+1-u*(n))/2 in the comparison, as the skeptic suggested, instead of citing C006 (b'). The argument is unchanged.

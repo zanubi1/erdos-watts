@@ -33,6 +33,14 @@ Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. 
     - **R2:** this route is circular with respect to C005. Averaging does not help: a missing value forces Σ_{n<=X} O*(n) >= ~X²/8.
     - **R3a/R3b:** a "holes" version. If the number of unused values <= X at time X is o(X/log X) for infinitely many X, then the sequence is a permutation (via C004). The data has at most 50 holes.
 
+- **C007** (hole-count step bound): a(n+1) - (n+1) <= q'_{H_π(n)+1} - (a(n)+n+1), where q'_i are the primes >= a(n)+n+1 and H_π(n) is the number of holes <= n of the next term's parity.
+  - Skeptic: **PASS** (2026-11-25). The comparison H_π <= O* is conditional on C006 (b).
+  - Tight at some steps. Up to 10^7 the bound has max 554.
+- **C008** (hole-density criterion): H(X) = #{k <= X : a(k) > X}. If liminf H(X) log X / X = 0, then M = ∅. The same holds if S(X) = Σ_{k<=X} (a(k)-k)^+ = o(X²/log²X) along a subsequence.
+  - Skeptic: **PASS**, with the criterion conditional on C003/C004.
+  - Checked to 10^7: max H = 50, and the running max grows about 10 per decade. S(X) ≈ Σ_{Y<=X} H(Y); the difference is 68 at 10^7.
+  - **This is the weakest sufficient target found so far.**
+
 Proof status of the chain: if Matteo accepts C003 -> C004 -> C005, then **an upper displacement bound a(n) <= n + o(n/log n) proves the conjecture.**
 
 Literature status:
@@ -119,6 +127,7 @@ To break it:
 - [x] Overshoot experiment (2026-11-24): `experiments/results/overshoot_1e7/`.
 - [ ] Fix `experiments/results/run_1e7/summary.md` (and `run_1e6`): relabel "max |a(n)-n|" as the lower displacement and add the upper one.
 - [x] C006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
-- [ ] Promote R3a/R3b from C006's Remarks to candidates C007/C008 (holes-based density criterion), then run them through skeptic review. R3b is the precise density target for route 2.
+- [x] C007/C008 created from C006 Remarks R3a/R3b; skeptic PASS (2026-11-25), C008 (ii) conditional on C003/C004. Awaiting Matteo.
+- [ ] **Next target (route 2):** prove that the average hole count (1/X) Σ_{Y<=X} H(Y) is o(X / log X), even along a subsequence. Up to 10^7 it is 8.8. By C008 together with the identity S(X) = Σ_{Y<=X} H(Y) + (small term), this is enough. It needs a 'holes get filled' mechanism, which no prime-counting estimate supplies (C006 Remark R4).
 - [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
 - [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.
