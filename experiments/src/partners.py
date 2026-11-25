@@ -74,32 +74,30 @@ def main():
     del isp
     run_partners(args.workdir, args.R)
     ld = lambda name, dt: np.fromfile(os.path.join(args.workdir, name), dtype=dt)
-    H = h0.astype(np.int32) + h1
-    v = ld("h_v.i32", np.int32).astype(np.int64)
-    n = ld("h_n.i32", np.int32).astype(np.int64)
-    Wa = ld("h_W.i8", np.int8).reshape(-1, 5).astype(np.int32)
-    K, W1, W2, W3, W4 = Wa.T
-    S1, S2, S3, S4 = ld("h_S.i16", np.int16).reshape(-1, 4).astype(np.int32).T
-    Atot, AP, Mv = ld("h_A.i16", np.int16).reshape(-1, 3).astype(np.int32).T
-    KbM, Kbu = ld("h_cut.i8", np.int8).reshape(-1, 2).astype(np.int32).T
-    E1g, E4g, E1j, E4j, E1p, E4p = ld("h_E.f32", np.float32).reshape(-1, 6).T.copy()
-    alv = ld("h_alive.i8", np.int8).reshape(-1, 4).astype(np.int32)
-    Kal_v, Nal_v, Kal_n, Nal_n = alv.T
-    eps = v & 1
+    H = (h0 + h1).astype(np.int16)
+    cols = lambda name, dt, k: [np.ascontiguousarray(c) for c in ld(name, dt).reshape(-1, k).T]
+    v = ld("h_v.i32", np.int32)
+    n = ld("h_n.i32", np.int32)
+    K, W1, W2, W3, W4 = cols("h_W.i8", np.int8, 5)        # int8 (all <= 127)
+    S1, S2, S3, S4 = cols("h_S.i16", np.int16, 4)
+    Atot, AP, Mv = cols("h_A.i16", np.int16, 3)
+    KbM, Kbu = cols("h_cut.i8", np.int8, 2)
+    E1g, E4g, E1j, E4j, E1p, E4p = cols("h_E.f32", np.float32, 6)
+    Kal_v, Nal_v, Kal_n, Nal_n = cols("h_alive.i8", np.int8, 4)
+    eps = (v & 1).astype(np.int8)
     done = fi[v] != 0
     Hv = H[v - 1]
     Hn = H[n - 1]
-    Hopp_n = np.where(eps == 1, h0[n - 1], h1[n - 1]).astype(np.int32)
-    Hopp_v1 = np.where(eps == 1, h0[v - 2], h1[v - 2]).astype(np.int32)
+    Hopp_n = np.where(eps == 1, h0[n - 1], h1[n - 1]).astype(np.int16)
+    Hopp_v1 = np.where(eps == 1, h0[v - 2], h1[v - 2]).astype(np.int16)
     print(f"holes {len(v):,} (open at N: {int((~done).sum())}), partners {int(K.sum()):,}")
     # consistency checks against L009 / Sub-lemma S
     assert np.all(Atot == Hopp_v1), "Ahead count != H_{1-eps}(v-1) (Sub-lemma S)"
     assert np.all(W1 <= Atot) and np.all(W4 <= Hopp_n) and np.all(S4 <= Hopp_n)
     assert np.all(K <= Hv + Hopp_n), "L009' violated"
     print("checks: |Ahead(v)| = H_{1-eps}(v-1) for all holes; W1 <= H_{1-eps}(v-1); W4 <= H_{1-eps}(n); L009' holds")
-    L = n - v + 1  # lifetime for completed holes
-    lg = np.log(v.astype(np.float64))
-    dec = np.minimum(np.floor(np.log10(v)).astype(int), 7)
+    lg = np.log(v.astype(np.float32))
+    dec = np.minimum(np.floor(np.log10(v)), 7).astype(np.int8)
     decs = [d for d in range(2, 8) if (done & (dec == d)).sum() > 100]
     big = done & (v >= 1000)
 
@@ -126,7 +124,7 @@ def main():
         "mean n-v"], rows)
 
     print("\n## joint law of (W1, W2, W4): most frequent tuples, v >= 1e3")
-    code = W1 * 10000 + W2 * 100 + W4
+    code = W1.astype(np.int32) * 10000 + W2.astype(np.int32) * 100 + W4
     for lab, s in [("all", big), ("K >= 6", big & (K >= 6)), ("K >= 8", big & (K >= 8))]:
         u, c = np.unique(code[s], return_counts=True)
         o = np.argsort(-c)[:15]
@@ -183,10 +181,10 @@ def main():
 
     # hypergeometric tails: K primes placed uniformly on the M slots; class sizes fixed
     print("\n## tails vs hypergeometric mixture (K primes uniform on the M = S1+..+S4 slots), v >= 1e3")
-    Mslots = S1 + S2 + S3 + S4
+    Mslots = (S1 + S2 + S3 + S4).astype(np.int16)
 
     def hyp_tail_mix(Sc, Obs, sel, jmax=10):
-        kk, ss, mm = K[sel], Sc[sel], Mslots[sel]
+        kk, ss, mm = K[sel].astype(np.int64), Sc[sel].astype(np.int64), Mslots[sel].astype(np.int64)
         key = (kk.astype(np.int64) * 4096 + ss) * 4096 + mm
         u, inv = np.unique(key, return_inverse=True)
         ku, su, mu = u // (4096 * 4096), u // 4096 % 4096, u % 4096
@@ -241,11 +239,12 @@ def main():
     # ================= 3 geometry
     print("\n# 3. Geometry")
     ph = ld("p_hole.i32", np.int32)
-    pg = ld("p_geo.i16", np.int16).reshape(-1, 3).astype(np.int32)
+    pg = ld("p_geo.i16", np.int16).reshape(-1, 3)
     pc = ld("p_cls.u8", np.uint8)
     pcl = pc & 15
     pchain = pc >> 4
-    dwv, dnw, dMw = pg.T
+    dwv, dnw, dMw = [np.ascontiguousarray(c).astype(np.int32) for c in pg.T]
+    del pg
     pbig = big[ph]
     win = (n - v)[ph]
     for c, name in ((4, "Late W4"), (1, "Ahead W1"), (2, "steal W2"), (3, "W3")):
@@ -345,7 +344,7 @@ def main():
     for d in decs:
         s = done & (dec == d)
         rows.append([f"[1e{d},1e{d+1})", Atot[s].max(), f"{Atot[s].mean():.2f}", AP[s].max(), f"{AP[s].mean():.2f}",
-                     W1[s].max(), f"{(AP[s].sum() / (Atot[s] * 2 / lg[s] / np.log(2)).sum()):.3f}"])
+                     W1[s].max(), f"{(AP[s].sum() / (Atot[s] * 2.0 / (lg[s] + np.log(2))).sum()):.3f}"])
     md(["v range", "max |Ahead(v)|", "mean", "max #Ahead partners (any w)", "mean", "max W1 (w <= n)",
         "#Ahead partners / sum 2|A|/ln(2v)"], rows)
 
@@ -356,8 +355,7 @@ def main():
     prev = sf[up - 2]
     print(f"baseline over all k with a(k) > k: P(a(k-1) < k-1) = {np.mean(prev & 1):.3f}, "
           f"P(a(k-1) frontier) = {np.mean((prev & 2) > 0):.3f}, P(a(k-1) frontier and < k-1) = {np.mean((prev & 3) == 3):.3f}")
-    allk = np.arange(2, N + 1)
-    pr = sf[allk - 2]
+    pr = sf[:N - 1]  # flags of step k-1 for k = 2..N
     print(f"baseline over all k: P(a(k-1) < k-1) = {np.mean(pr & 1):.3f}, P(frontier) = {np.mean((pr & 2) > 0):.3f}")
     s = pbig & (pcl == 1)
     ch = pchain[s]
@@ -369,6 +367,19 @@ def main():
             ch = pchain[sk]
             print(f"  for holes with K >= {k}: P(pred fill) = {np.mean(ch & 1):.3f}, P(pred frontier fill) = "
                   f"{np.mean((ch & 3) == 3):.3f}")
+
+    # pre-steal: an Ahead partner w = a(k) (k <= v-1) forces a(k+1) < v, since v is unused at time k+1 <= v
+    s = pbig & (pcl == 1)
+    vv = v[ph[s]].astype(np.int64)
+    ww = dwv[s] + vv
+    kk = fi[ww].astype(np.int64)
+    y = a[kk].astype(np.int64)  # a(k+1)
+    print(f"Ahead partners: a(k+1) < v always: {bool(np.all(y < vv))}; a(k+1) < k+1 (fills a hole): {np.mean(y < kk + 1):.3f}; "
+          f"a(k+1) = k+1: {np.mean(y == kk + 1):.3f}; k+1 < a(k+1) < v: {np.mean((y > kk + 1) & (y < vv)):.3f}")
+    print(f"  v - k (how long before v the Ahead partner was placed): mean {np.mean(vv - kk):.1f}, p50 {np.median(vv - kk):.0f}, "
+          f"p99 {np.percentile(vv - kk, 99):.0f}, max {int((vv - kk).max())}")
+    # injectivity count: distinct a(k+1) per hole equals W1 (k distinct -> a(k+1) distinct), so W1 <= #{y < v, y = eps, used at a time k+1 <= v right after an Ahead partner}
+    del vv, ww, kk, y
 
     # ================= 5 candidates
     print("\n# 5. Candidate statements")
