@@ -24,7 +24,7 @@
   - Zhou dates the result "1970" in the text, but cites Dokl. Akad. Nauk SSSR 132 (1960), 1258-1260. That page range differs from the one above.
 - This is still secondary. The original was not read (mathnet.ru fails DNS).
 
-## Update 2026-11-25 (fifth pass): primary access still failed
+## Update 2026-11-25 (sixth pass): primary access still failed
 
 The session allowlist was extended to mathnet.ru, projecteuclid.org, tsukuba.repo.nii.ac.jp, link.springer.com, en.wikipedia.org, terrytao.wordpress.com and export.arxiv.org. **Every one of these hosts still fails DNS** (getaddrinfo ENOTFOUND). Each was retried once after a delay, with the same result. So neither Lavrik nor Mikawa was read. Only arxiv.org works.
 
@@ -50,6 +50,6 @@ The session allowlist was extended to mathnet.ru, projecteuclid.org, tsukuba.rep
 
 ## Verified by
 
-Fifth pass (2026-11-25): Suzuki pp. 1-5 and 15-17 were read as page images. arXiv:2605.21529 was read only via WebFetch extraction. Baier 2004 is known from a search snippet only. Lavrik, Mikawa and Perelli-Pintz remain **unread**.
+Sixth pass (2026-11-25): Suzuki pp. 1-5 and 15-17 were read as page images. arXiv:2605.21529 was read only via WebFetch extraction. Baier 2004 is known from a search snippet only. Lavrik, Mikawa and Perelli-Pintz remain **unread**.
 
 Literature agent, 2026-11-25. **Only search-engine snippets and secondary citations** (MRT 2019 pp. 5-8, which I did read). Lavrik's, Wolke's, Mikawa's and Perelli-Pintz's papers were **not read**: projecteuclid.org and tsukuba.repo.nii.ac.jp fail DNS, and mathnet.ru was not tried for the full text. Before citing anything specific to Lavrik, a human should read Lavrik 1961, or a textbook statement of it.

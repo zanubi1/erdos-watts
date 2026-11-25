@@ -23,3 +23,17 @@ Defines our target (Watts' greedy question). The page status "solved" refers to 
 - Setup session (dated 2026-11-25 in the log) read only a **mirror** (primereboot.pages.dev, "last verified January 15, 2026").
 - Literature agent, 2026-11-24, second pass, after the coordinator reported that the allowlist was extended: www.erdosproblems.com and erdosproblems.com **still fail DNS** (tried both and retried). **The original page and the forum thread are still unread; the mirror-only caveat stands.** Read instead the site's own database, https://raw.githubusercontent.com/teorth/erdosproblems/main/data/problems.yaml, entry #473: `status: proved` (last update 2025-08-31; refers to the main question), `oeis: ["A055265"]`, `formalized: yes` (2026-09-18), `forum: posts: 3`. Because the forum has only 3 posts, a long discussion or a resolution of the greedy question seems unlikely, but I have not read them. The formalization covers only the main question (see formal-conjectures.md).
 - Literature agent, 2026-11-24, first pass: tried to fetch the **original page and the forum thread; both failed** (host www.erdosproblems.com is not in this session's allowed network domains, DNS lookup fails). Saw only web-search snippets/summaries of the forum thread (title "473 Discussion Thread"), which agree with the mirror on 197 and add the 199 remark. **The original page and the forum thread have still not been read.** TODO: allow www.erdosproblems.com and re-read, in particular to check for comments newer than January 2026.
+
+## Update 2026-11-25 (main session, original page and forum read via curl)
+
+**Verified by:** the main session read the original https://www.erdosproblems.com/473 and its forum thread https://www.erdosproblems.com/forum/thread/473 in full. They were fetched with curl through the environment proxy; the agents' WebFetch tool fails DNS on this host.
+
+- **Page.** Watts' greedy question is stated exactly as in README.md: "do all positive integers occur as some such a_n?"
+  - Last edited 02 Dec 2025. Formalised statement: yes (the main question only). OEIS: A055265.
+  - No proof expositions and no proof claims.
+- **Forum: 3 comments, all from Oct 2025.**
+  - van Doorn ("Woett") on 197: 199 also never occurs as a sum. The first 99 terms contain all of 1..99.
+  - An Odlyzko reference question, answered: not found.
+  - A pointer to Li-Shang-Zhang (2025) on the main question via bounded gaps.
+  - Nothing on the greedy permutation question. New comments are suspended.
+- **Conclusion.** No prior proof or claim of the greedy question on erdosproblems.com. The "mirror only" caveat above is now resolved.

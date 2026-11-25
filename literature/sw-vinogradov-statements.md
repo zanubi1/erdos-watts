@@ -44,7 +44,7 @@ Not accessible in this session (DNS failure): en.wikipedia.org, encyclopediaofma
   - Davenport Ch. 22 is not verified.
 - Since C014 needs only the qualitative forms (Remark R2), **none of the discrepancies found affect C014.**
 
-## Update 2026-11-25 (fifth pass): the books are still unread
+## Update 2026-11-25 (sixth pass): the books are still unread
 
 **Access.** The allowlist now includes link.springer.com, en.wikipedia.org, terrytao.wordpress.com, mathnet.ru, projecteuclid.org, tsukuba.repo.nii.ac.jp and export.arxiv.org. **All of them still fail DNS** (getaddrinfo ENOTFOUND), also on a retry after a delay. Only arxiv.org resolves. Google Books is not on the list. So **IK, Davenport and Vaughan were NOT read in this pass either.** No exact book statement can be quoted.
 
@@ -77,9 +77,19 @@ Page numbers are not given because I could not see the books' tables of contents
 
 ## Verified by
 
-Fifth pass (2026-11-25): arXiv:2505.07803 read only via WebFetch extraction. The Davenport chapter numbering comes from a search-result summary. **No book was read.**
+Sixth pass (2026-11-25): arXiv:2505.07803 read only via WebFetch extraction. The Davenport chapter numbering comes from a search-result summary. **No book was read.**
 
 Literature agent, 2026-11-25.
 - **Read** (page images or HTML text): [LZ] pp. 1-10; [Tao5] pp. 2-3.
 - **Read via WebFetch extraction** (the tool paraphrases; the quotes are short): [BG] Sections 4.1-4.3 and the bibliography; [Ah] Section 4.2; [Ex] Lemma 6; [Ext] introduction.
 - **NOT read:** Vaughan's book, Iwaniec-Kowalski, Davenport. The theorem numbers (Vaughan Thm 3.1, IK Thm 13.6, IK Cor. 5.29) are confirmed only through those secondary citations; Davenport Ch. 22 is not confirmed at all. A human with the books should do a final check.
+
+## Update 2026-11-25 (main session): Siegel-Walfisz read from Wikipedia
+
+**Verified by:** the main session read the Statement section of https://en.wikipedia.org/wiki/Siegel%E2%80%93Walfisz_theorem (revision oldid=1321322946, via curl and action=raw). Quoted:
+
+> given any real number N there exists a positive constant C_N depending only on N such that ψ(x;q,a) = x/φ(q) + O(x exp(-C_N (log x)^{1/2})), whenever (a, q) = 1 and q ≤ (log x)^N. The constant C_N is not effectively computable because Siegel's theorem is ineffective.
+
+- **Comparison.** This matches C014's (SW) **word for word**: the same uniformity range q ≤ (log x)^M, the same error, and the same ineffectivity. The log-power consequence that C014 uses follows at once. No gap.
+- **Still not read:** the textbook sources (IK Cor. 5.29, Davenport Ch. 22) and Vinogradov (Vaughan Thm 3.1).
+- **Mikawa 1991 (projecteuclid):** curl gets an anti-bot page instead of the PDF.

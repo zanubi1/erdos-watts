@@ -29,4 +29,4 @@ Y. Suzuki, "On prime vs. prime power pairs", arXiv:1610.09084v1 (28 Oct 2016), h
 
 ## Verified by
 
-Literature agent, 2026-11-25 (fifth pass). **Read** pp. 1-5 and 15-17 of the arXiv PDF as page images. The quotes above are from those pages. Mikawa's and Perelli-Pintz's papers themselves were **NOT read**. projecteuclid.org, tsukuba.repo.nii.ac.jp and dei.unipd.it fail DNS, and the Wiley host was not tried.
+Literature agent, 2026-11-25 (sixth pass). **Read** pp. 1-5 and 15-17 of the arXiv PDF as page images. The quotes above are from those pages. Mikawa's and Perelli-Pintz's papers themselves were **NOT read**. projecteuclid.org, tsukuba.repo.nii.ac.jp and dei.unipd.it fail DNS, and the Wiley host was not tried.
