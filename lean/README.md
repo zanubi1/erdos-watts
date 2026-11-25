@@ -19,6 +19,8 @@ anywhere, except the single intentional `sorry` in `ErdosWatts/Conjecture.lean`.
 | `ErdosWatts/L003.lean` | `missingSet` (M), L003 (`L003_smallestMissing`, all-parity `L003_smallestMissing_all`) |
 | `ErdosWatts/L004.lean` | L004 bound (`L004_bound`, `L004_exists`), `L004_finite_imp_empty`, PNT consequences (`L004_rhs_isEquivalent`, `L004_eventually_ge`) |
 | `ErdosWatts/L005.lean` | L005 displacement reduction (`L005_displacementReduction`, `L005_missingSet_empty`) |
+| `ErdosWatts/L009.lean` | L009 (`L009`, count form `L009_count`), Sub-lemma S (`subLemmaS`, `subLemmaS_index`), partner set `W`, `W1`..`W4`, identity `L009_identity`, sharp form `L009_sharp`, Corollary (`L009_corollary_count`, `L009_corollary`, `L009_lifetime`), `primeCounting_sub_eq_card`, `primeAfter_spec` |
+| `ErdosWatts/L012.lean` | L012 (a) (`L012`, `L012_classes`), (b) (`L012_b`: `L012_W12_le_par`, `L012_par_le`, `L012_crossings_le`), `card_U_filter_gt` |
 | `ErdosWatts/Conjecture.lean` | Watts' question (`watts_greedy_bijective`, `sorry`), sanity check of the first 12 terms |
 
 `lean/scratch/` (if present) is not built; put unfinished work there.
@@ -50,6 +52,8 @@ Everything is in `namespace ErdosWatts`.
 - **Holes.** `holes p m := #{x ∈ Icc 1 m | x % 2 = p ∧ x ∉ U m}` (H_p(m)), `H m := holes 0 m + holes 1 m`,
   `B v := #{x ∈ Ico 1 v | x % 2 = v % 2 ∧ x ∉ U v}` (L009's B(v); the bound `x ≥ 1` is explicit,
   since `0 ∉ U v` would otherwise be counted).
+- **Primes / crossings.** `primeAfter K x` = P_K(x), the K-th prime > x (`Nat.nth Nat.Prime (π x + K - 1)`),
+  `ell K x` = ℓ_K(x) = P_K(x) - x; `downCrossings v n` = X_v(n), `downCrossingsPar v n` = X^ε_v(n) (L012).
 - **Conjecture.** `aPNat : ℕ+ → ℕ+` (`n ↦ a n`); `aPNat_injective` (proved),
   `aPNat_bijective_iff : Bijective aPNat ↔ ∀ v ≥ 1, Occurs v` (proved),
   `watts_greedy_bijective : Bijective aPNat` (`sorry`, research open).

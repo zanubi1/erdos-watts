@@ -125,11 +125,18 @@ theorem H_eq_card_notMem (m : ℕ) : H m = ((Icc 1 m).filter (fun x => x ∉ U m
   have e := Finset.card_filter_add_card_filter_not
     (s := (Icc 1 m).filter (fun x => x ∉ U m)) (fun x => x % 2 = 0)
   rw [Finset.filter_filter, Finset.filter_filter] at e
+  have h0 : (Icc 1 m).filter (fun x => x ∉ U m ∧ x % 2 = 0) =
+      (Icc 1 m).filter (fun x => x % 2 = 0 ∧ x ∉ U m) := by
+    apply Finset.filter_congr; intro x _; exact And.comm
+  have h1 : (Icc 1 m).filter (fun x => x ∉ U m ∧ ¬ x % 2 = 0) =
+      (Icc 1 m).filter (fun x => x % 2 = 1 ∧ x ∉ U m) := by
+    apply Finset.filter_congr; intro x _
+    constructor
+    · rintro ⟨h1, h2⟩; exact ⟨by omega, h1⟩
+    · rintro ⟨h1, h2⟩; exact ⟨h2, by omega⟩
+  rw [h0, h1] at e
   unfold H holes
-  rw [← e]
-  congr 1
-  · congr 1; apply Finset.filter_congr; intro x _; exact And.comm
-  · congr 1; apply Finset.filter_congr; intro x _; omega
+  exact e
 
 theorem card_U_filter_gt (m : ℕ) : ((U m).filter (fun x => m < x)).card = H m := by
   have e1 := Finset.card_filter_add_card_filter_not (s := U m) (fun x => x ≤ m)
