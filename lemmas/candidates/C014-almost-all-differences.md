@@ -26,7 +26,7 @@ where Bad_c(Z, Y) = { h ∈ [1, Z] : h even, r_Y(h) <= c } and r_Y(h) = #{ p pri
 
 In particular, Z_j = j and Y_j = Z_j/(log Z_j)^2 satisfy hypothesis (G) of C013 (d): Y_j log Z_j / Z_j = 1/log Z_j -> 0, and |Bad_c(Z_j, Y_j)| log Z_j / Z_j <= C(2)/log Z_j -> 0.
 
-Moreover, for every even h ∈ [1, Z] outside the exceptional set in (ii) with A = 2, we have r_Y(h) >= Z/(4 (log Z)^4).
+Moreover, for Z large, every even h ∈ [1, Z] outside the exceptional set in (ii) with A = 2 has r_Y(h) >= Z/(4 (log Z)^4).
 
 ## Depends on
 
@@ -318,3 +318,49 @@ Code: `experiments/src/c014_variance.c`. It computes R_Y(h) exactly for **every*
   2. (Resolved while drafting.) A first draft took K = 2B + 1, which gives only X L^{-1} in (3.1). That is too weak for Σ_2. Now K := 3B + 12. Σ_2 uses (3.1) as X L^{-B-12}.
 
   No other step is, to my knowledge, uncertain. Awaiting skeptic (give them Statement + Proof only), literature agent (is (G\*) stated somewhere?), and an analytic number theorist.
+- 2026-11-25 (skeptic): I read only Statement, Depends on, Proof, Remarks and Numerical check, plus the statement of C013 (to match the definitions of r_Y and Bad_c). I did not read attempts/. I checked every inequality and every exponent of L by hand, and reran the numerics with an independent implementation. **Verdict: PASS on every step.** No mathematical gap found. Two cosmetic points and one procedural caveat are listed at the end.
+  - **Step 0: PASS.**
+    - k(p) <= 6/p is equivalent to 4p^2-11p+6 >= 0, with roots 3/4 and 2, so it holds with equality at p = 2.
+    - (0a): (n/φ(n))^2 = Σ_{e|n} k(e), and f(r) <= (r/φ(r))^2. (0b) and (0c) follow by partial summation. The bounds μ^2/φ(q) <= f(q)/q and μ^2 d/φ(d)^2 = f(d)/d are correct.
+    - (0.1): for squarefree q, the map q -> (d, r) = ((q,h), q/(q,h)) is injective. |c_q(h)| = φ(d), so the term equals 1/(φ(d)φ(r)^2) and r > X/d. Dropping the coprimality conditions only enlarges the sum. Σ_{d|h} μ^2(d)/φ(d) = h/φ(h). (0.2) follows from (0a).
+    - (0.3): #{h <= Z : [d1,d2] | h} <= Z(d1,d2)/(d1 d2). The identity n = Σ_{e|n} φ(e) gives the regrouping d2 = es with (e,s) = 1, and Π_{p|d}(1+1/p) <= d/φ(d). The split at d1 = P gives 2C_f^2(1+log P)/P + 2C_ε C_f/P. All terms are nonnegative, so the interchanges are legitimate.
+    - (0e): the Euler product is valid by absolute convergence and multiplicativity of μ^2 c_q(h)/φ(q)^2 in q. The local factors, the p = 2 factor (2 or 0) and (p/(p-1))/(1-1/(p-1)^2) = (p-1)/(p-2) are all correct. So S(h) >= 2C2 for even h.
+    - Independent check: the Euler product agrees with the truncated Ramanujan series (q <= 4000) at h = 2, 6, 30, 210, 999990 and 9999990, to within the truncation error.
+  - **Step 1: PASS.** n <= Y and h <= Z give n + h <= N, so the constraint m <= N is automatic. m >= 1 is also automatic. The sums are finite, so the interchange is trivial.
+  - **Step 2: PASS.**
+    - Disjointness: 1/(qq') >= P^{-2} > 2P/N once N > 2P^3. Also δ < 1/2, so β is unique.
+    - Dirichlet in the form ||qα|| <= 1/(Q'+1) is correct (Q'+2 points in Q'+1 boxes). Q'+1 > N/P gives a strict < P/(qN) <= δ. Reducing a/q to lowest terms keeps |q'α - a'| <= |qα - a|, so "we may assume (a,q)=1" is fine.
+    - So q > P, and |α - a/q| < 1/(q(Q'+1)) <= q^{-2}.
+    - (V) is Vaughan, *HL Method*, Thm 3.1, in the form I also recall. With P < q <= N/P, both Nq^{-1/2} and N^{1/2}q^{1/2} are <= N P^{-1/2}. The q <= N/P bound is used correctly in the third term. N^{4/5} <= N P^{-1/2}. So sup_m |G| ≪ N P^{-1/2} L^4 (log N <= 2L).
+  - **Step 3: PASS.**
+    - x > X^{1/2} >= Y^{1/2} gives log x >= L/4 for Z large. Then q <= L^B <= (L/4)^{B+1} once L >= 4^{B+1}, so (SW) with M = B+1 applies. Its constant depends only on A.
+    - Σ_{(r,q)=1} e(ar/q) = c_q(a) = c_q(1) = μ(q), since (a,q) = 1.
+    - The terms with (n,q) > 1 are p^k with p | q. They contribute <= ω(q) log x <= log^2 x.
+    - The summed SW error is φ(q) x (log x)^{-K} <= 4^K X L^{B-K}. The ranges x <= X^{1/2} (<= 3X^{1/2}) and the L^2 term are absorbed because X >= Z/L^2.
+    - Partial summation: Σ_{n<=X} a_n e(nβ) = D(X)e(Xβ) - 2πiβ ∫_1^X D(x)e(xβ)dx is correct for a_n = Λ(n)e(an/q) - μ(q)/φ(q). The loss is 1 + 2π|β|X <= 1 + 2πP. This gives X L^{2B-K} = X L^{-B-12}. Verified.
+  - **Steps 4-5: PASS.**
+    - Orthogonality gives ⌊Y⌋ over the full circle. |v_X(β)| <= 1/(2|β|) on 0 < |β| <= 1/2 (Jordan). The tail is <= 2∫_δ^∞ dβ/(4β^2) = 1/(2δ).
+    - J(h) = S_P(h)(⌊Y⌋ - τ(h)) is an exact identity. It does use (1) disjointness and δ < 1/2, so that ∫_M = Σ_{q,a} ∫_{-δ}^{δ}, (2) e(-hα) = e(-ha/q)e(-hβ) for integer h, (3) Σ_a e(-ha/q) = c_q(h), real and even, and (4) the q-independent width, so that I(h) factors out. All four hold.
+  - **Step 6: PASS.**
+    - The decomposition R - SY = R_m + E_M + (S_P - S)⌊Y⌋ + S(⌊Y⌋ - Y) - S_P τ is an exact identity (expanded and checked).
+    - Parseval is applied to Φ = 1_m G \bar F and Φ = 1_M(G\bar F - G*\bar F*). Both are bounded, hence in L^2. Restricting to 1 <= h <= Z only drops terms.
+    - Σ_1 = N^2 P^{-1} L^8 · 2YL ≪ Z Y^2 L^{11-B}. Σ_2 ≪ Z Y^2 L^{-2B-21}. Here ∫_M |G*|^2 = Σ_q μ^2 φ(q)/φ(q)^2 ∫|v_N|^2 <= ⌊N⌋ Σ_{q<=P} μ^2/φ(q) uses disjointness, and is correct.
+    - Σ_3 ≪ Z Y^2 L^{1-B} log L. Σ_4 ≪ Z. Σ_5 ≪ (N/P)^2 Z = Z Y^2 L^{4-2B}.
+    - The trivial size of Σ_h R(h)^2 is indeed ≍ Z Y^2.
+    - The total is Z Y^2 L^{-3A-1}, and Chebyshev gives (ii) with Z L^{-A-1}.
+    - R1 (general D) and R2 (log exponent c) recomputed: correct.
+  - **Step 7: PASS.**
+    - Prime-power terms: <= (2Y^{1/2} + 2N^{1/2})(log N)^2 = o(Y).
+    - Weights on prime pairs: <= log Y log N <= 2L^2. So r_Y(h) >= Z/(4L^4) off the exceptional set, and Bad_c ⊆ exceptional set once Z/(4L^4) > c.
+    - Definitions match C013 (r_Y and Bad_c with real Y, h ∈ [1,Z] even). Z_j = j satisfies both limits in (G).
+  - **Sanity (item 8): no conflict found.**
+    - (G*) is the classical Chudakov-Estermann / Lavrik mean-square argument. The ranges are unbalanced only by a power of L, and the proof shows that this costs only L-powers. This is plausible: Σ_1 has ratio (N/Y) L^{9-B}.
+    - The same proof correctly *fails* for Y = Z^θ, θ < 1 (Σ_1 loses Z^{1-θ}). That is where the genuinely hard short-range results (zero-density methods) live.
+    - Siegel zeros only make the constants ineffective, because SW is used only for q <= (log x)^{B+1} (R3).
+    - The mod-6 model set Q of C013 R3 violates SW, so the proof does not "prove" that false variant.
+    - The size of the exceptional set, ≪ Z L^{-A}, matches the classical Goldbach exceptional-set bound.
+  - **Numerics (item 9).** I reran `experiments/src/c014_variance.c` at Z = 10^6, 3·10^6, 10^7 and reproduced the table exactly. I also wrote an independent check (numpy FFT correlation, real Y, all h including odd, separate Euler-product code). It gives Σ_{h<=Z} |R-SY|^2/(Z Y^2) = 7.26e-3 at Z = 10^6 and 1.57e-3 at Z = 10^7, about 0.2 L^2/Y, i.e. square-root cancellation. Odd h contribute about 1e-3 of the total. The exceptional counts agree with the C code to within a few units (floor vs real Y). As the prover says, at A >= 1 the threshold Y L^{-A} is still below the √Y·L fluctuation at these Z, so (ii) cannot be tested for A >= 1 numerically. That is expected, not a counterexample.
+  - **Cosmetic.**
+    - (1) The "Moreover" sentence of the Statement (r_Y(h) >= Z/(4(log Z)^4)) should say "for Z >= Z_2(A=2)". It is proved only for Z large.
+    - (2) (ii) is proved for all h, not only even h. Harmless.
+  - **Procedural caveat (not a gap).** The forms of (SW) and (V) match my own recollection: Vaughan Thm 3.1 with (log X)^4, IK Cor 5.29, Davenport Ch. 22. But my recollection is not a re-reading of the source, and by R2 only their qualitative shape matters. Given the stakes, this PASS should be followed by an external analytic number theorist and Matteo before C014 moves to proven/. The novelty of the combined result rests on C013, not on C014. C014 is routine.
