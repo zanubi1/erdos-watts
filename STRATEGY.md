@@ -9,6 +9,12 @@ _Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass
 >
 > The blocking lemma (union form) and the cascade were **not found** in the literature (which is not the same as "new").
 
+> **C014 (2026-11-25, prover, UNREVIEWED).** There is now a written-out circle-method proof of hypothesis (G) of C013, canonical form Y = Z/(log Z)^2: `lemmas/candidates/C014-almost-all-differences.md`.
+> - Inputs: Siegel-Walfisz, Vinogradov (Vaughan Thm 3.1), Dirichlet, Parseval; all cited from memory.
+> - The singular-series mean square is proved inline.
+> - Numerics to Z = 10^8 agree.
+> - **Bottleneck now:** a skeptic pass on C014 and an expert check. If C014 holds, C013 (d) + C014 is an unconditional proof of the permutation property. Nothing is claimed until then.
+
 ## Goal
 
 Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. Failing that, get a substantial conditional or partial result.

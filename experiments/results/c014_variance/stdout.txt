@@ -1,0 +1,50 @@
+Z=1000000 Y=5239 lnZ=13.816 #primepowers<=Y=740 #even h=500000
+mean S(h) over even h = 1.999985 (theory: 2)
+normalised variance  mean ((R-SY)/Y)^2 = 1.449835e-02   (sqrt = 1.2041e-01)
+  compare 1/(log Z)^2 = 5.2392e-03, log(Z)/Y (random model ~ S log^2/Y) = 2.6371e-03
+max |R/(SY)-1| = 0.3539 at h=406306
+  #{h: |R-SY| > Y/(lnZ)^0.5 = 1409.5} = 14756
+  #{h: |R-SY| > Y/(lnZ)^1.0 = 379.2} = 265509
+  #{h: |R-SY| > Y/(lnZ)^1.5 = 102.0} = 432473
+  #{h: |R-SY| > Y/(lnZ)^2.0 = 27.4} = 481643
+count version: mean ((r - S Y/(logY log h))/main)^2 = 2.4595e-02 ; min r_Y(h) = 43 at h=742432
+Z=3000000 Y=13487 lnZ=14.914 #primepowers<=Y=1656 #even h=1500000
+mean S(h) over even h = 1.999995 (theory: 2)
+normalised variance  mean ((R-SY)/Y)^2 = 7.262762e-03   (sqrt = 8.5222e-02)
+  compare 1/(log Z)^2 = 4.4958e-03, log(Z)/Y (random model ~ S log^2/Y) = 1.1058e-03
+max |R/(SY)-1| = 0.2687 at h=2322052
+  #{h: |R-SY| > Y/(lnZ)^0.5 = 3492.3} = 6632
+  #{h: |R-SY| > Y/(lnZ)^1.0 = 904.3} = 623023
+  #{h: |R-SY| > Y/(lnZ)^1.5 = 234.2} = 1247053
+  #{h: |R-SY| > Y/(lnZ)^2.0 = 60.6} = 1434235
+count version: mean ((r - S Y/(logY log h))/main)^2 = 1.8818e-02 ; min r_Y(h) = 102 at h=2322052
+Z=10000000 Y=38492 lnZ=16.118 #primepowers<=Y=4138 #even h=5000000
+mean S(h) over even h = 1.999998 (theory: 2)
+normalised variance  mean ((R-SY)/Y)^2 = 3.141139e-03   (sqrt = 5.6046e-02)
+  compare 1/(log Z)^2 = 3.8492e-03, log(Z)/Y (random model ~ S log^2/Y) = 4.1874e-04
+max |R/(SY)-1| = 0.1757 at h=9897854
+  #{h: |R-SY| > Y/(lnZ)^0.5 = 9587.7} = 554
+  #{h: |R-SY| > Y/(lnZ)^1.0 = 2388.1} = 1281054
+  #{h: |R-SY| > Y/(lnZ)^1.5 = 594.8} = 3867779
+  #{h: |R-SY| > Y/(lnZ)^2.0 = 148.2} = 4715072
+count version: mean ((r - S Y/(logY log h))/main)^2 = 1.3833e-02 ; min r_Y(h) = 276 at h=9834808
+Z=30000000 Y=101209 lnZ=17.217 #primepowers<=Y=9804 #even h=15000000
+mean S(h) over even h = 1.999999 (theory: 2)
+normalised variance  mean ((R-SY)/Y)^2 = 1.440187e-03   (sqrt = 3.7950e-02)
+  compare 1/(log Z)^2 = 3.3736e-03, log(Z)/Y (random model ~ S log^2/Y) = 1.7011e-04
+max |R/(SY)-1| = 0.1312 at h=29722412
+  #{h: |R-SY| > Y/(lnZ)^0.5 = 24391.8} = 2
+  #{h: |R-SY| > Y/(lnZ)^1.0 = 5878.5} = 1830934
+  #{h: |R-SY| > Y/(lnZ)^1.5 = 1416.8} = 10498810
+  #{h: |R-SY| > Y/(lnZ)^2.0 = 341.4} = 13887799
+count version: mean ((r - S Y/(logY log h))/main)^2 = 1.1301e-02 ; min r_Y(h) = 651 at h=29722412
+Z=100000000 Y=294705 lnZ=18.421 #primepowers<=Y=25743 #even h=50000000
+mean S(h) over even h = 2.000000 (theory: 2)
+normalised variance  mean ((R-SY)/Y)^2 = 6.002411e-04   (sqrt = 2.4500e-02)
+  compare 1/(log Z)^2 = 2.9471e-03, log(Z)/Y (random model ~ S log^2/Y) = 6.2505e-05
+max |R/(SY)-1| = 0.0867 at h=83944516
+  #{h: |R-SY| > Y/(lnZ)^0.5 = 68664.9} = 0
+  #{h: |R-SY| > Y/(lnZ)^1.0 = 15998.6} = 1538350
+  #{h: |R-SY| > Y/(lnZ)^1.5 = 3727.6} = 29500909
+  #{h: |R-SY| > Y/(lnZ)^2.0 = 868.5} = 44986657
+count version: mean ((r - S Y/(logY log h))/main)^2 = 8.9397e-03 ; min r_Y(h) = 1692 at h=84343582
