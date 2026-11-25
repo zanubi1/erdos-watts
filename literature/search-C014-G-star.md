@@ -36,6 +36,14 @@ Date: 2026-11-25. Literature agent, fourth pass. Network: arxiv.org (abs, html, 
   - The ℓ = 1, log-power-ratio case is easier than either. That matches C014's own assessment ("No step is new").
 - **Suggested citation wording for C014:** "We found no statement of (G*) in the literature. Lavrik (as quoted in Zhou, arXiv:1704.01908) treats shifts u <= X with m <= X. The unbalanced structure appears for polynomial shifts in Zhou, Thm 1.1, and for sums with one small prime in Akeno, arXiv:2508.02769, Prop. 1.4 (proof omitted). Our proof is the standard circle-method argument."
 
+## Update 2026-11-25 (fifth pass)
+
+- **Mikawa 1991**, as quoted in Suzuki arXiv:1610.09084, Theorem A (read): n <= X, shifts h <= H <= X. It does not contain (G\*).
+- **Lavrik**: three secondary paraphrases (Zhou; arXiv:2605.21529, Thm 6.16; Baier 2004 abstract snippet) disagree on the counting range. None has shifts longer than the prime range. The original is still unread.
+- **New candidate prior art:** Perelli-Pintz, JLMS (2) 47 (1993) 41-49, Theorem 3. According to Suzuki, Remark 4, it gives the result for the count with n-range Y and shifts h ∈ [X, X+H]. That is the unbalanced direction of (G\*).
+  - **Unread.** Until it is read, the claim "(G\*) not found stated" must carry this caveat.
+  - See `suzuki-2016-prime-vs-prime-power.md`.
+
 ## Verified by
 
 Literature agent, 2026-11-25.
