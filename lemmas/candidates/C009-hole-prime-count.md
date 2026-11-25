@@ -15,7 +15,9 @@ Let n >= 2 and 2 <= v <= n with v ∉ U_n, and put ε = v mod 2. Then
 
     π(n + v) - π(2v)  <=  H(v) + H_{1-ε}(n).
 
-This bound is attained: equality occurs 1,887 times up to 10^7.
+This bound is attained: equality occurs 1,887 times over all pairs (n, v) with n <= 10^7, all of them at n = fi(v) - 1.
+
+**Scope.** Both forms use a(1) = 1. More precisely, Sub-lemma S and the identity behind C009' need a(1) odd. For even starts, C009' fails by 1 at some transient holes (skeptic, 2026-11-25).
 
 **Corollary.** Suppose H(m) <= h for all m <= n, where H = H_0 + H_1. Then every hole v at time n (2 <= v <= n, v ∉ U_n) satisfies
 
@@ -77,6 +79,8 @@ Equivalently, H_p(m) = #{ k ∈ [1, m] : k ≡ p, a(k) > m }.
 ### Proof of C009
 
 Fix n >= 2 and v with 2 <= v <= n and v ∉ U_n. Put ε = v mod 2.
+
+_Prior art: Case 2 ("steals") is the charging argument of Lagarias-Rains-Sloane 2002 (EKG paper, Lemma 7). The special case B(v) = 0 is the classical smallest-missing step (EKG Lemmas 3-4; Applegate et al. 2015, Theorem 1(vi); OEIS A253074)._
 
 Let Q = { q prime : 2v < q <= n + v }, so that #Q = π(n + v) - π(2v). If v = n, then Q = ∅ and the claim holds, since its right side is >= 1. The argument below does not need this case split, though.
 
@@ -176,8 +180,8 @@ Hypothesis: n >= 2, and H(m) <= h for every m with 1 <= m <= n. Let v be a hole 
   - If n + v >= P_K(2v), then (2v, n+v] would contain the K primes > 2v up to P_K(2v), so π(n+v) - π(2v) >= K, a contradiction.
   - Hence n + v < P_K(2v), that is, n - v < P_K(2v) - 2v = ℓ_K(2v).
 - **Conclusions.**
-  - With K = 3h + 2, the inequality 3h + 1 <= K - 1 holds, so we get the stated Corollary: n - v < ℓ_{3h+2}(2v).
-  - With K = 2h + 1 and (C009'), we get the sharper n - v < ℓ_{2h+1}(2v).
+  - With K = 3h + 2 and the four-term form, 3h + 1 <= K - 1, so we get the first-draft bound n - v < ℓ_{3h+2}(2v).
+  - With K = 2h + 1 and (C009'), 2h <= K - 1, so we get the stated Corollary: n - v < ℓ_{2h+1}(2v).
 - **About h.** h >= 1 automatically, since v itself is a hole at time v, so H(v) >= 1. ∎
 
 In particular, applied at n = fi(v) - 1 for a value v that occurs with fi(v) > v: if H(m) <= h for all m < fi(v), then the lifetime satisfies L(v) = fi(v) - v <= ℓ_{2h+1}(2v). This needs fi(v) - 1 >= 2, which holds because fi(v) > v >= 2.
@@ -214,3 +218,15 @@ No step is marked GAP?. The proof uses only L001, L002, a(1) = 1, and the defini
 - 2026-11-25 (prover): full proof written. Added Sub-lemma S (per-parity count, both parities), the edge-case check, and the sharpening (C009') π(n+v) - π(2v) <= H(v) + H_{1-ε}(n), which is an exact rewriting of the right side; the Corollary improves to n - v < ℓ_{2h+1}(2v). No GAP?. **Awaiting skeptic.**
 - 2026-11-25 (literature): Case 2 ("steals") is the charging argument of Lagarias-Rains-Sloane 2002, EKG Lemma 7 (each admissible partner of a missing value forces a smaller next term, and distinct times give distinct values). Cite it. The special case B(v) = 0 is the classical smallest-missing step (EKG Lemmas 3-4, Yellowstone Theorem 1(vi), A253074). I did **not find** the four-case partition or the inequality itself in the sources read. No delay bound for A055265 was found anywhere. See literature/search-C009-C010-hole-payers.md.
 - 2026-11-25 (editor): added the sharp form (C009') and the improved corollary ℓ_{2h+1} to the Statement, both proved in the prover's write-up. **Awaiting skeptic.**
+- 2026-11-25 (skeptic): **PASS** (C009, Sub-lemma S, identity/C009', Corollary with ℓ_{2h+1}). Checked:
+  - *Restatement.* For all n >= 2 and all v in [2, n] with v ∉ U_n: π(n+v) - π(2v) <= H(v) + H_{1-ε}(n) (equivalently the four-term form). No hidden quantifier issues. The constants are absolute, and nothing is "for large n".
+  - *Partition.* The four fi-ranges partition {1,2,...} ∪ {∞}. This holds for every v <= n, including v = n, where W2 = ∅. W ⊆ (v, n] uses q > 2v and q <= n+v. All q are odd since q > 4.
+  - *Case 2.* v ∈ A_k needs v ∉ U_k (k <= n). a(k+1) ≠ v needs k+1 <= n. x(w) ∉ U_v needs k >= v. a(k+1) ≡ ε holds by F1. Injectivity: w ↦ fi(w) ↦ fi(w)+1 ↦ a(fi(w)+1) is a composition of injections (F2). All of these are correct and used where stated.
+  - *Case 1 / S.* S1-S3 are valid for both p, for every m >= 1, and for any **odd** a(1) (only F1, F2 are used). W1's elements are > m = v-1, so S applies.
+  - *Identity.* (i) uses v ∉ U_v. (ii) uses a(v) ≡ v (F1). Both are correct.
+  - *Corollary.* Only m = v and m = n of the hypothesis are used. C009' gives <= 2h = K-1 with K = 2h+1. Then n+v < P_K(2v), so n - v < ℓ_{2h+1}(2v). The index is right, with no off-by-one. The lifetime form fi(v) - v <= ℓ_{2h+1}(2v) follows by integrality.
+  - *Numerics (own script, scratchpad chk2.py).* I tested **every** n <= 10^7 and every hole v in [2, n] at time n: 88,212,972 (n, v) pairs, 0 violations. Equality holds 1,887 times, all at n = fi(v) - 1 (so the Statement's "1,887 times" is also the all-n count). For n <= 2·10^4, I also checked the four per-case bounds (#Wi vs. its bound) and the identity 1 + B + H_{1-ε}(v-1) = H(v) separately at every (n, v): 0 failures.
+  - *Variants.* a(1) ∈ {1,3,5,7,13}, N = 5000, every n: C009' holds, and so do all per-case bounds and the identity. For even a(1) ∈ {2,4,6,8,10,20}, C009' is **false** (e.g. a(1)=2: n=519, v=509, LHS 2 > RHS 1; a(1)=6: n=9, v=5). There the identity fails (7.5k mismatches), while the original four-term C009 and every per-case bound still held numerically. This matches the proof, which uses F1 (hence odd a(1)) in identity (ii) and in S. So the proof does not "prove" a false variant.
+  - *Dependencies.* L001 and L002 are in proven/. S is proved inline, so the result is not conditional on candidate C007.
+  - *Editorial (non-blocking).* (1) The Corollary proof still calls ℓ_{3h+2} "the stated Corollary"; the Statement now says ℓ_{2h+1}. Reword. (2) The Statement's equality count should say "over all (n, v) with n <= 10^7, all at n = fi(v)-1". (3) Add the LRS 2002 (EKG Lemma 7) citation for Case 2 to the proof text, as the literature entry asks. (4) State explicitly that C009' (and S) needs a(1) odd. The Remark covers S only.
+- 2026-11-25 (editor): applied the skeptic's editorial fixes (1)-(4): Corollary wording, scope of the equality count, the LRS 2002 citation, and the a(1) odd scope note. No change to the argument.
