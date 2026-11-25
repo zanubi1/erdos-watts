@@ -15,6 +15,13 @@ _Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass
 >   - (G) is an explicit hypothesis `G_hyp`, faithful to C013 (d); it is not an axiom.
 >   - Axioms: propext, Classical.choice, Quot.sound only. The growth bound (b) is proved too, via a partial L006.
 >   - So the new, combinatorial half of the proof is machine-checked. C014, the circle method, is not, because Mathlib has no circle method.
+> - **Review status (2026-11-25):**
+>   - C013 (a)-(d): skeptic PASS; blind combinatorics-referee PASS; Lean-verified, with (G) as an explicit hypothesis (`C013_d`).
+>   - C014: skeptic PASS; blind analytic-referee PASS (every log exponent recomputed; divergences from Vaughan Ch. 3 judged harmless; no known obstruction).
+>   - The Siegel-Walfisz statement is verified word for word (Wikipedia). Vinogradov-Vaughan is verified only through papers that quote it.
+>   - Novelty: no prior proof, and no source for the cascade, in OEIS, arXiv (titles and abstracts), formal-conjectures, or erdosproblems #473 (page and forum read: 3 comments, none on this).
+>   - Open literature lead: Perelli-Pintz, JLMS 47 (1993), Thm 3 (sums over n <= Y with shifts h in [X, X+H]) may already state a (G*)-type result. That would make C014 citable rather than new; it does not affect correctness. Unread.
+>   - Drafts in `drafts/` (MathOverflow question, expert email), unsent.
 > - **Before anything moves to proven/ or is announced:**
 >   1. Matteo's review;
 >   2. an independent analytic number theorist's check of C014, and of C013 (c);
