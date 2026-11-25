@@ -2,6 +2,13 @@
 
 _Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass, overshoot experiment, L006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
 
+> **LITERATURE NOTE (2026-11-25, C013).** No source states hypothesis (G). However, the literature agent assesses (G) as **very probably a routine consequence of Lavrik-type (1961) mean-value results** for prime pairs over all shifts h <= x, about 80% confidence. Two sketched reductions are in `literature/search-C013-G-and-cascade.md`. If this holds, **C013 (d) would be an unconditional proof of the permutation property**, and no source checked contains such a proof. Nothing is claimed yet. Required before any claim:
+> 1. Lavrik's exact statement (unread; projecteuclid and mathnet are unreachable), or Route B written out as its own candidate lemma;
+> 2. a skeptic pass on C013 (a)-(d) (a skeptic PASS on the implication "(G) ⇒ permutation" is now recorded in C013's Review log);
+> 3. an analytic number theorist's check.
+>
+> The blocking lemma (union form) and the cascade were **not found** in the literature (which is not the same as "new").
+
 ## Goal
 
 Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. Failing that, get a substantial conditional or partial result.
