@@ -16,6 +16,9 @@ anywhere, except the single intentional `sorry` in `ErdosWatts/Conjecture.lean`.
 | `ErdosWatts/Defs.lean` | the sequence `a` and all shared notions (below), injectivity, positivity, fi |
 | `ErdosWatts/L001.lean` | L001 parity (`L001_parity`) and F1 `a n % 2 = n % 2` (`a_mod_two`) |
 | `ErdosWatts/L002.lean` | L002 well-definedness (`L002_wellDefined`) |
+| `ErdosWatts/L003.lean` | `missingSet` (M), L003 (`L003_smallestMissing`, all-parity `L003_smallestMissing_all`) |
+| `ErdosWatts/L004.lean` | L004 bound (`L004_bound`, `L004_exists`), `L004_finite_imp_empty`, PNT consequences (`L004_rhs_isEquivalent`, `L004_eventually_ge`) |
+| `ErdosWatts/L005.lean` | L005 displacement reduction (`L005_displacementReduction`, `L005_missingSet_empty`) |
 | `ErdosWatts/Conjecture.lean` | Watts' question (`watts_greedy_bijective`, `sorry`), sanity check of the first 12 terms |
 
 `lean/scratch/` (if present) is not built; put unfinished work there.
