@@ -12,7 +12,11 @@ Let n >= 2 and 2 <= v <= n with v ∉ U_n, and put ε = v mod 2. Then
 
 More precisely, with W1..W4 as in L009: |W1| + |W2| <= X_v(n), |W3| <= 1 and |W4| <= H_{1-ε}(n).
 
-**Scope.** The statement holds for every starting value a(1). The proof uses no parity facts (neither F1 nor Sub-lemma S of L009); w ≡ 1 - ε comes from q being odd.
+**(b) Parity-refined form and its ceiling** (needs a(1) = 1; added 2026-11-25, **not yet skeptic-reviewed**). Let X^ε_v(n) count only the down-crossings j with a(j) ≡ ε (mod 2). Then
+
+    |W1| + |W2|  <=  X^ε_v(n)  <=  H(v) - 1,     and     X_v(n)  <=  H(v - 1) + H(v) - 1.
+
+**Scope.** Part (a) holds for every starting value a(1). The proof uses no parity facts (neither F1 nor Sub-lemma S of L009); w ≡ 1 - ε comes from q being odd.
 
 ## Depends on
 
@@ -31,6 +35,17 @@ Let w ∈ W1 ∪ W2 and k = fi(w), so that k <= n - 1 and a(k) = w > v.
 
 Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
 
+**Proof of (b)** (from the crossings experiment's proposal P1, written out by the main session).
+- **|W1| + |W2| <= X^ε.** For the crossings j = k + 1 built above, a(k) = w has parity 1 - ε, so by L001 a(j) has parity ε.
+- **Crossings with j <= v.** Map j to k = j - 1 <= v - 1. Then a(k) > v > v - 1, so a(k) is a used value > v - 1 at time v - 1.
+  - If a(j) ≡ ε, then a(k) ≡ 1 - ε (L001). By Sub-lemma S of L009 at m = v - 1, there are exactly H_{1-ε}(v-1) such used values.
+  - Without the parity restriction, S summed over both parities gives H(v-1).
+  - j ↦ a(j-1) is injective (F2).
+- **Crossings with v < j <= n.** Map j to a(j) < v. Since j - 1 >= v, a(j) ∉ U_{j-1} ⊇ U_v, so a(j) is a hole < v at time v.
+  - With parity ε it is counted by B(v). Without the restriction, it is one of the H(v) - 1 holes < v at time v (v itself is a hole at time v).
+  - Injective by F2.
+- **Sum.** X^ε <= H_{1-ε}(v-1) + B(v) = H(v) - 1, by the identity in L009's Sharpening. Also X <= H(v-1) + H(v) - 1. ∎
+
 ## Remarks
 
 - **Relation to L009.** L009 bounds |W1| by H_{1-ε}(v-1) (Sub-lemma S) and |W2| by B(v), whose sum is H(v) - 1. C012 replaces that sum by a single dynamical quantity, the number of times the sequence jumps from above v to below v.
@@ -43,7 +58,17 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
 
 - Skeptic, 2026-11-25: all (n, v) pairs with n <= 3·10^6 (24.1M pairs), 0 violations. Starts a(1) ∈ {2, 3, 4, 5, 6, 7, 10, 13, 20, 101} to 2·10^5, 0 violations.
 - X_v(n) > H(v) - 1 at 4.49M pairs and < H(v) - 1 at 16.5M pairs, so neither bound dominates.
-- Pending: the 10^8 check by the experimenter.
+- Experimenter, 2026-11-25, to 10^8. Code: `experiments/src/crossings.py` + `crossings_gen.c`.
+  - Checks on the code: the brute-force selftest at N = 4000 found 0 mismatches. K and W1..W4 match `partners_gen.c` on all 47,519,538 holes (fi(v) <= 10^8, or still open at 10^8), with n = fi(v) - 1.
+  - K <= X_v(n) + 1 + H_{1-ε}(n): 0 violations, with equality in 2,966 holes (0.006%).
+  - |W1| + |W2| <= X_v(n): 0 violations, with equality in 0.47% of holes.
+  - **Parity-refined form.** Let X^ε count only the crossings with a(j) ≡ v (mod 2).
+    - |W1| + |W2| <= X^ε_v(n): 0 violations, equality 4.7%.
+    - K <= X^ε + 1 + H_{1-ε}(n): 0 violations, equality 0.08%.
+    - Per class: W1 <= E^ε (crossings with j <= v) and W2 <= L^ε (crossings with v < j <= n), both with 0 violations.
+  - **X against H(v) - 1** on [1e7, 1e8]: X is smaller in 57.0% of holes, equal in 12.9% and larger in 30.1%. The largest excess X - (H(v) - 1) is 47. The max of X is 113, at v = 95,956,519.
+  - **X^ε against H(v) - 1.** X^ε_v(n) <= H(v) - 1 held in every case, and an elementary injection proves it (experimenter's reply, 2026-11-25). So the parity-refined C012 is never weaker than L009' for W1 + W2. Above 10^7 it is strictly sharper in 97.5% of holes.
+  - **Growth.** X_v(n) does not look O(log v). By decade, max X / ln v is 0.95, 1.53, 2.28, 2.79, 4.33, 4.54, 6.25, which tracks the growth of H(v).
 
 ## Review log
 
@@ -60,3 +85,4 @@ Hence |W1| + |W2| <= X_v(n). Summing the four classes gives the claim. ∎
   - *Dependencies.* L009 is in proven/, and so is L002. L001 is listed but not used: only F2, F3 and the definition of A_k are needed. Note also that L002 is not really needed here, because v ∈ A_k already shows A_k ≠ ∅.
   - *Editorial (non-blocking).* (1) Add a Scope line saying the lemma holds for every a(1). (2) Remove L001 from "Depends on", or say that it is not used. (3) Fill in the Numerical check section. The "to do" there asks for 10^8, and I ran 3·10^6 with all pairs. (4) The "Why it might help" remark is a heuristic, not a claim. Note that X_v(n) counts every down-crossing, so the bound can be much weaker than L009' at a level the sequence oscillates across; it is useful only if such levels are rare.
 - 2026-11-25 (editor): applied the skeptic's editorial points (1)-(4).
+- 2026-11-25 (main session): added part (b), the crossings experiment's P1, with a written proof. The 10^8 run found 0 violations of (b). **(b) awaits a skeptic.** (a) has a skeptic PASS.
