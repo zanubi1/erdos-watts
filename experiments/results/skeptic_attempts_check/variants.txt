@@ -1,0 +1,210 @@
+##### a1=2
+N=200000 a1=2
+(b') parity/frontier failures: 200000
+L006(c') failures: 3836
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43046
+R2(ii) checked 199997, failures 827
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258361 L009' failures=11  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258361 fail 0 equal 90 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258361 fail 1 equal 111 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160191 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387986 fail 3 equal 326 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258361 fail 1 equal 102 max(L-R) 1 maxL 7
+P6 checked 1258361 fail 0 equal 313 maxL 2
+P5 generic events 100751 failures 0
+Late losses 28440; with v frontier: at last step (fi(v)=step+1) 16736, strictly inside 0
+0
+##### a1=3
+N=200000 a1=3
+(b') parity/frontier failures: 0
+L006(c') failures: 0
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 0
+R2(ii) checked 199997, failures 0
+max O*=62 2maxO*=124 maxDlo=124 maxDup=116
+maxH=31 pairs=1252425 L009' failures=0  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1252425 fail 0 equal 297 max(L-R) 0 maxL 7
+P2 t=mid            checked 1252425 fail 0 equal 162 max(L-R) 0 maxL 6
+P2 t=n-1            checked 1160380 fail 0 equal 274 max(L-R) 0 maxL 1
+P2 t=tau(frontier)  checked 389483 fail 0 equal 376 max(L-R) 0 maxL 5
+P2 t=pseudo-random  checked 1252425 fail 0 equal 86 max(L-R) 0 maxL 6
+P6 checked 1252425 fail 0 equal 523 maxL 2
+P5 generic events 108354 failures 0
+Late losses 25493; with v frontier: at last step (fi(v)=step+1) 15570, strictly inside 0
+0
+##### a1=4
+N=200000 a1=4
+(b') parity/frontier failures: 200000
+L006(c') failures: 3835
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43047
+R2(ii) checked 199997, failures 826
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258362 L009' failures=11  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258362 fail 0 equal 90 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258362 fail 1 equal 111 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160191 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387987 fail 3 equal 326 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258362 fail 1 equal 102 max(L-R) 1 maxL 7
+P6 checked 1258362 fail 0 equal 313 maxL 2
+P5 generic events 100751 failures 0
+Late losses 28440; with v frontier: at last step (fi(v)=step+1) 16736, strictly inside 0
+0
+##### a1=5
+N=200000 a1=5
+(b') parity/frontier failures: 0
+L006(c') failures: 0
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 0
+R2(ii) checked 199997, failures 0
+max O*=62 2maxO*=124 maxDlo=124 maxDup=116
+maxH=31 pairs=1252425 L009' failures=0  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1252425 fail 0 equal 298 max(L-R) 0 maxL 7
+P2 t=mid            checked 1252425 fail 0 equal 163 max(L-R) 0 maxL 6
+P2 t=n-1            checked 1160379 fail 0 equal 275 max(L-R) 0 maxL 1
+P2 t=tau(frontier)  checked 389483 fail 0 equal 377 max(L-R) 0 maxL 5
+P2 t=pseudo-random  checked 1252425 fail 0 equal 87 max(L-R) 0 maxL 6
+P6 checked 1252425 fail 0 equal 523 maxL 2
+P5 generic events 108355 failures 0
+Late losses 25493; with v frontier: at last step (fi(v)=step+1) 15570, strictly inside 0
+0
+##### a1=6
+N=200000 a1=6
+(b') parity/frontier failures: 200000
+L006(c') failures: 3834
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43048
+R2(ii) checked 199997, failures 826
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258360 L009' failures=12  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258360 fail 0 equal 91 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258360 fail 1 equal 112 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160189 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387986 fail 3 equal 327 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258360 fail 1 equal 103 max(L-R) 1 maxL 7
+P6 checked 1258360 fail 0 equal 314 maxL 2
+P5 generic events 100751 failures 0
+Late losses 28442; with v frontier: at last step (fi(v)=step+1) 16738, strictly inside 0
+0
+##### a1=7
+N=200000 a1=7
+(b') parity/frontier failures: 0
+L006(c') failures: 0
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.506 at n=56
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 0
+R2(ii) checked 199997, failures 0
+max O*=62 2maxO*=124 maxDlo=124 maxDup=116
+maxH=31 pairs=1252435 L009' failures=0  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1252435 fail 0 equal 299 max(L-R) 0 maxL 7
+P2 t=mid            checked 1252435 fail 0 equal 164 max(L-R) 0 maxL 6
+P2 t=n-1            checked 1160379 fail 0 equal 275 max(L-R) 0 maxL 1
+P2 t=tau(frontier)  checked 389469 fail 0 equal 378 max(L-R) 0 maxL 5
+P2 t=pseudo-random  checked 1252435 fail 0 equal 89 max(L-R) 0 maxL 6
+P6 checked 1252435 fail 0 equal 523 maxL 2
+P5 generic events 108365 failures 0
+Late losses 25502; with v frontier: at last step (fi(v)=step+1) 15579, strictly inside 0
+0
+##### a1=8
+N=200000 a1=8
+(b') parity/frontier failures: 200000
+L006(c') failures: 3839
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.506 at n=56
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43052
+R2(ii) checked 199997, failures 826
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258365 L009' failures=11  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258365 fail 0 equal 92 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258365 fail 1 equal 109 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160187 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387973 fail 3 equal 328 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258365 fail 1 equal 104 max(L-R) 1 maxL 7
+P6 checked 1258365 fail 0 equal 315 maxL 2
+P5 generic events 100756 failures 0
+Late losses 28445; with v frontier: at last step (fi(v)=step+1) 16741, strictly inside 0
+0
+##### a1=10
+N=200000 a1=10
+(b') parity/frontier failures: 200000
+L006(c') failures: 3833
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43048
+R2(ii) checked 199997, failures 825
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258365 L009' failures=11  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258365 fail 0 equal 90 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258365 fail 1 equal 111 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160193 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387990 fail 3 equal 326 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258365 fail 1 equal 102 max(L-R) 1 maxL 7
+P6 checked 1258365 fail 0 equal 313 maxL 2
+P5 generic events 100752 failures 0
+Late losses 28441; with v frontier: at last step (fi(v)=step+1) 16737, strictly inside 0
+0
+##### a1=15
+N=200000 a1=15
+(b') parity/frontier failures: 0
+L006(c') failures: 0
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.506 at n=56
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 0
+R2(ii) checked 199997, failures 0
+max O*=62 2maxO*=124 maxDlo=124 maxDup=116
+maxH=31 pairs=1252423 L009' failures=0  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1252423 fail 0 equal 302 max(L-R) 0 maxL 7
+P2 t=mid            checked 1252423 fail 0 equal 165 max(L-R) 0 maxL 6
+P2 t=n-1            checked 1160371 fail 0 equal 276 max(L-R) 0 maxL 1
+P2 t=tau(frontier)  checked 389457 fail 0 equal 381 max(L-R) 0 maxL 5
+P2 t=pseudo-random  checked 1252423 fail 0 equal 89 max(L-R) 0 maxL 6
+P6 checked 1252423 fail 0 equal 524 maxL 2
+P5 generic events 108361 failures 0
+Late losses 25502; with v frontier: at last step (fi(v)=step+1) 15579, strictly inside 0
+0
+##### a1=20
+N=200000 a1=20
+(b') parity/frontier failures: 200000
+L006(c') failures: 3838
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.506 at n=56
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 43052
+R2(ii) checked 199997, failures 827
+max O*=62 2maxO*=124 maxDlo=125 maxDup=117
+maxH=31 pairs=1258360 L009' failures=11  B(v)+1!=H_e(v): 0
+P2 t=v              checked 1258360 fail 0 equal 92 max(L-R) 0 maxL 7
+P2 t=mid            checked 1258360 fail 1 equal 109 max(L-R) 1 maxL 6
+P2 t=n-1            checked 1160181 fail 0 equal 0 max(L-R) -1 maxL 1
+P2 t=tau(frontier)  checked 387970 fail 3 equal 328 max(L-R) 1 maxL 5
+P2 t=pseudo-random  checked 1258360 fail 1 equal 104 max(L-R) 1 maxL 7
+P6 checked 1258360 fail 0 equal 315 maxL 2
+P5 generic events 100752 failures 0
+Late losses 28446; with v frontier: at last step (fi(v)=step+1) 16742, strictly inside 0
+0

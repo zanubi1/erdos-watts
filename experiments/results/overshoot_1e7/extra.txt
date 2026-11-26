@@ -1,0 +1,32 @@
+max u_par(n)-n 1 max u(n)-n 1
+bound holds: True max bound 1542 at n+1= 8526044 actual max Dup 188
+mean slack 202.55363495040388
+exact formula check: True
+bound with total O: max 3336
+most reused sum-primes (q, multiplicity, gap below q, first n, last n):
+17051887 91 180 8525841 8526052
+17051899 80 12 8525842 8526046
+17836561 80 152 8918196 8918375
+15204131 79 154 7601987 7602175
+18687731 78 144 9343778 9343952
+4652507 78 154 2326154 2326342
+9689891 76 124 4844862 4845042
+17983873 75 156 8991861 8992025
+9691001 75 94 4845419 4845579
+8421403 75 152 4210626 4210780
+17652163 74 150 8825999 8826183
+2010881 73 148 1005361 1005516
+corr(mult, gap below) for q>2e6: 0.7068825105179134
+gap below >= 50: mean mult 27.5, max 91, count 33634
+gap below >= 100: mean mult 52.1, max 91, count 631
+gap below >= 150: mean mult 77.1, max 91, count 9
+overall mean mult (q>2e6): 8.32110160449562 max 91
+Dup record 112 @ 185126 maxgap near 2n 112 @ 370261 record gap nearby: [(370261, 112)]
+Dup record 116 @ 198369 maxgap near 2n 100 @ 396733 record gap nearby: []
+Dup record 120 @ 246043 maxgap near 2n 114 @ 492113 record gap nearby: [(492113, 114)]
+Dup record 128 @ 569087 maxgap near 2n 90 @ 1138273 record gap nearby: []
+Dup record 148 @ 674724 maxgap near 2n 118 @ 1349533 record gap nearby: [(1349533, 118)]
+Dup record 156 @ 678572 maxgap near 2n 132 @ 1357201 record gap nearby: [(1357201, 132)]
+Dup record 166 @ 2326155 maxgap near 2n 154 @ 4652353 record gap nearby: [(4652353, 154)]
+Dup record 184 @ 5468965 maxgap near 2n 102 @ 10937921 record gap nearby: []
+Dup record 188 @ 8525842 maxgap near 2n 180 @ 17051707 record gap nearby: [(17051707, 180)]

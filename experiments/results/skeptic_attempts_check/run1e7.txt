@@ -1,0 +1,23 @@
+N=10000000 a1=1
+(b') parity/frontier failures: 0
+L006(c') failures: 0
+R1 Dup(n+1) > n^.61+3K ln n: count 0 last n 0
+R1 q_K-t_n > n^.61+3K ln n: count 0 last n 0; max ratio (q_K-t)/bound 0.502 at n=57
+R1(0.53) q_K-t_n > n^.53+3K ln n: count 0 last 0
+R1 step2 q_K-t > Z^.6+2K lnZ: count 0 last 0
+R2(i) Dlo(n+1)>2O*(n): 0
+R2(ii) checked 9999986, failures 0
+max O*=100 2maxO*=200 maxDlo=200 maxDup=188
+maxH=50 pairs=88212972 L009' failures=0  B(v)+1!=H_e(v): 0
+P2 t=v              checked 88212972 fail 0 equal 1887 max(L-R) 0 maxL 8
+P2 t=mid            checked 88212972 fail 0 equal 1289 max(L-R) 0 maxL 7
+P2 t=n-1            checked 83500346 fail 0 equal 3094 max(L-R) 0 maxL 1
+P2 t=tau(frontier)  checked 19857661 fail 0 equal 3215 max(L-R) 0 maxL 7
+P2 t=pseudo-random  checked 88212972 fail 0 equal 648 max(L-R) 0 maxL 8
+P6 checked 88212972 fail 0 equal 6006 maxL 3
+P5 generic events 5680758 failures 0
+Late losses 1378604; with v frontier: at last step (fi(v)=step+1) 699173, strictly inside 0
+
+real	0m4.626s
+user	0m4.407s
+sys	0m0.192s

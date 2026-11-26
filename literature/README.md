@@ -1,9 +1,33 @@
 # Literature index
 
+Last pass: 2026-11-25, sixth pass: exact-statement check for C014 (SW, V, Lavrik, Mikawa).
+- **All newly allowlisted hosts still fail DNS**, even after a retry: mathnet.ru, projecteuclid.org, tsukuba.repo.nii.ac.jp, link.springer.com, en.wikipedia.org, terrytao.wordpress.com, export.arxiv.org. Only arxiv.org works.
+- No book was read, and neither was Lavrik or Mikawa.
+- New: Suzuki arXiv:1610.09084 (read) quotes Mikawa's theorem and points to **Perelli-Pintz 1993, Theorem 3, as a possible (G\*)-type statement (unread)**.
+
+Fifth pass: C013 novelty search. oeis.org, arxiv.org and github.com were reachable. export.arxiv.org and cs.uwaterloo.ca failed DNS. The erdosproblems forum returned 403, and mathoverflow / math.stackexchange were blocked. Fourth pass: C014 citation check (SW, V) and (G*) search. In this pass arxiv.org worked; wikipedia, encyclopediaofmath, terrytao.wordpress.com, link.springer.com and mathnet.ru failed DNS. Third pass (same day): C013 search on hypothesis (G) and the cascade. projecteuclid.org, tsukuba.repo.nii.ac.jp, mathnet.ru and export.arxiv.org fail DNS; the erdosproblems forum returns 403; arxiv.org abs/pdf/search work. Previous pass: 2026-11-25 (L009/C010 search; arxiv.org PDFs were reachable via WebFetch this time). Earlier: 2026-11-24 (two passes). **Network note:** even after the allowlist change, www.erdosproblems.com, erdosproblems.com, oeis.org and arxiv.org fail DNS in the agent session. raw.githubusercontent.com works, so OEIS entries were read through the GitHub mirror `oeis/oeisdata` and the erdosproblems status through `teorth/erdosproblems`.
+
 | Source | Relevance | Verified by |
 |---|---|---|
-| [erdosproblems.com #473](erdosproblems-473.md) | the problem itself | summary of a mirror page only - re-read the original |
-| [OEIS A055265](oeis-A055265.md) | the sequence; no proof of permutation | summary of the OEIS internal page |
-| Lagarias, Rains, Sloane, "The EKG sequence" (2002), arXiv:math/0204011 | model proof for a greedy permutation | not yet read |
+| [erdosproblems.com #473 + forum thread](erdosproblems-473.md) | the problem; greedy question open as far as seen; 197 never a sum | mirror + snippets + site database (problems.yaml) read; original page and forum (3 posts) NOT read |
+| [OEIS A055265 + cross-refs](oeis-A055265.md) | the sequence; A282695 says no proof; A282696/7 displacement records (394 by n ~ 10^8), which match our runs | raw OEIS files read via GitHub mirror |
+| [OEIS A253074 / A253073](oeis-A253074.md) | Devlin-Artamonov "missing x forces late terms" argument: prior art for the L003/L004 technique | raw OEIS file read via GitHub mirror |
+| [Google DeepMind formal-conjectures](formal-conjectures.md) | 473.lean formalizes only the main question (solved) and the finite variant (open); **greedy variant not formalized** | raw file read |
+| [Hasler OEIS wiki, Prime sums from neighboring terms](oeis-wiki-hasler-prime-sums.md) | context; conjectures only | snippets only (oeis.org unreachable) |
+| [Lagarias-Rains-Sloane, EKG (2002)](lagarias-rains-sloane-2002.md) | "smallest missing" proof (Lemmas 3-4); **Lemma 7 = charging argument of L009 case 2**; linear sieve bounds | arXiv PDF read (pp. 1-6, 9-13), 2026-11-25 |
+| [Yellowstone permutation (2015)](applegate-et-al-2015-yellowstone.md) | Theorem 1(vi): smallest-missing forcing; no lifetime bound | arXiv PDF pp. 2-5 read |
+| [Sloane, OEIS article (2018)](sloane-2018-oeis-notices.md) | calls A055265's permutation property possibly "beyond reach" (prime gaps) | arXiv PDF pp. 1-12 read |
+| [OEIS A117922, A117925, A086527, A282700, A128280, A051237](oeis-A117922-A086527.md) | no delay/lifetime bound anywhere; no payer argument | raw OEIS files read via mirror |
+| [Search log for L009/C010](search-C009-C010-hole-payers.md) | L009 case 2 is known (EKG Lemma 7); full L009 bound and C010 **not found** | see linked notes |
+| [Search log for L006 step formula](search-C006-step-formula.md) | L006: **not found** in the OEIS entries or by web search; elementary/folklore; EKG and Yellowstone proofs still unread | OEIS raw files read; rest snippets; EKG/Yellowstone hosts (arxiv, emis, cs.uwaterloo.ca) unreachable |
 | MathOverflow 241569 | Segal's finite version | not yet read |
-| Google DeepMind formal-conjectures | is #473 formalized in Lean? | not yet checked |
+| [Search log for C013: (G) and the cascade](search-C013-G-and-cascade.md) | (G) **not found stated**; assessed as a routine consequence of Lavrik-type mean values (two sketched reductions, about 80% confidence); blocking lemma/cascade and any permutation proof **not found** | see linked notes; reductions are the agent's own sketches |
+| [Novelty search for C013 (cascade) and any permutation proof](search-C013-novelty.md) | 2026-11-25. Union blocking lemma, cascade (c), reduction to (G), and any proof that A055265/A128280 is a permutation: **not found**. Prior art only for \|S\| = 1 (EKG Lemmas 3-4 read; A253074). The greedy variant is not in formal-conjectures (PR #6099) | EKG pp. 3-6 and OEIS raw files read; Hasler wiki read via extraction; forum (403), MO/MSE (blocked), Hofman-Pilipczuk NOT read |
+| [Matomäki-Radziwiłł-Tao (2019)](matomaki-radziwill-tao-2019.md) | Thm 1.3: prime pairs for almost all h, \|h-h0\| <= H, h0 <= X^{1-ε}; shift <= p-range, so it does not cover (G) | arXiv PDF pp. 1-9 read |
+| [Lavrik / Wolke / Mikawa / Perelli-Pintz](lavrik-wolke-mikawa-prime-pairs.md) | almost-all-h prime pairs; Lavrik (all h <= x) is the key input for (G) Route A; exact form **unverified**. Sixth pass: three paraphrases of Lavrik conflict on the counting range; Mikawa (via Suzuki) is balanced, so it does not give (G\*) | snippets + secondary citations only; originals NOT read (hosts fail DNS) |
+| [SW and Vinogradov-Vaughan: exact statements](sw-vinogradov-statements.md) | C014 "Depends on": (V) with (log N)^4 and Vaughan Thm 3.1 confirmed via secondary quotes (strict \|α-a/q\| < q^{-2}); IK 13.6 quoted with log^3; SW log-power form = IK Cor. 5.29 via secondary quote; Davenport Ch. 22 unverified. Sixth pass: item-by-item table, **no GAP**, and the list of book pages needed for literature/private/ | arXiv papers quoting them, read (1206.0252, 1201.6656 pp. 2-3, 2607.27282, 2103.15648); books NOT read |
+| [Search log for C014 (G*)](search-C014-G-star.md) | (G*) **not found stated**; unbalanced analogues: Zhou 1704.01908 Thm 1.1 (polynomial shifts, ℓ >= 2), Akeno 2508.02769 Prop. 1.4 (sums, p <= X^c, proof omitted); Lavrik per Zhou is the balanced {m <= X} form | WebFetch extraction of arXiv HTML; Lavrik still unread |
+| [Suzuki (2016), prime vs. prime power pairs](suzuki-2016-prime-vs-prime-power.md) | Quotes Mikawa 1991 (Thm A: n <= X, h <= H <= X; balanced, so not (G\*)). Points to **Perelli-Pintz 1993, Thm 3**: n-range Y, shifts h ∈ [X, X+H], a possible (G\*)-type prior statement, **unread** | arXiv PDF pp. 1-5, 15-17 read |
+| [Bhowmik-Grimmelt (2026) survey](bhowmik-grimmelt-2026-goldbach-exceptional-set.md) | standard Parseval + Chebyshev scheme for Goldbach's exceptional set | arXiv PDF pp. 1-6, 10-13 read |
+
+**Network note (2026-11-25):** the agents' WebFetch tool fails DNS on several allowlisted hosts (erdosproblems.com, projecteuclid.org, en.wikipedia.org, link.springer.com). `curl` from Bash, through the environment proxy, reaches them (mathnet.ru is still unreachable; projecteuclid PDFs return an anti-bot page). Fetch with curl into the scratchpad, convert to text with `python3 -I`, then read the text.

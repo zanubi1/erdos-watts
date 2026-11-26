@@ -1,49 +1,177 @@
 # Strategy
 
-_Last updated: 2026-11-25 (setup)._
+_Last updated: 2026-11-25 (session 2: skeptic pass on L003-L005, literature pass, overshoot experiment, L006 proved and reviewed). The dates "2026-11-25" in the setup entries are a typo for the setup day; they come before this session._
+
+> **STATUS (2026-11-25): a candidate unconditional proof exists. NOTHING IS CLAIMED YET.**
+>
+> - **C013** (blocking lemma + cascade): if some value m0 never occurs, then almost every later term a(k) of m0's parity makes h = a(k) - m0 an even number with at most 2m0 representations h = q - p (p <= Y, q prime). So "(G) ⇒ the sequence is a permutation".
+>   - Skeptic: **PASS** on (a)-(d). Main-session check: no gap.
+> - **C014** (circle method): proves (G) with Y = Z/(log Z)^2. Almost all even h <= Z have about S(h)·Y prime pairs (p, p+h) with p <= Y, with exceptions ≪ Z (log Z)^{-A}.
+>   - Skeptic: **PASS** on Steps 0-7. Main-session check: no gap.
+>   - Literature: the cited forms of Siegel-Walfisz (log-power form) and Vinogradov-Vaughan ((log X)^4) are confirmed through secondary sources. No published statement of this unbalanced form was found; Lavrik uses equal ranges.
+> - **Together, C013 (d) + C014 would prove unconditionally that A055265 is a permutation of N.**
+> - **Lean (2026-11-25):** C013 (a)-(d) is formalized in `lean/ErdosWatts/C013.lean`.
+>   - The main theorem is `C013_d : G_hyp → ∀ v, 1 ≤ v → Occurs v`.
+>   - (G) is an explicit hypothesis `G_hyp`, faithful to C013 (d); it is not an axiom.
+>   - Axioms: propext, Classical.choice, Quot.sound only. The growth bound (b) is proved too, via a partial L006.
+>   - So the new, combinatorial half of the proof is machine-checked. C014, the circle method, is not, because Mathlib has no circle method.
+> - **Review status (2026-11-25):**
+>   - C013 (a)-(d): skeptic PASS; blind combinatorics-referee PASS; Lean-verified, with (G) as an explicit hypothesis (`C013_d`).
+>   - C014: skeptic PASS; blind analytic-referee PASS (every log exponent recomputed; divergences from Vaughan Ch. 3 judged harmless; no known obstruction).
+>   - The Siegel-Walfisz statement is verified word for word (Wikipedia). Vinogradov-Vaughan is verified only through papers that quote it.
+>   - Novelty: no prior proof, and no source for the cascade, in OEIS, arXiv (titles and abstracts), formal-conjectures, or erdosproblems #473 (page and forum read: 3 comments, none on this).
+>   - Open literature lead: Perelli-Pintz, JLMS 47 (1993), Thm 3 (sums over n <= Y with shifts h in [X, X+H]) may already state a (G*)-type result. That would make C014 citable rather than new; it does not affect correctness. Unread.
+>   - Drafts in `drafts/` (MathOverflow question, expert email), unsent.
+> - **Before anything moves to proven/ or is announced:**
+>   1. Matteo's review;
+>   2. an independent analytic number theorist's check of C014, and of C013 (c);
+>   3. the primary sources for (SW) and (V) (Vaughan's book, Iwaniec-Kowalski), read by a human;
+>   4. a further literature check that the cascade argument is not already known.
+> - **Why earlier routes failed, and why this one doesn't.** Every count based on the hole count H loses a factor of log n (the "barrier" below). C013 avoids H altogether: a value that never occurs is available at *every* later step, and the blocking lemma bounds all such values together. C013 R3 also shows that no hypothesis on counts of primes in intervals can suffice. A mod-6 pseudo-prime set satisfies all of them, and its greedy sequence misses 2/3 of N. So the input has to be binary (about prime pairs), which is exactly what (G) is.
 
 ## Goal
 
-Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. Failing that: a substantial conditional or partial result.
+Prove that the Watts greedy sequence a(n) (OEIS A055265) is a permutation of N. Failing that, get a substantial conditional or partial result.
 
 ## What we know so far
 
-- **L001** consecutive terms alternate in parity (trivial, proven).
-- **L002** the sequence is well defined (trivial, proven).
-- **C003** (draft proof) if m is the smallest value that never appears, then from some point on, a(n) + m is composite for every term a(n) of parity opposite to m.
-- **C004** (draft proof) the set M of missing values is either empty or contains all but finitely many numbers of the form p - m (p prime, m = min M). In particular, |M ∩ [1, X]| >= (1 - o(1)) X / log X if M is nonempty.
-- **C005** (draft proof) **reduction:** if a(n) <= n + f(n) with f nondecreasing and f(x) = o(x / log x), then M is empty, i.e. the sequence is a permutation.
+**Proven** (`lemmas/proven/`). L003-L009 and L011 were promoted on 2026-11-25, after skeptic passes plus a main-session review with Matteo's delegated OK. They were formerly C003-C009 and C011.
 
-C003-C005 need a skeptic pass and a literature check. They may well be folklore.
+- **L001**: consecutive terms alternate in parity, so a(k) ≡ k (mod 2). Trivial.
+- **L002**: the sequence is well defined. Trivial.
+- **L003**: if m is the smallest missing value, then a(n) + m is composite for all n >= N0.
+- **L004**: if the missing set M is nonempty, then |M ∩ [1, X]| >> X / log X. In particular, M finite implies M empty.
+- **L005**: if a(n) <= n + o(n / log n), then M = ∅.
+- **L006** (step formula): a(n+1) = q_{b+1} - a(n), with q_i the primes >= a(n) + u*(n) and b <= O*(n). Also O*(n) = (n+1-u*(n))/2. Its prover Remarks are unreviewed and live in `attempts/2026-11-24-c006-remarks.md`.
+- **L007** (hole step bound): a(n+1) - (n+1) <= (the length from a(n)+n+1 needed to see H_π(n)+1 primes).
+- **L008**: H(X) = #{ k <= X : a(k) > X }, and H(X) <= D + S(X)/D. Criterion (ii) is superseded by L011.
+- **L009** (payers): for a hole v at time n, π(n+v) - π(2v) <= H(v) + H_{1-ε}(n). This is the sharp form L009', and it is attained. Needs a(1) odd.
+  - Corollary: if H <= h up to time n, then every hole v at time n has n - v < ℓ_{2h+1}(2v).
+- **L011** (unconditional criterion): if some v is missing, then H(n) >= (1 - o(1)) n / log n. So **liminf H(n) log n / n < 1 implies the permutation property**. Needs only L009 and the PNT.
+
+**Formalized in Lean 4 + Mathlib** (`lean/`, 2026-11-25):
+- L001, L002, L003, L004, L005, L009 (with Sub-lemma S, L009' and the corollary), L011 and L012 (a and b).
+- No `sorry` and no extra axioms (`#print axioms`: propext, Classical.choice, Quot.sound only).
+- The PNT comes from Mathlib (`Nat.isEquivalent_primeCounting`), so there are no explicit hypotheses.
+- Watts' question is stated in `lean/ErdosWatts/Conjecture.lean` (`watts_greedy_bijective`, `sorry`).
+- No GAPs were found in the informal proofs. The informal-vs-formal discrepancies are cosmetic (indexing from n >= 1, truncated subtraction, liminf over EReal) and are listed in each lemma's Review log.
+- Not yet formalized: L006, L007, L008.
+
+**Open** (`lemmas/candidates/`):
+- **C010** (conjecture): a uniform bound on the number of primes a hole survives, K(v) := π(fi(v)-1+v) - π(2v) <= K0, or <= C log v. Either implies the permutation property.
+  - Data: max K is 8 up to 10^7 and **11 up to 10^8**. The per-decade maxima 6, 7, 8, 8, 11 fit about 2 + 1.1 log10 v, so **C log v is the realistic target**.
+
+**Reductions now available** (all proven). Any one of these proves the conjecture:
+1. a(n) <= n + o(n / log n) (L005);
+2. H(n) <= (1 - δ) n / log n for infinitely many n (L011);
+3. C010 in any uniform form.
+
+Literature status:
+- **L003/L004 are a known technique.** The same "smallest missing value forces p - m to be missing" mechanism is in the Devlin-Artamonov proof outline in OEIS A253074 (the variant where adjacent sums must be non-prime). Cite it, together with the EKG "smallest missing" argument, and do not claim novelty.
+- **L005 was not found in any source.** It is a routine counting step: call it "not found", not "new".
+
+## Literature (2026-11-24, see `literature/`)
+
+- **Status:** the greedy question is still **open** as far as we can see.
+  - OEIS A282695: "There is no proof at present for the conjecture that A055265 is a permutation".
+  - The erdosproblems database (teorth/erdosproblems, problems.yaml) marks #473 as "proved", but that refers to the main (non-greedy) question.
+- **Formal-conjectures:** `FormalConjectures/ErdosProblems/473.lean` formalizes only the main question (solved, with a linked formal proof using a non-greedy construction) and Segal's finite variant (open). **The greedy variant is not formalized.** A Lean statement of it would be a small, concrete contribution.
+- **Displacement data:** no proved bound on displacement exists anywhere.
+  - OEIS records A282696/A282697 give the records of |a(n) - n|. They match our runs exactly (156 at n = 678,572; 200 at n = 8,526,046), an independent check of our code.
+  - Beyond our data the records reach 316 at n ≈ 1.08e8 and later 394.
+- **Correction:** A076990 and A243625 are *not* displacement sequences; they are related greedy sequences.
+- **Still unread:** the original erdosproblems.com/473 page and its forum thread (3 posts), Hasler's OEIS wiki page, and the EKG paper. The erdosproblems.com, oeis.org and arxiv.org hosts still fail DNS lookup from the session even after the allowlist change, so a human may need to read these.
 
 ## Data (experiments/results)
 
-| N | max a(n) | max abs(a(n) - n) | smallest value not yet seen |
+| N | max a(n) - n (upper, what L005 needs) | max n - a(n) (lower) = max overshoot | smallest value not yet seen |
 |---|---|---|---|
-| 10^6 | 1,000,018 | 156 | 999,949 |
-| 10^7 | 10,000,013 | 200 | 9,999,963 |
+| 10^6 | 156 | 150 | 999,949 |
+| 10^7 | **188** (n = 8,525,842) | 200 (n = 8,526,046) | 9,999,963 |
 
-The displacement grows very slowly (consistent with ~ (log n)^2, i.e. prime-gap scale). Every m below the frontier appears within ~200 steps of index m.
+The earlier "max |a(n)-n| = 200" was the *lower* displacement. Both quantities are about 0.7-0.8 (ln n)^2. See `experiments/results/overshoot_1e7/summary.md`.
+
+### Findings of the overshoot experiment
+
+1. **Overshoot is lower displacement.**
+   - Exact identity: O(n) = n + 1 - u(n), where u(n) is the smallest unused value.
+   - Exact relation: max O = max (n - a(n)).
+   - **Warning:** O(n) = o(n) already *is* the permutation property. "Bound the overshoot" is not a weaker subgoal. The upper bound in L005 is the genuinely weaker target.
+2. **Worst spots sit at large prime gaps near 2n, not near n.**
+   - Six of the nine upper-displacement records after 10^5 sit exactly on a maximal prime gap at 2n. Example: the 188 sits at the record gap 180 after 17,051,707.
+   - Top events are at the 99th percentile of local gap size against a random control.
+3. **Mechanism (observed, not proven): the reflection lock.**
+   - Inside a gap (p, q) near 2n, the sums lock onto q (and q + 12), and the sequence follows x ↦ q - x for about the length of the gap.
+   - The upper excursion is about q - 2n.
+   - A left-behind value m is picked up when its partner q - m comes up, a delay of about q - 2m.
+4. **Step formula (exact, elementary).** a(n+1) = u_par(n) + (P_{k+b} - t_n), where:
+   - t_n = a(n) + u_par(n);
+   - P_k is the first prime >= t_n;
+   - b is the number of blocked primes, and b <= O_par(n).
+
+   Hence a(n+1) - (n+1) <= 1 + (length needed, starting at t_n, to see O_par(n)+1 primes). On its own this is circular: it bounds the upper displacement in terms of the overshoot.
+5. **Exact link between the two displacements:** Dup(n+1) = (s_n - 2n - 1) + Dlo(n), where s_n = a(n) + a(n+1).
 
 ## Main line of attack
 
-By C005, it is enough to prove the **upper displacement bound**
+By L005, it is enough to prove a(n) <= n + o(n / log n). The data says the truth is about (log n)^2.
 
-    a(n) <= n + o(n / log n).
+The bottleneck is the circularity between the two displacements:
+- upper displacement <= (prime-counting length) + overshoot, by the step formula;
+- overshoot = lower displacement.
 
-The data suggests the truth is far stronger (about (log n)^2), so there is a lot of room. Ideas to explore:
+To break it:
 
-1. **Frontier dynamics.** Let u_e(n), u_o(n) be the smallest unused even/odd numbers after n steps. Show a(n+1) cannot jump far above the frontier: after a(n), among the unused numbers of the right parity just above the frontier, some x makes a(n) + x prime. The issue is that "used" numbers above the frontier block candidates. Bound the number of used values above the frontier (call it the overshoot) and show it can't build up.
-2. **Potential function.** Find a quantity (e.g. overshoot, or max(a(1..n)) - n) that grows by at most O(prime gap) per "excursion" and is forced back down.
-3. **Compare with EKG.** Lagarias-Rains-Sloane's proof that the EKG sequence is a permutation uses "if p appears then multiples follow" control. Look for an analogue: once the frontier is passed, terms are pulled back.
+_Update 2026-11-25: route 1 is now made precise by L009-L011. A uniform bound on the number of primes a hole survives (C010) suffices, and so does H(n) < (1-δ) n/log n infinitely often (L011). See "Open questions" for the current target. Routes 1-3 below are kept for history; item 3 is done (L006)._
+
+1. **Wait-time lemma.** If m is overtaken at step n (the running max passes m), then m is used within W(n) steps, for some W(n) = o(n / log n).
+   - **Plausible route:** the reflection lock. While the sums sit on a prime q, the partner q - m of each left-behind m is reached in order.
+   - **Data:** the maximum wait is 309 for m < 10^7.
+   - **Consequence:** a wait bound gives O(n) = o(n / log n), which directly gives M = ∅ and bypasses L005. It is therefore the whole problem; look for a version that needs only an *averaged* or *density* bound, and combine it with L004.
+2. **Density route (combine L004 with averages).**
+   - L004 needs |M ∩ [1, X]| >> X / log X if M is nonempty.
+   - So it suffices to show that, for infinitely many X, all but o(X / log X) values <= X appear before step X + o(X).
+   - This needs averaged control only, not a pointwise bound. It may be reachable with Brun-Titchmarsh or Selberg sieve upper bounds on primes in short intervals, plus a counting argument on blocked primes (mean 0.79 per step in the data).
+3. **Step-formula lemma.** Write up item 4 above as candidate L006 and send it through the experimenter -> skeptic loop. It is elementary and is needed by both routes.
 
 ## Secondary lines
 
-- Weaker unconditional statements: every even number appears? Infinitely many fixed points? Every m <= 10^7 appears (computational, done).
-- Conditional results: under Cramér-type prime gap bounds, or Hardy-Littlewood, does the displacement bound follow?
+- **Weaker unconditional statements:**
+  - Does every even number appear?
+  - Are there infinitely many fixed points?
+  - Are there infinitely many n in A070942 (the first n terms are exactly 1..n)? That would imply the permutation property.
+- **Conditional results:** under Cramér-type gap bounds, or Hardy-Littlewood, does the displacement bound follow?
+- **Formalization:** a Lean statement of the greedy variant, plus L001/L002/L003-L005, as a contribution to formal-conjectures.
 
 ## Open questions for the next session
 
-- [ ] Skeptic pass on C003, C004, C005.
-- [ ] Literature agent: is C005 (or the "missing set is empty or large" trick) known? Check OEIS wiki (Hasler, "Prime sums from neighboring terms"), MathOverflow, the erdosproblems.com forum thread for #473, Google DeepMind formal-conjectures (is #473 formalized?).
-- [ ] Experimenter: track the overshoot (number of used values above the smallest unused value) over time; correlate the worst displacement spots (e.g. n ≈ 8,526,046) with large prime gaps.
+- [x] Skeptic pass on L003, L004, L005 (2026-11-24): all PASS, with L004 and L005 conditional on their predecessors.
+- [x] L003-L009 and L011 promoted to proven (2026-11-25).
+- [x] Literature pass (2026-11-24): see "Literature" above.
+- [ ] Still unread: erdosproblems.com/473 page and forum, Hasler's wiki page, the EKG paper (arXiv:math/0204011). The hosts are blocked by DNS; read them manually or from a different environment.
+- [x] Overshoot experiment (2026-11-24): `experiments/results/overshoot_1e7/`.
+- [ ] Fix `experiments/results/run_1e7/summary.md` (and `run_1e6`): relabel "max |a(n)-n|" as the lower displacement and add the upper one.
+- [x] L006 (step formula): proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [x] L007/L008 created from L006 Remarks R3a/R3b; skeptic PASS (2026-11-25), L008 (ii) conditional on L003/L004. Awaiting Matteo.
+- [x] Hole-dynamics experiment (2026-11-25): `experiments/results/holes_dynamics_1e7/`. There is no restoring drift. Lifetimes are governed by a prime count (L009). Pair and prime-sum-free ideas are dead.
+- [x] L009 (with L009') and L011: proved, skeptic PASS (2026-11-25). Awaiting Matteo.
+- [x] 10^8 run (2026-11-25): `experiments/results/k_survival_1e8/`. Max K = 11, so K0 = 8 fails. Max H = 75. All eight OEIS displacement records match.
+- [x] Partners experiment (10^8, 2026-11-25): `experiments/results/partners_1e8/`. Measured against the primes actually in the window, W1 + W4 looks like a random (hypergeometric) placement, so there is no special arithmetic avoidance. Ahead partners are suppressed (0.4× random), explained by the pre-steal injection. Nothing contracts.
+- [x] L012 (crossing bound, proven 2026-11-25): W1 + W2 <= number of down-crossings of level v; the parity refinement gives X^ε <= H(v) - 1.
+- [x] Crossings experiment (10^8, 2026-11-25): `experiments/results/crossings_1e8/`. Crossings are **not** O(log v); their max tracks H(v). So the crossing route does not escape the circularity either.
+- **Diagnosis (2026-11-25): a barrier.** Every bound found from the sequence's own bookkeeping reduces "primes survived by a hole" (K) to the hole count H:
+  - L009', with the bound H(v) + H(n);
+  - L012, with X^ε <= H(v) - 1;
+  - the partner counts, with the same shape.
+
+  Going back from H to K via lifetimes loses a factor of about log n. Up to 10^8, K, H and the crossings all grow like log v, so no counting identity contracts. **Breaking the loop needs distributional input**: how the primes in windows of length about log² n near 2n interact with the dynamics.
+- **2026-11-25 (prover, direction 1): C013 candidate, unreviewed.** Interval-count hypotheses (H1)-(H3) cannot suffice: a Cramér-perfect pseudo-prime set inside 1 mod 6 satisfies them and all of L001-L012, yet its greedy sequence misses 2/3 of N. The new elementary input is a blocking lemma: permanently missing values S block at most max S - 1 steps, uniformly in |S|. With the second-generation cascade and a(n) = O(n log n), it gives **(G) ⇒ permutation**. (G) says that almost all even h <= Z (all but o(Z/log Z)) are q - p with p <= Z/(log Z)^2 in more than c ways, for each fixed c. It follows from uniform Hardy-Littlewood and is probably provable by the classical circle method (GAP?). **The bottleneck is now whether (G) is a theorem.** See `lemmas/candidates/C013-blocking-cascade-binary-hypothesis.md` and `attempts/2026-11-25-conditional-theorem.md`. Needs a skeptic, the literature agent and an analytic number theorist.
+- [ ] **Candidate directions, for Matteo to choose:**
+  1. **Conditional theorem.** Assume a hypothesis on primes in short intervals, e.g. "every interval (x, x + y] with y >= (log x)^{2+δ} contains between (1-η) y/log x and (1+η) y/log x primes" (a Cramér/Selberg-type uniformity). Under it, try to prove H(n) = O(polylog n), via L011.
+     - The loss of log n might be absorbed, because H counts holes in a window of length about log² n, while K counts primes, about log n of them.
+     - This is the most promising route to a rigorous (conditional) result.
+  2. **Probabilistic model.** Prove the analogous statement for the greedy sequence with "prime" replaced by a random set of density 1/log n (a Cramér model). That would give a rigorous heuristic and identify which properties of the primes are needed.
+  3. **A weaker unconditional statement.** For example, infinitely many n with H(n) = 0 (equivalently, A070942 infinite), or that every even number appears. Both look as hard as the main problem.
+- [ ] Secondary: since L011 needs only H(n) < (1-δ) n/log n infinitely often, look for *any* sublinear bound on H. Even H(n) = O(n / log n) with a small constant would be enough.
+- [ ] The R1 citation (quantitative Baker-Harman-Pintz) is marked GAP?: its source PDF was unreachable from this session.
+- [ ] By-product claim a(n) = O(n log n) unconditionally: sketch only, needs its own candidate file and review.

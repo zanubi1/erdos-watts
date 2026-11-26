@@ -17,3 +17,6 @@ Holds for the first 10^7 terms (by construction of `greedy.py`, which only searc
 ## Review log
 
 - 2026-11-25: written at setup.
+- 2026-11-25 (formalizer): **formalized: yes.** File: lean/ErdosWatts/L001.lean, theorems `ErdosWatts.L001_parity` (for `1 ≤ n`, `a n % 2 ≠ a (n + 1) % 2`) and the corollary `ErdosWatts.a_mod_two` (for `1 ≤ n`, `a n % 2 = n % 2`; this is L009's F1). Sub-steps follow the informal proof: `three_le_a_add_a_succ` (sum >= 3 from positivity + distinctness), `odd_a_add_a_succ` (prime and != 2, hence odd). Uses the shared definitions in lean/ErdosWatts/Defs.lean.
+  Axioms: `'ErdosWatts.L001_parity' depends on axioms: [propext, Classical.choice, Quot.sound]`; `'ErdosWatts.a_mod_two' depends on axioms: [propext, Classical.choice, Quot.sound]`. Explicit hypotheses: none.
+  Discrepancies informal vs formal: none ("opposite parity" is rendered as `a n % 2 ≠ a (n+1) % 2`; informal a(n) = `a n` for n >= 1). GAPs found: none.
